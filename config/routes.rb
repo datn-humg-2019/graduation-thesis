@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  scope "(:locale)", locale: /en|vi/ do
+    get "home/index"
+    root "home#index"
+    devise_for :users, controllers: { registrations: "users/registrations", sessions: "users/sessions",
+      passwords: "users/passwords"}
+  end
 end
