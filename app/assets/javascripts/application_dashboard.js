@@ -14,6 +14,7 @@
 //= require activestorage
 //= require_tree .
 //= require jquery3
+//= require paper-dashboard
 //= require popper
 //= require bootstrap-sprockets
 //= require Chart.min

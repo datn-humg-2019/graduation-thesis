@@ -1,0 +1,77 @@
+<div class="pass-form">
+  <%= form_for(resource, as: resource_name, url: user_registration_path,
+    html: { method: :put, multipart: true }, remote: true) do |f| %>
+    <%= link_to :back, class: "close" do %><i class="fa fa-times"></i><% end %>
+
+    <h3 class="text-center"><%= t ".change_info" %></h3>
+
+    <div class="error-message"></div>
+
+    <div class="change-avatar">
+      <img id="img-prev" src="#" class="hidden image">
+      <% if current_user.avatar.url.present? %>
+        <%= image_tag current_user.avatar.url, class: "image img-avatar" %>
+      <% else %>
+        <%= image_tag "default_avatar", class: "image img-avatar"%>
+      <% end %>
+      <div class="middle">
+        <%= f.label :avatar, "Upload", class: "btn btn-success" %>
+        <%= f.file_field :avatar, class: "hidden" %>
+      </div>
+    </div>
+
+    <div class="field form-group">
+      <%= f.label :name, t("users.registrations.new.name") %>
+      <%= f.text_field :name,
+        class: "form-control", required: true %>
+    </div>
+    
+    <div class="field form-group">
+      <%= f.label :identity_card, "identity card" %>
+      <%= f.text_field :identity_card,
+        class: "form-control" %>
+    </div>
+
+    <div class="field form-group">
+      <%= f.label :lbl_gender, "Gioi Tinh" %>
+      <%= f.collection_select :gender, Settings.list_gender, :first, :last,
+          {include_blank: false}, {class: "form-control"} %>
+    </div>
+
+    <div class="field form-group">
+      <%= f.label :lbl_address, "address" %>
+      <%= f.text_area :address, placeholder: "address", class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :lbl_birth, "birth" %>
+      <%= f.text_field :birth, placeholder: "birth", class: "input-datetimepiker form-control", readonly: true %>
+    </div>
+
+    <%= check_box_tag :change_pass %>
+    <%= label_tag :change_pass, t(".change_pass") %><br>
+    <div class="form-change-pass">
+      <div class="field">
+        <%= f.label :current_password, t(".current_pass") %>
+        <%= f.password_field :current_password,
+          class: "form-control add-required" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password, t(".new_pass") %>
+        <%= f.password_field :password,
+          class: "form-control add-required" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation, t(".confirm_new_pass") %>
+        <%= f.password_field :password_confirmation,
+          class: "form-control add-required" %><br>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "update", class: "btn btn-success btn-block" %>
+    </div>
+  <% end %>
+</div>

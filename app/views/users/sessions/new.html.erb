@@ -1,0 +1,26 @@
+<div class="center-attr" id="modal-signup" >
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="background-modal modal-content">
+      <div class="modal-header">
+        <h4><b><%= t ".sign_in" %></b></h4>
+      </div>
+      <div class="modal-body modal-padding">
+        <p>sign in</p>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+          <%= f.text_field :login, class:"modal-input form-control", placeholder: "email or phone" %><br>
+          <%= f.password_field :password, class:"modal-input form-control",
+            placeholder: "password" %><br>
+          
+          <% if devise_mapping.rememberable? %>
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me, t(".remember") %>
+          <% end %>
+           <%= f.submit "sign in", class:"modal-input form-control btn btn-danger" %>
+        <% end %>
+        <%= link_to t(".forget_pass"), new_password_path(resource_name) %></p>
+        <p><%= t ".no_account" %> <%= link_to t(".sign_up"), new_user_registration_path %></p>
+      </div>
+    </div>
+  </div>
+</div>

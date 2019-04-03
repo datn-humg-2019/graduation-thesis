@@ -13,15 +13,17 @@ class User < ApplicationRecord
     @login || self.phone || self.email
   end
 
-  def self.find_first_by_auth_conditions(warden_conditions)
-    conditions = warden_conditions.dup
-    if login = conditions.delete(:login)
-      where(conditions).where(["lower(phone) = :value OR lower(email) = :value", { :value => login.downcase }]).first
-    else
-      if conditions[:username].nil?
-        where(conditions).first
+  class << self
+    def find_first_by_auth_conditions(warden_conditions)
+      conditions = warden_conditions.dup
+      if login = conditions.delete(:login)
+        where(conditions).where(["lower(phone) = :value OR lower(email) = :value", { :value => login.downcase }]).first
       else
-        where(username: conditions[:username]).first
+        if conditions[:username].nil?
+          where(conditions).first
+        else
+          where(username: conditions[:username]).first
+        end
       end
     end
   end

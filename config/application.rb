@@ -13,6 +13,8 @@ module GraduationThesis
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}")]
     config.i18n.available_locales = [:en, :vi]
     config.i18n.default_locale = :en
+    config.assets.paths << Rails.root.join("vendors", "assets")
+    config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
