@@ -11,16 +11,14 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require jquery3
+//= require jquery-ui
 //= require activestorage
 //= require_tree .
-//= require jquery3
 //= require paper-dashboard
 //= require popper
 //= require bootstrap-sprockets
 //= require Chart.min
-
-$(function(){
-  $.ajaxSetup({
-    headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
-  });
-});
+//= require i18n
+//= require i18n.js
+//= require i18n/translations

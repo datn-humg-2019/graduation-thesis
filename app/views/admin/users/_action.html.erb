@@ -1,0 +1,9 @@
+<% if current_user.admin? %>
+  <%= link_to admin_user_path(id: user), method: :GET, data: {toggle: "modal", target: "#modal-admin"}, class: "btn btn-primary", remote: true do %>
+    <i class="fa fa-eye"></i> View
+  <% end %>
+
+  <%= link_to admin_user_path(id: user), method: :DELETE, data: {confirm: "Are you sure?"}, class: "btn btn-danger" do %>
+    <i class="fa fa-trash-o"></i> Destroy
+  <% end %>
+<% end %>

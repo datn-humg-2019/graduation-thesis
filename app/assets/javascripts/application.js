@@ -11,12 +11,16 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require jquery3
+//= require jquery-ui
 //= require activestorage
 //= require_tree .
-//= require jquery3
 //= require popper
 //= require bootstrap-sprockets
 //= require Chart.min
+//= require i18n
+//= require i18n.js
+//= require i18n/translations
 
 $(function(){
   $.ajaxSetup({

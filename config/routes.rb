@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       passwords: "users/passwords"}
     
     namespace :admin do
-      # resources :users
+      resources :users
       get "/", to: "dashboards#index"
     end
   end
