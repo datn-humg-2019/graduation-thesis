@@ -5,7 +5,7 @@ class CreateDetails < ActiveRecord::Migration[5.2]
       t.float :price,                    null: false
       t.integer :ref_detail_id,          null: false
       t.string :ref_detail_type,         null: false
-      t.references :product_warehouses,  foreign_key: true, null: false
+      t.references :product_warehouse,  foreign_key: true, null: false
 
       t.timestamps
     end

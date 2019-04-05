@@ -1,0 +1,55 @@
+<h2>
+  <%= t("user") %>
+</h2>
+<hr>
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead class=" text-primary">
+            <tr>
+              <th>
+                ID
+              </th>
+              <th>
+                NAME
+              </th>
+              <th>
+                EMAIL
+              </th>
+              <th>
+                ROLE
+              </th>
+              <th>
+                ACTION
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |u| %>
+              <tr>
+                <td>
+                  <%= link_to u.id, admin_user_path(id: u) %>
+                </td>
+                <td>
+                  <%= u.name %>
+                </td>
+                <td>
+                  <%= u.email %>
+                </td>
+                <td>
+                  <%= u.role %>
+                </td>
+                <td>
+                  <%= render "action", user: u %>                
+                </td>
+              </tr>
+              <br>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

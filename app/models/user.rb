@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
-  has_one :warehouses, dependent: :destroy
+  has_one :warehouse, dependent: :destroy
   has_many :images, as: :ref_image
   has_many :notifications, dependent: :destroy
   has_many :sells, dependent: :destroy
@@ -19,8 +19,20 @@ class User < ApplicationRecord
 
   enum role: {admin: 0, vip: 1, ctv: 2}
 
+  scope :manager_user, ->{where.not role: "admin"}
+
   def login
     @login || phone || email
+  end
+
+  def is_me? user
+    self == user
+  end
+
+  def age
+    now = Time.now.utc.to_date
+    now.year - birth.year -
+      (now.month > birth.month || (now.month == birth.month && now.day >= birth.day) ? 0 : 1)
   end
 
   class << self

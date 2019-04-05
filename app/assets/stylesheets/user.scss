@@ -1,0 +1,92 @@
+@import "colors";
+
+.profile-user-info {
+  display: table;
+  width: 98%;
+  width: calc(100% - 24px);
+  margin: 0 auto
+}
+
+.profile-info-row {
+  display: table-row
+}
+
+.profile-info-name,
+.profile-info-value {
+  display: table-cell;
+  border-top: 1px dotted #D5E4F1
+}
+
+.profile-info-name {
+  text-align: right;
+  padding: 6px 10px 6px 4px;
+  font-weight: 400;
+  color: #667E99;
+  background-color: transparent;
+  width: 110px;
+  vertical-align: middle
+}
+
+.profile-info-value {
+  padding: 6px 4px 6px 6px
+}
+
+.profile-info-value>span+span:before {
+  display: inline;
+  content: ",";
+  margin-left: 1px;
+  margin-right: 3px;
+  color: #666;
+  border-bottom: 1px solid #FFF
+}
+
+.profile-info-value>span+span.editable-container:before {
+  display: none
+}
+
+.profile-info-row:first-child .profile-info-name,
+.profile-info-row:first-child .profile-info-value {
+  border-top: none
+}
+
+.profile-picture {
+  border: 1px solid #CCC;
+  background-color: #FFF;
+  padding: 4px;
+  display: inline-block;
+  max-width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, .15)
+}
+
+@media only screen and (max-width:480px) {
+  .profile-info-name {
+      width: 80px
+  }
+}
+
+.tab-content {
+  border: 1px solid #C5D0DC;
+  padding: 16px 12px;
+  position: relative;
+  overflow: auto;
+}
+
+.tab-content.no-border {
+  border: none;
+  padding: 12px
+}
+
+.tab-content.no-border.padding-24 {
+  padding: 24px
+}
+
+.user-title {
+  color: $blue;
+}
+
+.modal-profile-size {
+  width: 800px;
+}

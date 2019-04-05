@@ -1,0 +1,13 @@
+var modal = $('#modal-admin');
+modal.find('.btn-primary').remove();
+<% if @user.nil? %>
+  show_notify('user-nil', 3, 'User not found', '/');
+<% elsif !flash[:danger].nil? %>
+  show_notify('user-not-permission', 3, 'Ban Khong co quyen', '/');
+  <% flash.clear %>
+<% else %>
+  modal.find('h4').text('Detail of user: ' + '<%= @user.name %>');
+  modal.find('.modal-content').addClass('modal-profile-size');
+  modal.find('.modal-body').html('<%= j render "admin/users/profile", user: @user %>');
+  modal.modal();
+<% end %>
