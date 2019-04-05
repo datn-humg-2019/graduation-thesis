@@ -7,8 +7,8 @@ class CreateProductWarehouses < ActiveRecord::Migration[5.2]
       t.datetime :mfg,             null: true, default: DateTime.now.strftime("%Y-%d-%m")
       t.datetime :exp,             null: true, default: DateTime.now.strftime("%Y-%d-%m")
       t.boolean :stop_providing,   null: true, default: false
-      t.references :products,      foreign_key: true, null: false
-      t.references :warehouses,    foreign_key: true, null: false
+      t.references :product,      foreign_key: true, null: false
+      t.references :warehouse,    foreign_key: true, null: false
 
       t.timestamps
     end

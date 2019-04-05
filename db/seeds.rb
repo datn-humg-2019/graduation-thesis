@@ -9,3 +9,14 @@ if User.where(email: "admin@gmail.com", role: "admin").blank?
     adress: "Ha Noi"
   )
 end
+
+User.create!(
+  email: "user@gmail.com",
+  phone: "0123456788",
+  user_code: "u01",
+  password: "111111",
+  name: "user",
+  gender: true,
+  adress: "Ha Noi",
+  role: 1
+)

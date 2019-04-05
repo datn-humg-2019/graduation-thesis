@@ -5,7 +5,7 @@ class CreateSells < ActiveRecord::Migration[5.2]
       t.integer :total_count,    null: false
       t.float :total_price,      null: false
       t.string :description,     null: false
-      t.references :users,       foreign_key: true, null: false
+      t.references :user,       foreign_key: true, null: false
 
       t.timestamps
     end

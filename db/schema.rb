@@ -36,10 +36,10 @@ ActiveRecord::Schema.define(version: 2019_04_03_035626) do
     t.float "price", null: false
     t.integer "ref_detail_id", null: false
     t.string "ref_detail_type", null: false
-    t.bigint "product_warehouses_id", null: false
+    t.bigint "product_warehouse_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_warehouses_id"], name: "index_details_on_product_warehouses_id"
+    t.index ["product_warehouse_id"], name: "index_details_on_product_warehouse_id"
   end
 
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -52,10 +52,10 @@ ActiveRecord::Schema.define(version: 2019_04_03_035626) do
 
   create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "content", null: false
-    t.bigint "users_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["users_id"], name: "index_notifications_on_users_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "partners", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -74,15 +74,15 @@ ActiveRecord::Schema.define(version: 2019_04_03_035626) do
     t.integer "count", null: false
     t.float "price_origin", null: false
     t.float "price_sale", null: false
-    t.datetime "mfg", default: "2019-03-04 00:00:00"
-    t.datetime "exp", default: "2019-03-04 00:00:00"
+    t.datetime "mfg", default: "2019-05-04 00:00:00"
+    t.datetime "exp", default: "2019-05-04 00:00:00"
     t.boolean "stop_providing", default: false
-    t.bigint "products_id", null: false
-    t.bigint "warehouses_id", null: false
+    t.bigint "product_id", null: false
+    t.bigint "warehouse_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["products_id"], name: "index_product_warehouses_on_products_id"
-    t.index ["warehouses_id"], name: "index_product_warehouses_on_warehouses_id"
+    t.index ["product_id"], name: "index_product_warehouses_on_product_id"
+    t.index ["warehouse_id"], name: "index_product_warehouses_on_warehouse_id"
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -90,10 +90,10 @@ ActiveRecord::Schema.define(version: 2019_04_03_035626) do
     t.string "product_code", null: false
     t.string "description", default: ""
     t.string "tag", default: ""
-    t.bigint "categories_id", null: false
+    t.bigint "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["categories_id"], name: "index_products_on_categories_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
   end
 
   create_table "sells", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -101,10 +101,10 @@ ActiveRecord::Schema.define(version: 2019_04_03_035626) do
     t.integer "total_count", null: false
     t.float "total_price", null: false
     t.string "description", null: false
-    t.bigint "users_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["users_id"], name: "index_sells_on_users_id"
+    t.index ["user_id"], name: "index_sells_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(version: 2019_04_03_035626) do
     t.string "user_code", default: ""
     t.boolean "gender"
     t.string "adress", default: ""
-    t.date "birth", default: "2019-03-04"
+    t.date "birth", default: "2019-05-04"
     t.integer "role", default: 0, null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -131,17 +131,17 @@ ActiveRecord::Schema.define(version: 2019_04_03_035626) do
   create_table "warehouses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "total_count", null: false
     t.float "total_money", null: false
-    t.bigint "users_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["users_id"], name: "index_warehouses_on_users_id"
+    t.index ["user_id"], name: "index_warehouses_on_user_id"
   end
 
-  add_foreign_key "details", "product_warehouses", column: "product_warehouses_id"
-  add_foreign_key "notifications", "users", column: "users_id"
-  add_foreign_key "product_warehouses", "products", column: "products_id"
-  add_foreign_key "product_warehouses", "warehouses", column: "warehouses_id"
-  add_foreign_key "products", "categories", column: "categories_id"
-  add_foreign_key "sells", "users", column: "users_id"
-  add_foreign_key "warehouses", "users", column: "users_id"
+  add_foreign_key "details", "product_warehouses"
+  add_foreign_key "notifications", "users"
+  add_foreign_key "product_warehouses", "products"
+  add_foreign_key "product_warehouses", "warehouses"
+  add_foreign_key "products", "categories"
+  add_foreign_key "sells", "users"
+  add_foreign_key "warehouses", "users"
 end
