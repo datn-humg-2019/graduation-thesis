@@ -1,10 +1,9 @@
 class Admin::UsersController < Admin::ApplicationController
   before_action :authenticate_user!
   before_action :get_user, only: %i(show edit update destroy)
+  before_action :load_user, only: :index
 
-  def index
-    @users = User.manager_user.select :id, :email, :phone, :name, :user_code, :gender, :adress, :birth, :role
-  end
+  def index; end
 
   def show
     repond_js
@@ -38,6 +37,10 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   private
+  def load_user
+    @q = User.ransack(params[:q])
+    @users = @q.result.manager_user.load_user#.page(params[:page])
+  end
 
   def user_params
     params.require(:user).permit :name, :email, :password, :role

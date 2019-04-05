@@ -1,5 +1,7 @@
 $(document).ready(function() {
   setTimeout(function() {$('.time-out').hide('slow');}, 3000);
+  icheck();
+  setup_datepiker();
 });
 
 $(document).on('click', '.close', function () {$(this).parent().hide();});
@@ -23,4 +25,30 @@ function show_notify(id, type, message) {
   var div_notify = $('#'+id);
   div_notify.delay(0).fadeIn('slow');
   div_notify.delay(3000).fadeOut('slow', function() {$(this).remove();});
+}
+
+function icheck(){
+  if($(".icheck-me").length > 0){
+    $(".icheck-me").each(function(){
+      var $el = $(this);
+      var skin = ($el.attr('data-skin') !== undefined) ? "_" + $el.attr('data-skin') : "",
+      color = ($el.attr('data-color') !== undefined) ? "-" + $el.attr('data-color') : "";
+      var opt = {
+        checkboxClass: 'icheckbox' + skin + color,
+        radioClass: 'iradio' + skin + color,
+      }
+      $el.iCheck(opt);
+    });
+  }
+}
+
+function setup_datepiker() {
+  $('.input-datetimepiker').datepicker({
+    clearBtn: true,
+    todayBtn: true,
+    language: I18n.locale,
+    todayHighlight: true,
+    autoclose: true,
+    format: I18n.t('date-js')
+  });
 }

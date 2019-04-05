@@ -1,0 +1,19 @@
+<% users.each do |u| %>
+  <tr>
+    <td>
+      <%= link_to u.id, admin_user_path(id: u), method: :GET, data: {toggle: "modal", target: "#modal-admin"}, remote: true %>
+    </td>
+    <td>
+      <%= u.name %>
+    </td>
+    <td>
+      <%= u.email %>
+    </td>
+    <td>
+      <%= u.role %>
+    </td>
+    <td>
+      <%= render "action", user: u %>                
+    </td>
+  </tr>
+<% end %>

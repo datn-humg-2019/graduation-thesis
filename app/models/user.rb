@@ -20,6 +20,7 @@ class User < ApplicationRecord
   enum role: {admin: 0, vip: 1, ctv: 2}
 
   scope :manager_user, ->{where.not role: "admin"}
+  scope :load_user, ->{select :id, :email, :phone, :name, :user_code, :gender, :adress, :birth, :role}
 
   def login
     @login || phone || email
