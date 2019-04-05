@@ -4,6 +4,10 @@
 <hr>
 <div class="col-md-12">
   <div class="card">
+    <div class="card-header">
+      <%= render "filter" %>
+    </div>
+    <hr>
     <div class="card-body">
       <div class="table-responsive">
         <table class="table table-bordered">
@@ -27,26 +31,7 @@
             </tr>
           </thead>
           <tbody>
-            <% @users.each do |u| %>
-              <tr>
-                <td>
-                  <%= link_to u.id, admin_user_path(id: u) %>
-                </td>
-                <td>
-                  <%= u.name %>
-                </td>
-                <td>
-                  <%= u.email %>
-                </td>
-                <td>
-                  <%= u.role %>
-                </td>
-                <td>
-                  <%= render "action", user: u %>                
-                </td>
-              </tr>
-              <br>
-            <% end %>
+            <%= render "grid_users", users: @users %>
           </tbody>
         </table>
       </div>
