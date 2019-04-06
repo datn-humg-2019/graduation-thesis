@@ -6,7 +6,7 @@
     </div>
     <div class="col-md-6 mb-3">
       <%= label_tag :role, "Role", for: "validationDefault01" %>
-      <%= f.select :role_eq, options_for_select(User.roles.to_a), {include_blank: t(".none")}, {class: "form-control"} %>
+      <%= f.select :role_eq, options_for_select(User.roles.to_a), {class: "form-control"} %>
     </div>
   </div>
 

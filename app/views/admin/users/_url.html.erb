@@ -1,0 +1,9 @@
+<h2>
+  <% if action == "index" %>
+    <%= t(".user") %>
+  <% elsif action == "new" %>
+    <%= link_to t(".user"), admin_users_path %> > <%= t(".new_title") %>
+  <% elsif action == "edit" %>
+    <%= link_to t(".user"), admin_users_path %> > <%= t(".edit_title") %>
+  <% end %>
+</h2>
