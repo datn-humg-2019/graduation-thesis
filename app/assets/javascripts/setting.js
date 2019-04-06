@@ -8,13 +8,13 @@ $(document).on('click', '.close', function () {$(this).parent().hide();});
 
 /**
  *  Show notification
- * 
+ *
  *  id: is id off element. No duplicate
- * 
+ *
  *  type: type of notify
- * 
+ *
  *  0: alert-info, 1: alert-success, 2: alert-warning, 3: alert-danger
- * 
+ *
  *  message: you don't know ??
  * */
 function show_notify(id, type, message) {
@@ -43,7 +43,7 @@ function icheck(){
 }
 
 function setup_datepiker() {
-  $('.input-datetimepiker').datepicker({
+  $('.input-datepiker').datepicker({
     clearBtn: true,
     todayBtn: true,
     language: I18n.locale,

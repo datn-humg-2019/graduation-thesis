@@ -15,14 +15,28 @@ class Admin::UsersController < Admin::ApplicationController
 
   def create
     @user = User.new user_params
-    flash[:success] = t ".create_success" if @user.save
+    @user.password = @user.default_password
+    if @user.save
+      flash[:success] = t ".create_success"
+      redirect_to admin_users_path
+    else
+      flash[:danger] = t ".create_fail"
+      semester_convert_date
+      render :new
+    end
   end
 
   def edit; end
 
   def update
-    result = @user.admin?
-    flash[:success] = t ".update_success" if result
+    if @user.update_attributes user_params
+      flash[:success] = t ".update_success"
+      redirect_to admin_users_path
+    else
+      flash[:danger] = t ".update_fail"
+      semester_convert_date
+      render :edit
+    end
   end
 
   def destroy
@@ -39,11 +53,16 @@ class Admin::UsersController < Admin::ApplicationController
   private
   def load_user
     @q = User.ransack(params[:q])
-    @users = @q.result.manager_user.load_user#.page(params[:page])
+    @users = @q.result.manager_user.load_user.page(params[:page]).per(3)
   end
 
   def user_params
-    params.require(:user).permit :name, :email, :password, :role
+    params[:user][:birth] = convert_date params[:user][:birth]
+    params.require(:user).permit :email, :phone, :name, :gender, :adress, :birth, :role
+  end
+
+  def semester_convert_date
+    @user.birth = convert_date_to_local @user.birth
   end
 
   def get_user

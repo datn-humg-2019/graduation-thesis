@@ -1,0 +1,11 @@
+<h2>
+  <%= link_to t("user"), admin_users_path %> > Edit
+</h2>
+<hr>
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <%= render "form", action: "update" %>
+    </div>
+  </div>
+</div>

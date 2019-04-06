@@ -15,7 +15,6 @@
 //= require jquery-ui
 //= require activestorage
 //= require bootstrap-datepicker
-//= require bootstrap-datetimepicker
 //= require_tree .
 //= require paper-dashboard
 //= require popper

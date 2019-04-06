@@ -25,7 +25,7 @@
       <%= f.text_field :name,
         class: "form-control", required: true %>
     </div>
-    
+
     <div class="field form-group">
       <%= f.label :identity_card, "identity card" %>
       <%= f.text_field :identity_card,
@@ -45,7 +45,7 @@
 
     <div class="form-group">
       <%= f.label :lbl_birth, "birth" %>
-      <%= f.text_field :birth, placeholder: "birth", class: "input-datetimepiker form-control", readonly: true %>
+      <%= f.text_field :birth, placeholder: "birth", class: "input-datepiker form-control", readonly: true %>
     </div>
 
     <%= check_box_tag :change_pass %>

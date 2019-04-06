@@ -3,7 +3,7 @@
   <div class="box-body">
     <div class="form-group">
       <%= f.label :role, "role" %>
-      <%= f.collection_select :role, User.roles.to_a, :last, :first,
+      <%= f.collection_select :role, role_selected, :last, :first,
           {include_blank: false}, {class: "form-control"} %>
     </div>
     <div class="form-group">
@@ -28,20 +28,13 @@
     </div>
     <% if action == "update" %>
       <div class="form-group">
-        <%= f.label :user_code, "#{@user.user_code}" %>
+        <%= f.label :get_user_code, "#{@user.get_user_code}" %>
       </div>
     <% end %>
     <div class="form-group">
-      <%= f.label :lbl_gender, "gender" %>
-      <br>
-      <%= f.radio_button :gender, "true", class: "icheck-me", data: { "skin" => "square", "color" => "blue" } %>
-      <%= f.label :lbl_gender, "Nam"%>
-      &nbsp;&nbsp;&nbsp;&nbsp;
-      <%= f.radio_button :gender, "false", class: "icheck-me", data: { "skin" => "square", "color" => "blue" } %>
-      <%= f.label :lbl_gender, "Nu" %>
-      &nbsp;&nbsp;&nbsp;&nbsp;      
-      <%= f.radio_button :gender, "nil", class: "icheck-me", data: { "skin" => "square", "color" => "blue" }, checked: true %>
-      <%= f.label :lbl_gender, "Khac" %>
+      <%= f.label :gender, "role" %>
+      <%= f.collection_select :gender, gender_selected, :last, :first,
+          {include_blank: false}, {class: "form-control"} %>
     </div>
     <div class="form-group">
       <%= f.label :adress, "adress" %>
@@ -49,7 +42,7 @@
     </div>
     <div class="form-group">
       <%= f.label :birth, "birth" %>
-      <%= f.text_field :birth, placeholder: "birth", class: "input-datetimepiker form-control", readonly: true %>
+      <%= f.text_field :birth, placeholder: "birth", class: "input-datepiker form-control", readonly: true %>
     </div>
   </div>
   <div class="box-footer">
