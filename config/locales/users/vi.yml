@@ -1,0 +1,13 @@
+en:
+  admin:
+    users:
+      create:
+        create_success: "Tạo người dùng thành công"
+        create_fail: "Tạo người dùng thất bại"
+      update:
+        update_success: "Cập nhật người dùng thành công"
+        update_fail: "Cập nhật người dùng thất bại"
+      destroy:
+        cant_do_it: "Bạn không thể thực hiện hành vi này"
+        destroy_success: "Xóa người dùng thành công"
+        destroy_fail: "Xóa người dùng thất bại"

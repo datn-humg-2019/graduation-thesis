@@ -8,7 +8,7 @@ class Admin::ApplicationController < ActionController::Base
   private
   def convert_date date
     Date.strptime(date, t("date")).strftime("%Y/%m/%d") if date.present?
-  rescue Exception
+  rescue ArgumentError
     date
   end
 
