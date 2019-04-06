@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_03_035626) do
+ActiveRecord::Schema.define(version: 2019_04_06_101227) do
 
   create_table "bills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "bill_code", null: false
@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(version: 2019_04_03_035626) do
     t.integer "count", null: false
     t.float "price_origin", null: false
     t.float "price_sale", null: false
-    t.datetime "mfg", default: "2019-05-04 00:00:00"
-    t.datetime "exp", default: "2019-05-04 00:00:00"
+    t.datetime "mfg", default: "2019-06-04 00:00:00"
+    t.datetime "exp", default: "2019-06-04 00:00:00"
     t.boolean "stop_providing", default: false
     t.bigint "product_id", null: false
     t.bigint "warehouse_id", null: false
@@ -111,10 +111,9 @@ ActiveRecord::Schema.define(version: 2019_04_03_035626) do
     t.string "email", default: "", null: false
     t.string "phone", default: "", null: false
     t.string "name", default: "", null: false
-    t.string "user_code", default: ""
     t.boolean "gender"
     t.string "adress", default: ""
-    t.date "birth", default: "2019-05-04"
+    t.date "birth", default: "2019-06-04"
     t.integer "role", default: 0, null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -125,7 +124,6 @@ ActiveRecord::Schema.define(version: 2019_04_03_035626) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["phone"], name: "index_users_on_phone", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["user_code"], name: "index_users_on_user_code", unique: true
   end
 
   create_table "warehouses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

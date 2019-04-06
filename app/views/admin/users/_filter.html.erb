@@ -1,8 +1,8 @@
 <%= search_form_for @q, url: admin_users_path, method: :GET do |f| %>
   <div class="form-row">
     <div class="col-md-6 mb-3">
-      <%= label_tag :name_or_email_or_phone_or_user_code_cont, "Search field", for: "validationDefault01" %>
-      <%= f.search_field :name_or_email_or_phone_or_user_code_cont, class: "form-control", placeholder: "Email, Name, Phone, User code" %>
+      <%= label_tag :name_or_email_or_phone_cont, "Search field", for: "validationDefault01" %>
+      <%= f.search_field :name_or_email_or_phone_cont, class: "form-control", placeholder: "Email, Name, Phone, User code" %>
     </div>
     <div class="col-md-6 mb-3">
       <%= label_tag :role, "Role", for: "validationDefault01" %>

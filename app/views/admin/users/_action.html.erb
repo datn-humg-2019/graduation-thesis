@@ -6,4 +6,10 @@
   <%= link_to admin_user_path(id: user), method: :DELETE, data: {confirm: "Are you sure?"}, class: "btn btn-danger" do %>
     <i class="fa fa-trash-o"></i> Destroy
   <% end %>
+
+  <% unless user.admin? %>
+    <%= link_to edit_admin_user_path(id: user), method: :GET, class: "btn btn-warning" do %>
+      <i class="fa fa-edit"></i> Edit
+    <% end %>
+  <% end %>
 <% end %>

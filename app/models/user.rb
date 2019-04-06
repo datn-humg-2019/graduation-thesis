@@ -15,12 +15,16 @@ class User < ApplicationRecord
   attr_writer :login
 
   validates :name, presence: true
-  validates :phone, presence: true
+  validates :email, presence: true, uniqueness: true, format: {with: Devise.email_regexp}
+  validates :phone, presence: true, uniqueness: true, length: {minimum: 10, maximum: 11},
+                    format: {with: /\A(0)[8|9|3|7|5]\d{8,9}/}
+  validate :birth_not_than_today
 
   enum role: {admin: 0, vip: 1, ctv: 2}
 
   scope :manager_user, ->{where.not role: "admin"}
-  scope :load_user, ->{select :id, :email, :phone, :name, :user_code, :gender, :adress, :birth, :role}
+
+  scope :load_user, ->{select :id, :email, :phone, :name, :gender, :adress, :birth, :role}
 
   def login
     @login || phone || email
@@ -30,10 +34,26 @@ class User < ApplicationRecord
     self == user
   end
 
+  def get_user_code
+    rcode = if admin?
+              "A"
+            elsif vip?
+              "V"
+            else
+              "C"
+            end
+    "#{rcode}-#{format('%03d', id)}"
+  end
+
   def age
+    return "????" if birth.nil?
     now = Time.now.utc.to_date
     now.year - birth.year -
       (now.month > birth.month || (now.month == birth.month && now.day >= birth.day) ? 0 : 1)
+  end
+
+  def default_password
+    "#{format('%02d', birth.day)}#{format('%02d', birth.month)}#{birth.year}"
   end
 
   class << self
@@ -45,5 +65,11 @@ class User < ApplicationRecord
         conditions[:username].nil? ? where(conditions).first : where(username: conditions[:username]).first
       end
     end
+  end
+
+  private
+  def birth_not_than_today
+    return if birth.blank?
+    errors.add(:base, "Birthday cannot equal than today") if age.negative? || birth.today?
   end
 end
