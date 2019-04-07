@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: olalalala
+  api_key: '594253696184476'
+  api_secret: 03MQaCLAoTFPkA_hj-xjqkQefqg
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: olalalala
+  api_key: '594253696184476'
+  api_secret: 03MQaCLAoTFPkA_hj-xjqkQefqg
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: olalalala
+  api_key: '594253696184476'
+  api_secret: 03MQaCLAoTFPkA_hj-xjqkQefqg
+  enhance_image_tag: true
+  static_file_support: false

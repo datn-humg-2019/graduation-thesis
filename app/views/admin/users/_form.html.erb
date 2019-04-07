@@ -44,6 +44,20 @@
       <%= f.label :birth, "birth" %>
       <%= f.text_field :birth, placeholder: "birth", class: "input-datepiker form-control", readonly: true %>
     </div>
+    <div class="form-group d-flex justify-content-center">
+      <% if action == "create" %>
+        <div class="change-avatar">
+          <img id="img-prev" src="#" class="hidden image">
+          <%= image_tag "avatar.jpg", class: "image img-avatar"%>
+          <div class="middle">
+            <%= f.label :image, "Upload", class: "btn btn-success" %>
+            <%= f.file_field :image, class: "hidden" %>
+          </div>
+        </div>
+      <% else %>
+          <%= image_tag @user.get_avatar, class: "img-thumb-size" %>
+      <% end %>
+    </div>
   </div>
   <div class="box-footer">
     <%= link_to "Back", admin_users_path, class: "btn btn-default" %>

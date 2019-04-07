@@ -3,6 +3,7 @@ en:
     users:
       create:
         create_success: "Tạo người dùng thành công"
+        create_image_fail: "Tạo Ảnh người dùng không thành công"
         create_fail: "Tạo người dùng thất bại"
       update:
         update_success: "Cập nhật người dùng thành công"

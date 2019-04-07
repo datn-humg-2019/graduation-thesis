@@ -56,6 +56,10 @@ class User < ApplicationRecord
     "#{format('%02d', birth.day)}#{format('%02d', birth.month)}#{birth.year}"
   end
 
+  def get_avatar
+    images.blank? ? "avatar.jpg" : images.first.image.thumb.url
+  end
+
   class << self
     def find_first_by_auth_conditions warden_conditions
       conditions = warden_conditions.dup
