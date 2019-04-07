@@ -52,3 +52,13 @@ function setup_datepiker() {
     format: I18n.t('date-js')
   });
 }
+
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      $('#img-prev').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+}

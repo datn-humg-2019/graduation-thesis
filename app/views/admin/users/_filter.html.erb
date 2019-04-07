@@ -1,12 +1,12 @@
 <%= search_form_for @q, url: admin_users_path, method: :GET do |f| %>
   <div class="form-row">
     <div class="col-md-6 mb-3">
-      <%= label_tag :name_or_email_or_phone_cont, "Search field", for: "validationDefault01" %>
+      <%= label_tag :name_or_email_or_phone_cont, "Search field", for: "name_or_email_or_phone_cont" %>
       <%= f.search_field :name_or_email_or_phone_cont, class: "form-control", placeholder: "Email, Name, Phone, User code" %>
     </div>
     <div class="col-md-6 mb-3">
-      <%= label_tag :role, "Role", for: "validationDefault01" %>
-      <%= f.select :role_eq, options_for_select(User.roles.to_a), {class: "form-control"} %>
+      <%= label_tag :role, "Role", for: "role_eq" %>
+      <%= f.select :role_eq, options_for_select(User.roles.to_a), {}, {class: "form-control"} %>
     </div>
   </div>
 

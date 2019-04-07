@@ -7,6 +7,7 @@ en:
         edit_title: Edit user
       create:
         create_success: "Create user success"
+        create_image_fail: "Create avatar of user fail"
         create_fail: "Create user fails"
       update:
         update_success: "Update user fails"

@@ -13,7 +13,10 @@
       <%= u.role %>
     </td>
     <td>
-      <%= render "action", user: u %>                
+      <%= image_tag u.get_avatar, class: "img-thumb-size" %>
+    </td>
+    <td>
+      <%= render "action", user: u %>
     </td>
   </tr>
 <% end %>
