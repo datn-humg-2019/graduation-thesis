@@ -1,0 +1,17 @@
+en:
+  admin:
+    categories:
+      url:
+        title: Loại hàng
+        new_title: Thêm mới loại hàng
+        edit_title: Chỉnh sửa loại hàng
+      create:
+        create_success: Tạo loại hàng thành công
+        create_image_fail: Thêm ảnh cho loại hàng thất bại
+        create_fail: Tạo loại hàng thất bại
+      update:
+        update_success: Cập nhật loại hàng thành công
+        update_fail: Cập nhật loại hàng thất bại
+      destroy:
+        destroy_success: Xóa loại hàng thành công
+        destroy_fail: Xóa loại hàng thất bại

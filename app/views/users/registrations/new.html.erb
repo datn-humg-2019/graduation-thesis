@@ -5,19 +5,15 @@
         <h4><b><%= t ".sign_up" %></b></h4>
       </div>
       <div class="modal-body modal-padding">
-        <p><%= "student parent sign up" %></p>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), remote: true) do |f| %>
           <%= f.email_field :email, class:"modal-input form-control", autofocus: true, placeholder: "email", required: true %><br>
           <%= f.text_field :phone, class:"modal-input form-control", placeholder: "phone", required: true %><br>
           <%= f.text_field :name, class:"modal-input form-control", placeholder: "name", required: true %><br>
           <%= f.password_field :password, class:"modal-input form-control", placeholder: "password", required: true %><br>
-          <%= f.password_field :password_confirmation, class:"modal-input form-control", placeholder: "pass_confirm", required: true %>
-          <div id="detail-not-input">
-            <br>
-            <%= f.text_field :birth, placeholder: "birth", class: "input-datepiker modal-input form-control", readonly: true %><br>
-            <%= f.text_field :gender, class:"modal-input form-control", placeholder: "gender" %><br>
-            <%= f.text_area :adress, class:"modal-input form-control", placeholder: "adress" %><br>
-          </div>
+          <%= f.password_field :password_confirmation, class:"modal-input form-control", placeholder: "password confirm", required: true %><br>
+          <%= f.text_field :birth, placeholder: "birth", class: "input-datepiker modal-input form-control", readonly: true %><br>
+          <%= f.collection_select :gender, gender_selected, :last, :first, {include_blank: false}, {class: "form-control"} %><br>
+          <%= f.text_area :adress, class:"modal-input form-control", placeholder: "adress" %><br>
           <hr>
           <%= f.submit "sign_up", class:"modal-input form-control btn btn-danger" %>
         <% end %>

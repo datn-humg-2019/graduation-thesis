@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(version: 2019_04_06_101227) do
     t.integer "count", null: false
     t.float "price_origin", null: false
     t.float "price_sale", null: false
-    t.datetime "mfg", default: "2019-06-04 00:00:00"
-    t.datetime "exp", default: "2019-06-04 00:00:00"
+    t.datetime "mfg", default: "2019-08-04 00:00:00"
+    t.datetime "exp", default: "2019-08-04 00:00:00"
     t.boolean "stop_providing", default: false
     t.bigint "product_id", null: false
     t.bigint "warehouse_id", null: false
@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 2019_04_06_101227) do
     t.string "name", default: "", null: false
     t.boolean "gender"
     t.string "adress", default: ""
-    t.date "birth", default: "2019-06-04"
+    t.date "birth", default: "2019-08-04"
     t.integer "role", default: 0, null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

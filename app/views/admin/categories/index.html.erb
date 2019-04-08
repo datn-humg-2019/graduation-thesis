@@ -18,13 +18,7 @@
                 NAME
               </th>
               <th>
-                EMAIL
-              </th>
-              <th>
-                ROLE
-              </th>
-              <th>
-                AVATAR
+                IMAGE
               </th>
               <th>
                 ACTION
@@ -32,13 +26,13 @@
             </tr>
           </thead>
           <tbody>
-            <%= render "grid_users", users: @users %>
+            <%= render "grid_categories", categories: @categories %>
           </tbody>
         </table>
       </div>
     </div>
     <div >
-      <%= paginate @users %>
+      <%= paginate @categories %>
     </div>
   </div>
 </div>

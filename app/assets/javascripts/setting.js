@@ -44,12 +44,13 @@ function icheck(){
 
 function setup_datepiker() {
   $('.input-datepiker').datepicker({
+    setDate: new Date(),
     clearBtn: true,
     todayBtn: true,
     language: I18n.locale,
     todayHighlight: true,
     autoclose: true,
-    format: I18n.t('date-js')
+    dateFormat: I18n.t('date-js')
   });
 }
 

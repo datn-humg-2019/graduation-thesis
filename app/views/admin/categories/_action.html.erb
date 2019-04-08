@@ -1,0 +1,9 @@
+<% if current_user.admin? %>
+  <%= link_to admin_category_path(id: category), method: :DELETE, data: {confirm: "Are you sure?"}, class: "btn btn-danger" do %>
+    <i class="fa fa-trash-o"></i> Destroy
+  <% end %>
+
+  <%= link_to edit_admin_category_path(id: category), method: :GET, class: "btn btn-warning" do %>
+    <i class="fa fa-edit"></i> Edit
+  <% end %>
+<% end %>

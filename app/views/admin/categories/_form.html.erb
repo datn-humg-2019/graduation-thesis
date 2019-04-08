@@ -1,0 +1,23 @@
+<%= form_for @category, url: {controller: "categories", action: action} do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+  <div class="box-body">
+    <div class="form-group">
+      <%= f.label :name, "Name" %>
+      <%= f.text_field :name, placeholder: "name", class: "form-control", required: true %>
+    </div>
+    <div class="form-group d-flex justify-content-center">
+      <div class="change-image">
+        <img id="img-prev" src="#" class="hidden image">
+        <%= image_tag @category.get_image, class: "image img-avatar img-thumb-size" %>
+        <div class="middle">
+          <%= f.label :image, "Upload", class: "btn btn-success" %>
+          <%= f.file_field :image, class: "hidden" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box-footer">
+    <%= link_to "Back", admin_categories_path, class: "btn btn-default" %>
+    <%= f.button :submit, class: "btn btn-primary float-right" %>
+  </div>
+<% end %>

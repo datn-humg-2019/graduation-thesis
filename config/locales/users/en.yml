@@ -2,17 +2,17 @@ en:
   admin:
     users:
       url:
-        user: "User"
-        new_title: New useasr
+        title: User
+        new_title: New user
         edit_title: Edit user
       create:
-        create_success: "Create user success"
-        create_image_fail: "Create avatar of user fail"
-        create_fail: "Create user fails"
+        create_success: Create user success
+        create_image_fail: Create avatar of user fail
+        create_fail: Create user fails
       update:
-        update_success: "Update user fails"
-        update_fail: "Update user fails"
+        update_success: Update user fails
+        update_fail: Update user fails
       destroy:
-        cant_do_it: "You can't do it"
-        destroy_success: "Destroy user success"
-        destroy_fail: "Destroy user fails"
+        cant_do_it: You can't do it
+        destroy_success: Destroy user success
+        destroy_fail: Destroy user fails
