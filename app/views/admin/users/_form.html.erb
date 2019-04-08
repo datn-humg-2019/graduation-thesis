@@ -32,7 +32,7 @@
       </div>
     <% end %>
     <div class="form-group">
-      <%= f.label :gender, "role" %>
+      <%= f.label :gender, "Gender" %>
       <%= f.collection_select :gender, gender_selected, :last, :first,
           {include_blank: false}, {class: "form-control"} %>
     </div>
@@ -46,7 +46,7 @@
     </div>
     <div class="form-group d-flex justify-content-center">
       <% if action == "create" %>
-        <div class="change-avatar">
+        <div class="change-image">
           <img id="img-prev" src="#" class="hidden image">
           <%= image_tag "avatar.jpg", class: "image img-avatar"%>
           <div class="middle">

@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def slide_active name
-    "active" if controller_name == name
+    "active" if controller_name == name || (controller_name == "dashboards" && name == "admin")
   end
 
   def working_label working

@@ -1,0 +1,16 @@
+<% categories.each do |c| %>
+  <tr>
+    <td>
+      <%= link_to c.id, admin_category_path(id: c) %>
+    </td>
+    <td>
+      <%= c.name %>
+    </td>
+    <td>
+      <%= image_tag c.get_image, class: "img-thumb-size" %>
+    </td>
+    <td>
+      <%= render "action", category: c %>
+    </td>
+  </tr>
+<% end %>

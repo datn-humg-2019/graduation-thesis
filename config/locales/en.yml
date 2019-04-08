@@ -1,6 +1,7 @@
 en:
-  locale: "vi"
+  locale: "en"
   date: "%m/%d/%Y"
   date-js: "mm/dd/yyyy"
   user: "User"
   user_not_found: "User not fond"
+  category_not_found: Category not found

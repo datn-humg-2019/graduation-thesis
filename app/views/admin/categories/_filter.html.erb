@@ -1,0 +1,18 @@
+<%= search_form_for @q, url: admin_categories_path, method: :GET do |f| %>
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <%= label_tag :name_cont, "Search field", for: "name_cont" %>
+      <%= f.search_field :name_cont, class: "form-control", placeholder: "Name" %>
+    </div>
+  </div>
+
+  <div>
+    <%= link_to new_admin_category_path, class: "float-left btn btn-success" do %>
+      <i class="fa fa-plus"></i> New category
+    <% end %>
+    <button class="float-left btn btn-primary" type="submit">
+      <i class="fa fa-search"></i>
+      Search
+    </button>
+  </div>
+<% end %>

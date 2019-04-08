@@ -1,6 +1,10 @@
 en:
   admin:
     users:
+      url:
+        title: Người dùng
+        new_title: Tạo người dùng mới
+        edit_title: Chỉnh sửa người dùng
       create:
         create_success: "Tạo người dùng thành công"
         create_image_fail: "Tạo Ảnh người dùng không thành công"
