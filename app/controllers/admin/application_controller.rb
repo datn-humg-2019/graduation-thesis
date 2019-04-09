@@ -21,7 +21,7 @@ class Admin::ApplicationController < ActionController::Base
   end
 
   def check_admin
-    redirect_to root_path unless current_user.admin?
+    redirect_to admin_path if user_signed_in? && !current_user.admin?
   end
 
   def repond_js

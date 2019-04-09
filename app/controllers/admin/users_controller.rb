@@ -17,12 +17,14 @@ class Admin::UsersController < Admin::ApplicationController
     @user = User.new user_params
     @user.password = @user.default_password
     if @user.save
-      image = @user.images.build
-      image.image = params[:user][:image]
-      if image.save
-        flash[:success] = t ".create_success"
-      else
-        flash[:danger] = t ".create_image_fail"
+      if params[:user][:image]
+        image = @user.images.build
+        image.image = params[:user][:image]
+        if image.save
+          flash[:success] = t ".create_success"
+        else
+          flash[:danger] = t ".create_image_fail"
+        end
       end
       redirect_to admin_users_path
     else

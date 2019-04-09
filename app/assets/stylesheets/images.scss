@@ -1,0 +1,30 @@
+.list_images {
+  width: 100%;
+  background: linear-gradient(90deg, rgb(236, 136, 69) 0%, rgb(94, 241, 229) 100%);
+  display: inline-block;
+}
+.list_images_old {
+  width: 100%;
+  background: linear-gradient(90deg, rgb(236, 136, 69) 0%, rgb(94, 241, 229) 100%);
+  display: inline-block;
+}
+
+.mblock {
+  width: 100px;
+  background-color: #fff;
+  margin: 10px;
+  float: left;
+  object-fit:cover;
+}
+
+.hover-hand {
+  cursor: pointer;
+}
+
+.destroy-image {
+  position: absolute;
+  background: gray;
+  color: white;
+  top: 0px;
+  border-radius: 50%;
+}

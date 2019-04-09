@@ -1,0 +1,24 @@
+<% products.each do |p| %>
+  <tr>
+    <td>
+      <%= link_to p.id, admin_user_path(id: p), method: :GET, data: {toggle: "modal", target: "#modal-admin"}, remote: true %>
+    </td>
+    <td>
+      <%= p.category.name %>
+    </td>
+    <td>
+      <%= p.name %>
+    </td>
+    <td>
+      <%= p.tag %>
+    </td>
+    <td>
+      <% p.images.each do |img| %>
+        <%= image_tag img.image.thumb.url, class: "img-thumb-size" %>
+      <% end %>
+    </td>
+    <td>
+      <%= render "action", product: p %>
+    </td>
+  </tr>
+<% end %>
