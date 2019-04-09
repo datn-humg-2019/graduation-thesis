@@ -6,4 +6,8 @@ module DashboardHelper
   def role_selected
     [["ADMIN", "admin"], ["VIP", "vip"], ["CTV", "ctv"]]
   end
+
+  def category_selected
+    Category.pluck :name, :id
+  end
 end

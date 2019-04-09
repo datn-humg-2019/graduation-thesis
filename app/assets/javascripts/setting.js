@@ -1,4 +1,22 @@
 $(document).ready(function() {
+  if($('#markdown').length == 1){
+    var simplemde = new SimpleMDE({
+      element: document.getElementById("markdown")
+    });
+  
+    simplemde.codemirror.on('refresh', function() {
+      if (simplemde.isFullscreenActive()) {
+        $('.sidebar').addClass('hidden');
+        $('.navbar').addClass('hidden');
+        $('.footer').addClass('hidden');
+      } else {
+        $('.sidebar').removeClass('hidden');
+        $('.navbar').removeClass('hidden');
+        $('.footer').removeClass('hidden');
+      }
+    });
+  }
+
   setTimeout(function() {$('.time-out').hide('slow');}, 3000);
   icheck();
   setup_datepiker();
@@ -61,5 +79,15 @@ function readURL(input) {
       $('#img-prev').attr('src', e.target.result);
     }
     reader.readAsDataURL(input.files[0]);
+  }
+}
+
+function readURLWithImg(input) {
+  if (input) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      $('.list_images').prepend('<div class="mblock"><img id="image_preview" src="' + e.target.result + '"/></div>')
+    }
+    reader.readAsDataURL(input);
   }
 }
