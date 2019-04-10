@@ -9,4 +9,9 @@ class Product < ApplicationRecord
     images.blank? ? "product.png" : images
   end
 
+  class << self
+    def get_list_tag
+      pluck(:tag).join(" ").split(" ").uniq.join(" ")
+    end
+  end
 end

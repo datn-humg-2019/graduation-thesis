@@ -16,21 +16,7 @@ class Admin::ProductsController < Admin::ApplicationController
   def create
     @product = Product.new product_params
     if @product.save
-      images = params[:product][:image]
-      count = 0
-      unless images.blank?
-        images.each do |i|
-          image = @product.images.build
-          image.image = i
-          count += 1 unless image.save
-        end
-      end
-      if count.zero?
-        flash[:success] = t ".create_success"
-      else
-        # so anh luu fails
-        flash[:danger] = t ".create_image_fail"
-      end
+      save_images params[:product][:image]
       redirect_to admin_products_path
     else
       flash[:danger] = t ".create_fail"
@@ -43,7 +29,7 @@ class Admin::ProductsController < Admin::ApplicationController
 
   def update
     if @product.update_attributes product_params
-      flash[:success] = t ".update_success"
+      save_images params[:product][:image]
       redirect_to admin_products_path
     else
       flash[:danger] = t ".update_fail"
@@ -53,9 +39,9 @@ class Admin::ProductsController < Admin::ApplicationController
   end
 
   def destroy
-    if @product.admin? || @product.is_me?(current_product)
-      flash[:danger] = t ".cant_do_it"
-    elsif @product.destroy
+    p = @product
+    if @product.destroy
+      p.images.destroy_all
       flash[:success] = t ".destroy_success"
     else
       flash[:danger] = t ".destroy_fail"
@@ -83,5 +69,23 @@ class Admin::ProductsController < Admin::ApplicationController
     return if @product
     flash[:danger] = t "product_not_found"
     redirect_to admin_products_path
+  end
+
+  def save_images param
+    images = param
+    count = 0
+    unless images.blank?
+      images.each do |i|
+        image = @product.images.build
+        image.image = i
+        count += 1 unless image.save
+      end
+    end
+    if count.zero?
+      flash[:success] = t ".create_success"
+    else
+      # so anh luu fails
+      flash[:danger] = t ".create_image_fail"
+    end
   end
 end

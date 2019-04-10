@@ -48,7 +48,9 @@ class Admin::CategoriesController < Admin::ApplicationController
   end
 
   def destroy
+    c = @category
     if @category.destroy
+      c.images.destroy_all
       flash[:success] = t ".destroy_success"
     else
       flash[:danger] = t ".destroy_fail"

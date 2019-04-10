@@ -1,0 +1,17 @@
+.tag_list {
+  display: inline-block;
+  vertical-align: top;
+  background: #f7f7f7;
+  border-radius: 30px;
+  margin: 5px;
+  padding: 10px 25px 10px 10px;
+  border: 1px solid #d6d6d6;
+  position: relative;
+}
+
+.tag_list span {
+  position: absolute;
+  right: 8px;
+  top: 10px;
+  cursor: pointer;
+}

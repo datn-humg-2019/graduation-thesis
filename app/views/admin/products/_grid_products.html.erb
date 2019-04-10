@@ -1,7 +1,7 @@
 <% products.each do |p| %>
   <tr>
     <td>
-      <%= link_to p.id, admin_user_path(id: p), method: :GET, data: {toggle: "modal", target: "#modal-admin"}, remote: true %>
+      <%= link_to p.id, admin_product_path(id: p), method: :GET, data: {toggle: "modal", target: "#modal-admin"}, remote: true %>
     </td>
     <td>
       <%= p.category.name %>
@@ -10,11 +10,16 @@
       <%= p.name %>
     </td>
     <td>
-      <%= p.tag %>
+      <%= render "products/tag", tags: p.tag, status: "asdas" %>
     </td>
     <td>
       <% p.images.each do |img| %>
-        <%= image_tag img.image.thumb.url, class: "img-thumb-size" %>
+        <div class="form-group mblock">
+          <span class="btn destroy-image" id="img-<%= img.id %>">
+            <i class="fa fa-times"></i>
+          </span>
+          <%= image_tag img.image.thumb.url, class: "img-thumb-size" %>
+        </div>
       <% end %>
     </td>
     <td>
