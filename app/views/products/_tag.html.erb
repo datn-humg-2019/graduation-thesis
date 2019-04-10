@@ -1,0 +1,11 @@
+<div>
+  <% tags.split(" ").each do |tag| %>
+    <% if status == "show" %>
+      <a href="#" target="_blank">
+        <div class="tag_list"><%= tag %></div>
+      </a>
+    <% else %>
+      <div class="tag_list"><%= tag %><span class="close_tag">X</span></div>
+    <% end %>
+  <% end %>
+</div>

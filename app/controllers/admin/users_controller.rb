@@ -48,9 +48,11 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def destroy
+    u = @user
     if @user.admin? || @user.is_me?(current_user)
       flash[:danger] = t ".cant_do_it"
     elsif @user.destroy
+      u.images.destroy_all
       flash[:success] = t ".destroy_success"
     else
       flash[:danger] = t ".destroy_fail"
