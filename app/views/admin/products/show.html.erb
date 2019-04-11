@@ -1,0 +1,51 @@
+<%= render "url", action: "new" %>
+<hr>
+<div class="col-md-12">
+  <div class="container">  
+  <div class="card">
+    <div class="card-body">
+      <h1 class="my-4"><%= "#{@product.category.name}: " %>
+        <small><%= @product.name %></small>
+      </h1>
+      <div class="row">
+        <div class="col-md-6">
+          <div id="image_product_detail" class="carousel slide" data-ride="carousel">
+            <ul class="carousel-indicators">
+              <% (0...@product.images.size).each do |i| %>
+                <li data-target="#image_product_detail" data-slide-to="<%= i %>" class="<%= "active" if i == 0 %>"></li>
+              <% end %>
+            </ul>
+            <div class="carousel-inner">
+              <% @product.images.each_with_index do |image, i| %>
+                <div class="carousel-item carousel-item <%= "active" if i == 0 %>">
+                  <%= image_tag image.image.url, class: "image_slide" %>
+                </div>
+              <% end %>
+              </div>
+              <a class="carousel-control-prev" href="#image_product_detail" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+              </a>
+              <a class="carousel-control-next" href="#image_product_detail" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+              </a>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+          <h3 class="my-3">Tags</h3>
+          <div class="row">
+            <%= render "products/tag", tags: @product.tag, status: "show" %>
+          </div>
+          <strong>
+            <h3 class="my-3">Description</h3>
+          </strong>
+          <div class="box-description">
+            <%= markdown @product.description %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>

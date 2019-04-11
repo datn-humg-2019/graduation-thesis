@@ -5,9 +5,7 @@ class Admin::ProductsController < Admin::ApplicationController
 
   def index; end
 
-  def show
-    repond_js
-  end
+  def show; end
 
   def new
     @product = Product.new
