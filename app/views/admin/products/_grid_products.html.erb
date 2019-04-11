@@ -1,7 +1,7 @@
 <% products.each do |p| %>
   <tr>
     <td>
-      <%= link_to p.id, admin_product_path(id: p), method: :GET, data: {toggle: "modal", target: "#modal-admin"}, remote: true %>
+      <%= link_to p.id, admin_product_path(id: p), method: :GET %>
     </td>
     <td>
       <%= p.category.name %>
@@ -10,7 +10,7 @@
       <%= p.name %>
     </td>
     <td>
-      <%= render "products/tag", tags: p.tag, status: "asdas" %>
+      <%= render "products/tag", tags: p.tag, status: "" %>
     </td>
     <td>
       <% p.images.each do |img| %>
