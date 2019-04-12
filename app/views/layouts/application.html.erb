@@ -10,13 +10,16 @@
   </head>
 
   <body>
-    <% flash.each do |message_type, message| %>
-      <div class="time-out alert alert-<%= "#{type_flash message_type}" %> alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <h4><i class="icon fa fa-warning"></i> Alert!</h4>
-        <%= message %>
-      </div>
-    <% end %>
-    <%= yield %>
+    <div class="my-notify"></div>
+    <%= render "layouts/header" %>
+      <% flash.each do |message_type, message| %>
+        <div class="time-out alert alert-<%= "#{type_flash message_type}" %> alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h4><i class="icon fa fa-warning"></i> Alert!</h4>
+          <%= message %>
+        </div>
+      <% end %>
+      <%= yield %>
+    <%= render "layouts/footer" %>
   </body>
 </html>

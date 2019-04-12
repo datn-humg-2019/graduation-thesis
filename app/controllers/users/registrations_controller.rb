@@ -42,7 +42,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :phone, :adress, :identity_card, :birth, :gender])
+    params[:user][:birth] = convert_date params[:user][:birth]
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :phone, :adress, :password, :password_confirmation, :birth, :gender, :adress])
   end
 
   def configure_account_update_params
