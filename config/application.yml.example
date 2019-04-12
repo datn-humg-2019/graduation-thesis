@@ -6,7 +6,9 @@
 # stripe_api_key: sk_test_2J0l093xOyW72XUYJHE4Dv2r
 # stripe_publishable_key: pk_test_ro9jV5SNwGb1yYlQfzG17LHK
 #
-# production:
-#   stripe_api_key: sk_live_EeHnL644i6zo4Iyq4v1KdV9H
-#   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
 development:
+  pass_mysql: Doanhnhan
+  SECRET_KEY_BASE: 60789e1b206ab0a1c3d7d61c01fe7f685b936ac4b9e17d94419111a82962f804f6ede90ceb5f69c7fc2b395f9b9ac5c89911e6c1a8eb6575820079bf87594a5c
+production:
+  pass_mysql: Doanhnhan
+  SECRET_KEY_BASE: 60789e1b206ab0a1c3d7d61c01fe7f685b936ac4b9e17d94419111a82962f804f6ede90ceb5f69c7fc2b395f9b9ac5c89911e6c1a8eb6575820079bf87594a5c
