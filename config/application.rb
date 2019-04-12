@@ -18,6 +18,7 @@ module GraduationThesis
     config.assets.paths << Rails.root.join("vendors", "assets")
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
     config.time_zone = Settings.time_zone
+    config.assets.initialize_on_precompile = false
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

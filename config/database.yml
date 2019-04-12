@@ -16,6 +16,6 @@ test:
 
 production:
   <<: *default
-  database: graduation-thesis_production
-  username: graduation-thesis
+  database: <%= Figaro.env.database %>
+  username: <%= Figaro.env.username %>
   password: <%= Figaro.env.pass_mysql %>
