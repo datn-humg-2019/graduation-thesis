@@ -6,6 +6,7 @@
       </div>
       <div class="modal-body modal-padding">
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), remote: true) do |f| %>
+          <div class="error-message text-left"></div>
           <%= f.email_field :email, class:"modal-input form-control", autofocus: true, placeholder: "email", required: true %><br>
           <%= f.text_field :phone, class:"modal-input form-control", placeholder: "phone", required: true %><br>
           <%= f.text_field :name, class:"modal-input form-control", placeholder: "name", required: true %><br>
