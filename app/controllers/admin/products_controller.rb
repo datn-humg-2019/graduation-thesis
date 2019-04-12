@@ -82,8 +82,7 @@ class Admin::ProductsController < Admin::ApplicationController
     if count.zero?
       flash[:success] = t ".create_success"
     else
-      # so anh luu fails
-      flash[:danger] = t ".create_image_fail"
+      flash[:danger] = t ".create_image_fail", count: count
     end
   end
 end

@@ -1,0 +1,8 @@
+en:
+  api:
+    session:
+      success: Login success
+      failed: Login fail
+    users:
+      create:
+        create_success: Create user success
