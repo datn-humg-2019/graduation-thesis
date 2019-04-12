@@ -60,6 +60,36 @@ class User < ApplicationRecord
     images.blank? ? "avatar.jpg" : images.first.image.thumb.url
   end
 
+  def get_avatar_api
+    images.blank? ? "" : images.first.image.url
+  end
+
+  def get_gender
+    case gender
+    when true
+      "Nam"
+    when false
+      "Nu"
+    else
+      "Khac"
+    end
+  end
+
+  def load_attribute_user
+    authorize_token = JsonWebToken.encode user_id: id
+    {
+      name: name,
+      email: email,
+      phone: phone,
+      gender: get_gender,
+      adress: adress,
+      birth: birth,
+      role: role,
+      avatar: get_avatar_api,
+      token: authorize_token
+    }
+  end
+
   class << self
     def find_first_by_auth_conditions warden_conditions
       conditions = warden_conditions.dup

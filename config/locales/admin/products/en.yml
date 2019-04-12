@@ -1,0 +1,18 @@
+en:
+  admin:
+    products:
+      url:
+        title: Products
+        new_title: New product
+        edit_title: Edit product
+      create:
+        create_success: Create product success
+        create_image_fail: Has %{count} avatar of product create fails
+        create_fail: Create product fails
+      update:
+        update_success: Update product success
+        update_fail: Update product fails
+      destroy:
+        cant_do_it: You can't do it
+        destroy_success: Destroy product success
+        destroy_fail: Destroy product fails

@@ -5,6 +5,7 @@ git_source(:github){|repo| "https://github.com/#{repo}.git"}
 
 ruby "2.5.3"
 
+gem "active_model_serializers"
 gem "bootsnap", ">= 1.1.0", require: false
 gem "bootstrap", "~> 4.3.1"
 gem "bootstrap-datepicker-rails"
@@ -12,6 +13,7 @@ gem "carrierwave", "~> 1.0"
 gem "chart-js-rails"
 gem "cloudinary", "~> 1.9.1"
 gem "coffee-rails", "~> 4.2"
+gem "config"
 gem "devise"
 gem "faker", "~> 1.6", ">= 1.6.6"
 gem "figaro"
@@ -21,6 +23,7 @@ gem "icheck-rails"
 gem "jbuilder", "~> 2.5"
 gem "jquery-rails"
 gem "jquery-ui-rails"
+gem "jwt"
 gem "kaminari"
 gem "mini_magick", "4.7.0"
 gem "mysql2", ">= 0.4.4", "< 0.6.0"
