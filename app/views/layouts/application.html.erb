@@ -10,8 +10,27 @@
   </head>
 
   <body>
-    <div class="my-notify"></div>
-    <%= render "layouts/header" %>
+    <% if user_signed_in? %>
+      <div class="my-notify"></div>
+      <div class="wrapper">
+        <%= render "layouts/slidebar" %>
+        <div class="main-panel">
+          <%= render "layouts/header" %>
+          <div class="content">
+            <% flash.each do |message_type, message| %>
+              <div class="time-out alert alert-<%= "#{type_flash message_type}" %> alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-warning"></i> Alert!</h4>
+                <%= message %>
+              </div>
+            <% end %>
+            <%= yield %>
+          </div>
+          <%= render "layouts/footer" %>
+          <%= render "layouts/modal" %>
+        </div>
+      </div>
+    <% else %>
       <% flash.each do |message_type, message| %>
         <div class="time-out alert alert-<%= "#{type_flash message_type}" %> alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -20,6 +39,6 @@
         </div>
       <% end %>
       <%= yield %>
-    <%= render "layouts/footer" %>
+    <% end %>
   </body>
 </html>

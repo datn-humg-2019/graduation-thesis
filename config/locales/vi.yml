@@ -4,4 +4,5 @@ en:
   date-js: "mm/dd/yyyy"
   user: "User"
   user_not_found: "User not fond"
+  user_not_role: User not role
   category_not_found: Category not found

@@ -12,9 +12,9 @@
   <body>
     <div class="my-notify"></div>
     <div class="wrapper">
-      <%= render "layouts/admin/slidebar" %>
+      <%= render "layouts/slidebar" %>
       <div class="main-panel">
-        <%= render "layouts/admin/admin_header" %>
+        <%= render "layouts/header" %>
         <div class="content">
           <% flash.each do |message_type, message| %>
             <div class="time-out alert alert-<%= "#{type_flash message_type}" %> alert-dismissible">
@@ -25,7 +25,7 @@
           <% end %>
           <%= yield %>
         </div>
-        <%= render "layouts/admin/admin_footer" %>
+        <%= render "layouts/footer" %>
         <%= render "layouts/modal" %>
       </div>
     </div>
