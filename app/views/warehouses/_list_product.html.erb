@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-sm-2 d-flex justify-content-center align-items-center">
+      <button class="btn btn-success" id="add-product" data-toggle="tooltip" data-placement="bottom" title="Add new product">
+        <i class="fa fa-plus"></i>
+      </button>
+  </div>
+  <% products.each do |p| %>
+    <div class="col-sm-2">
+        <div class="item">
+          <%= image_tag  p.get_thumb_image.image.url, class: "img-thumbnail" %>
+        </div>
+    </div>
+  <% end %>
+</div>

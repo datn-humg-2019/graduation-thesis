@@ -1,0 +1,13 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <%= render "filter" %>
+      <hr>
+      <%= render "overview", warehouse: @warehouse %>
+    </div>
+    <hr>
+    <div class="card-body">
+      <%= render "list_product",  products: @warehouse.product_warehouses %>
+    </div>
+  </div>
+</div>

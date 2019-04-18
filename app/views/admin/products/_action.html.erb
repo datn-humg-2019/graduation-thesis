@@ -1,5 +1,5 @@
 <% if current_user.admin? %>
-  <%= link_to admin_product_path(id: product), method: :GET do %>
+  <%= link_to admin_product_path(id: product), class: "btn btn-primary", method: :GET do %>
     <i class="fa fa-eye"></i> View
   <% end %>
 

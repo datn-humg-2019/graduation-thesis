@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     get "list_tag", to: "products#list_tag", as: "list_tag"
     post "destroy_image", to: "images#destroy", as: "destroy_image"
 
+    resources :warehouses
+
     namespace :admin do
       resources :users
       resources :categories
