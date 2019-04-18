@@ -31,6 +31,12 @@
           <% end %>
         </li>
       <% else %>
+        <li class="<%= slide_active "warehouses" %>">
+          <%= link_to warehouses_path do %>
+            <i class="nc-icon nc-box-2"></i>
+            <p>Warehouses</p>
+          <% end %>
+        </li>
         <li class="active">
           Nhập hàng
         </li>

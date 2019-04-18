@@ -20,6 +20,8 @@ class User < ApplicationRecord
                     format: {with: /\A(0)[8|9|3|7|5]\d{8,9}/}
   validate :birth_not_than_today
 
+  after_create :create_warehouse
+
   enum role: {admin: 0, vip: 1, ctv: 2}
 
   scope :manager_user, ->{where.not role: "admin"}
@@ -105,5 +107,9 @@ class User < ApplicationRecord
   def birth_not_than_today
     return if birth.blank?
     errors.add(:base, "Birthday cannot equal than today") if age.negative? || birth.today?
+  end
+
+  def create_warehouse
+    build_warehouse(total_count: 0, total_money: 0).save unless admin?
   end
 end

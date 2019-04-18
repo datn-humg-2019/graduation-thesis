@@ -22,6 +22,10 @@ $(document).ready(function() {
   setup_datepiker();
 });
 
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
+
 $(document).on('click', '.close', function () {$(this).parent().hide();});
 
 /**
