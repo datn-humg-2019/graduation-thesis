@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
     date
   end
 
+  def check_admin
+    redirect_to admin_path if user_signed_in? && current_user.admin?
+  end
+
   def convert_date_to_local date
     date&.strftime(t("date")) if date
   end

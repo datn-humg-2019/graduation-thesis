@@ -21,12 +21,7 @@ class Admin::ApplicationController < ActionController::Base
   end
 
   def check_admin
-    if user_signed_in? && current_user.admin?
-      redirect_to admin_path
-    else
-      flash[:danger] = t "user_not_role"
-      redirect_to root_path
-    end
+    redirect_to root_path if user_signed_in? && !current_user.admin?
   end
 
   def repond_js

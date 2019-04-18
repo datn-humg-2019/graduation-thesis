@@ -14,7 +14,9 @@
 //= require jquery3
 //= require jquery-ui
 //= require activestorage
+//= require bootstrap-datepicker
 //= require_tree .
+//= require paper-dashboard
 //= require popper
 //= require bootstrap-sprockets
 //= require Chart.min
@@ -22,6 +24,7 @@
 //= require i18n.js
 //= require i18n/translations
 //= require "icheck"
+//= require simplemde.min
 
 $(function(){
   $.ajaxSetup({
