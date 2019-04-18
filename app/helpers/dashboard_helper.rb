@@ -4,7 +4,7 @@ module DashboardHelper
   end
 
   def role_selected
-    [["ADMIN", "admin"], ["VIP", "vip"], ["CTV", "ctv"]]
+    [%w(ADMIN admin), %w(VIP vip), %w(CTV ctv)]
   end
 
   def category_selected

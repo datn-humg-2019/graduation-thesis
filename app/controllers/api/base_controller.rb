@@ -29,12 +29,16 @@ class Api::BaseController < ActionController::API
   end
 
   def authenticate_request!
-    token = request.headers["Authorization"].split(" ").last rescue nil
+    token = begin
+              request.headers["Authorization"].split(" ").last
+            rescue StandardError
+              nil
+            end
 
     unless token
       render json: {status: 501, error: true,
-        message: "Please log in",
-        data: nil}, status: 501
+                    message: "Please log in",
+                    data: nil}, status: 501
       return
     end
 
@@ -42,8 +46,8 @@ class Api::BaseController < ActionController::API
 
     if payload.nil? || !JsonWebToken.valid_payload(payload.first)
       render json: {status: 402, error: true,
-        message: "Please log in",
-        data: nil}, status: 402
+                    message: "Please log in",
+                    data: nil}, status: 402
       return
     end
 

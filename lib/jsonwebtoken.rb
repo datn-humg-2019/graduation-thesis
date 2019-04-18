@@ -11,14 +11,14 @@ class JsonWebToken
   end
 
   def self.valid_payload payload
-    return !expired(payload) && payload["iss"] == meta[:iss] && payload["aud"] == meta[:aud]
+    !expired(payload) && payload["iss"] == meta[:iss] && payload["aud"] == meta[:aud]
   end
 
   def self.meta
     {
       exp: Settings.api.time_reset_token.days.from_now.to_i,
       iss: Settings.api.company,
-      aud: Settings.api.client_name,
+      aud: Settings.api.client_name
     }
   end
 
