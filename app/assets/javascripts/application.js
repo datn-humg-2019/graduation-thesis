@@ -24,6 +24,7 @@
 //= require i18n.js
 //= require i18n/translations
 //= require "icheck"
+//= require chosen-jquery
 //= require simplemde.min
 
 $(function(){

@@ -16,6 +16,25 @@ function ajax_remove_image(method, url, data, id){
   });
 }
 
+function send_add_product_warehouse(data, tr){
+  $.ajax({
+    type: 'POST',
+    url: '/create_product_warehouses',
+    dataType: 'json',
+    data: data,
+    success: function(data){
+      if(data['notifi'].type == "1"){
+        tr.remove();
+      }
+      show_notify('new_product' + tr.find('#index_pw').text(), data['notifi'].type, data['notifi'].message);
+    },
+    error: function (error){
+      console.log(error);
+      alert('has an error');
+    }
+  });
+}
+
 function ajax_list_tag(){
   $.ajax({
     type: 'GET',

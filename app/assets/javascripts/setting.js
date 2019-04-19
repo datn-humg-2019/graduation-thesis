@@ -64,9 +64,18 @@ function icheck(){
   }
 }
 
+function set_up_chosen() {
+  $('.chosen').chosen({
+    allow_single_deselect: true,
+    no_results_text: 'Result not match',
+    width: '100%'
+  });
+}
+
 function setup_datepiker() {
+  var date = new Date();
   $('.input-datepiker').datepicker({
-    setDate: new Date(),
+    setDate: date,
     clearBtn: true,
     todayBtn: true,
     language: I18n.locale,

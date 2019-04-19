@@ -1,0 +1,50 @@
+<%= form_for @product, url: {controller: "products", action: action} do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+  <div class="box-body">
+    <div class="form-group">
+      <%= f.label :category_id, "category" %>
+      <%= f.collection_select :category_id, category_selected, :last, :first,
+          {include_blank: false}, {class: "form-control"} %>
+    </div>
+    <div class="form-group">
+      <%= f.label :name, "Name" %>
+        <%= f.text_field :name, placeholder: "Name", class: "form-control", required: true %>
+    </div>
+    <div class="form-group">
+      <%= f.label :tag, "Tag" %>
+        <%= f.text_field :tag, id: "tags", placeholder: "Tag", class: "form-control", required: true %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :description, "Description" %>
+      <%= f.text_area :description, placeholder: "Description", id: "markdown", class: "form-control" %>
+    </div>
+    
+    <div class="form-group d-flex justify-content-center row">
+      <% if action == "update" %>
+      <div class="list_images_old">
+        <% @product.images.each do |img| %>
+          <div class="mblock">
+            <span class="btn destroy-image" id="img-<%= img.id %>">
+              <i class="fa fa-times"></i>
+            </span>
+            <%= image_tag img.image.thumb.url %>
+          </div>
+        <% end %>
+      </div>
+      <% end %>
+      <hr>
+      <div class="list_images"></div>
+      <div class="change-image">
+        <div>
+          <%= f.label :image, "Upload", class: "btn btn-warning" %>
+          <%= f.file_field :image, multiple: true, class: "hover-hand" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box-footer">
+    <%= link_to "Back", admin_products_path, class: "btn btn-default" %>
+    <%= f.button :submit, class: "btn btn-primary float-right" %>
+  </div>
+<% end %>

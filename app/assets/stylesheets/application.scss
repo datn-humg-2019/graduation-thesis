@@ -1,6 +1,8 @@
 //= require_self
 //= require_tree ../../../vendor/assets/stylesheets
+//= require chosen
 //= require_tree .
+
 @import "bootstrap";
 @import "font-awesome";
 @import 'icheck/square/blue';

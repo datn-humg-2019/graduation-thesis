@@ -87,6 +87,10 @@ GEM
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
     choice (0.2.0)
+    chosen-rails (1.8.7)
+      coffee-rails (>= 3.2)
+      railties (>= 3.0)
+      sass-rails (>= 3.2)
     chromedriver-helper (2.1.1)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
@@ -368,6 +372,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   carrierwave (~> 1.0)
   chart-js-rails
+  chosen-rails
   chromedriver-helper
   cloudinary (~> 1.9.1)
   coffee-rails (~> 4.2)

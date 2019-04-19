@@ -1,0 +1,34 @@
+<%= render "url", action: "new" %>
+<hr>
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <%= link_to new_product_path, class: "float-left btn btn-success" do %>
+        New and Add product
+      <% end %>
+      <button class="btn btn-danger" id="add_new_pw">
+        <i class="fa fa-plus-circle"></i>
+      </button>
+    </div>
+    <div class="card-body">
+      <div class="list_pw">
+        <table class="table table-bordered table-striped" id="tbl_pw">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>product</th>
+              <th>So luong</th>
+              <th>gia nhap</th>
+              <th>gia ban</th>
+              <th>ngay sx</th>
+              <th>ngay het han</th>
+              <th>action</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
