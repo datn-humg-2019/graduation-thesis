@@ -66,6 +66,14 @@ class User < ApplicationRecord
     images.blank? ? "" : images.first.image.url
   end
 
+  def create_warehouse_if_exit
+    build_warehouse(total_count: 0, total_money: 0).save if !admin? && !warehouse.present?
+  end
+
+  def build_product params
+    warehouse.product_warehouses.build params
+  end
+
   def get_gender
     case gender
     when true

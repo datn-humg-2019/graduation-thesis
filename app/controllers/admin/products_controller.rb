@@ -18,7 +18,6 @@ class Admin::ProductsController < Admin::ApplicationController
       redirect_to admin_products_path
     else
       flash[:danger] = t ".create_fail"
-      semester_convert_date
       render :new
     end
   end
@@ -31,7 +30,6 @@ class Admin::ProductsController < Admin::ApplicationController
       redirect_to admin_products_path
     else
       flash[:danger] = t ".update_fail"
-      semester_convert_date
       render :edit
     end
   end
@@ -55,10 +53,6 @@ class Admin::ProductsController < Admin::ApplicationController
 
   def product_params
     params.require(:product).permit :name, :tag, :description, :category_id
-  end
-
-  def semester_convert_date
-    @product.birth = convert_date_to_local @product.birth
   end
 
   def get_product
