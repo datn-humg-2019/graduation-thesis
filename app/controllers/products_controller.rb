@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
   end
 
   def list_product
-    list_product = Product.pluck :id, :name
+    list_product = Product.list_product_can_add current_user
     respond_to do |format|
       format.json{render json: {list_product: list_product}}
     end

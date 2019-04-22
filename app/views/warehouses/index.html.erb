@@ -2,6 +2,24 @@
   <div class="card">
     <div class="card-header">
       <%= render "overview", warehouse: @warehouse %>
+      <div class="list_pw hidden">
+        <table class="table table-bordered table-striped" id="tbl_pw">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>product</th>
+              <th>So luong</th>
+              <th>gia nhap</th>
+              <th>gia ban</th>
+              <th>ngay sx</th>
+              <th>ngay het han</th>
+              <th>action</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
     </div>
     <hr>
     <div class="card-body">

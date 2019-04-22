@@ -5,6 +5,10 @@ class Product < ApplicationRecord
 
   scope :load_product, ->{select :id, :name, :description, :tag, :category_id}
 
+  scope :list_product_can_add, (lambda do |user|
+    where.not(id: user.list_product_id_has).pluck :id, :name
+  end)
+
   def get_images
     images.blank? ? "product.png" : images
   end
