@@ -1,4 +1,8 @@
 $(document).ready(function() {
+  if (window.location.pathname.includes("products/new")){
+    currency_input();
+  }
+
   $('body').on('click', '.close_tag', function(){
     $(this).parent().remove();
   });

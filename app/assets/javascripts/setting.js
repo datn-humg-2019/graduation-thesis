@@ -115,3 +115,33 @@ Array.prototype.remove = function() {
   }
   return this;
 };
+
+function currency_input() {
+  var currencyInput = $('input[type="currency"]');
+  for(element in currencyInput){
+    currencyInput.bind('focus', onFocus);
+    currencyInput.bind('blur', onBlur);
+  }
+}
+
+function localStringToNumber( s ){
+  return Number(String(s).replace(/[^0-9.-]+/g,""));
+}
+
+function onFocus(e){
+  var value = e.target.value;
+  e.target.value = value ? localStringToNumber(value) : '';
+}
+
+function onBlur(e){
+  var value = e.target.value;
+
+  const options = {
+      maximumFractionDigits : 2,
+      currency              : "VND", // https://www.currency-iso.org/dam/downloads/lists/list_one.xml
+      style                 : "currency",
+      currencyDisplay       : "symbol"
+  }
+
+  e.target.value = value ? localStringToNumber(value).toLocaleString(undefined, options) : ''
+}

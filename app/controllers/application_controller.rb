@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
     date
   end
 
+  def convert_price price
+    price.blank? ? "" : price.gsub(/[^0-9.-]+/, "")
+  end
+
   def check_admin
     redirect_to admin_path if user_signed_in? && current_user.admin?
   end
