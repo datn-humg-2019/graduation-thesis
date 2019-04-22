@@ -10,7 +10,9 @@
   <% products.each do |p| %>
     <div class="col-sm-2">
         <div class="item">
-          <%= image_tag  p.product.get_thumb_image.image.url, class: "img-thumbnail" %>
+          <%= link_to show_product_path(id: p.product.id), method: :GET, data: {toggle: "modal", target: "#modal-product"}, remote: true do %>
+            <%= image_tag  p.product.get_thumb_image.image.url, class: "img-thumbnail" %>
+          <% end %>
         </div>
     </div>
   <% end %>

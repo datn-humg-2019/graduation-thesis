@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
+  before_action :get_product, only: :show_product
 
   def new
     @product = Product.new
@@ -15,6 +16,10 @@ class ProductsController < ApplicationController
       flash[:danger] = t ".create_fail"
       render :new
     end
+  end
+
+  def show_product
+    repond_js
   end
 
   def list_tag
@@ -63,5 +68,13 @@ class ProductsController < ApplicationController
     pw.exp = convert_date params[:exp_pw] if params[:exp_pw].present?
     pw.stop_providing = false
     pw.save
+  end
+
+  def get_product
+    @product = Product.find_by id: params[:id]
+
+    return if @product
+    flash[:danger] = t "user_not_found"
+    redirect_to warehouses_path
   end
 end
