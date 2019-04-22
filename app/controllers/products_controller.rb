@@ -9,6 +9,7 @@ class ProductsController < ApplicationController
     @product = Product.new product_params
     if @product.save
       save_images params[:product][:image]
+      save_pw @product.id
       redirect_to warehouses_path
     else
       flash[:danger] = t ".create_fail"
@@ -31,6 +32,10 @@ class ProductsController < ApplicationController
   end
 
   private
+  def product_params
+    params.require(:product).permit :name, :tag, :description, :category_id
+  end
+
   def save_images param
     images = param
     count = 0
@@ -46,5 +51,17 @@ class ProductsController < ApplicationController
     else
       flash[:danger] = t ".create_image_fail", count: count
     end
+  end
+
+  def save_pw product_id
+    pw = current_user.warehouse.product_warehouses.build
+    pw.product_id = product_id
+    pw.count = params[:count_pw]
+    pw.price_origin = convert_price params[:price_origin_pw]
+    pw.price_sale = convert_price params[:price_sale_pw]
+    pw.mfg = convert_date params[:mfg_pw] if params[:mfg_pw].present?
+    pw.exp = convert_date params[:exp_pw] if params[:exp_pw].present?
+    pw.stop_providing = false
+    pw.save
   end
 end
