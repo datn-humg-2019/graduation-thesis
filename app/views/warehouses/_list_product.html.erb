@@ -1,6 +1,9 @@
-<div class="row">
+<div class="row" id="lst_preview_product">
   <div class="col-sm-2 d-flex justify-content-center align-items-center">
-    <%= link_to new_warehouse_product_warehouse_path(warehouse_id: @warehouse), class: "btn btn-success", title:"Add new product", data: {toggle: "tooltip", placement: "bottom"} do %>
+    <button class="btn btn-success" id="add_new_pw">
+      <i class="fa fa-plus-circle"></i>
+    </button>
+    <%= link_to new_warehouse_product_warehouse_path(warehouse_id: @warehouse), class: "btn btn-success", title:"New and add product", data: {toggle: "tooltip", placement: "bottom"} do %>
       <i class="fa fa-plus"></i>
     <% end %>
   </div>

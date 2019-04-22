@@ -74,6 +74,14 @@ class User < ApplicationRecord
     warehouse.product_warehouses.build params
   end
 
+  def check_has_product product_id
+    warehouse.product_warehouses.find_by(product_id: product_id)
+  end
+
+  def list_product_id_has
+    warehouse.product_warehouses.pluck :product_id
+  end
+
   def get_gender
     case gender
     when true

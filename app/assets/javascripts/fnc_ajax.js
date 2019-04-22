@@ -25,6 +25,8 @@ function send_add_product_warehouse(data, tr){
     success: function(data){
       if(data['notifi'].type == "1"){
         tr.remove();
+        chec_lst_hidden();
+        add_product_preview(data.product);
       }
       show_notify('new_product' + tr.find('#index_pw').text(), data['notifi'].type, data['notifi'].message);
     },
