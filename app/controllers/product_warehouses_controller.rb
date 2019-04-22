@@ -18,24 +18,24 @@ class ProductWarehousesController < ApplicationController
     end
   end
 
-  def update
-    pw = current_user.check_has_product params[:product_warehouse][:product_id]
-    if pw.present?
-      pw_temp = ProductWarehouse.new product_warehouse
-      pw.count += pw_temp.count
-      pw.price_origin = pw_temp.price_sale unless pw_temp.price_origin.zero?
-      pw.price_sale = pw_temp.price_origin unless pw_temp.price_sale.zero?
-      pw.mfg = pw_temp.mfg unless pw_temp.mfg.nil?
-      pw.exp = pw_temp.exp unless pw_temp.exp.nil?
-    end
-    notifi = nil
-    notifi = if pw.save
-                {message: "input your product success", type: "1"}
-              else
-                {message: "input your product failed", type: "3"}
-              end
-    format.json{render json: {notifi: notifi, product: pw.product.get_thumb_image.image.url}}
-  end
+  # def update
+  #   pw = current_user.check_has_product params[:product_warehouse][:product_id]
+  #   if pw.present?
+  #     pw_temp = ProductWarehouse.new product_warehouse
+  #     pw.count += pw_temp.count
+  #     pw.price_origin = pw_temp.price_sale unless pw_temp.price_origin.zero?
+  #     pw.price_sale = pw_temp.price_origin unless pw_temp.price_sale.zero?
+  #     pw.mfg = pw_temp.mfg unless pw_temp.mfg.nil?
+  #     pw.exp = pw_temp.exp unless pw_temp.exp.nil?
+  #   end
+  #   notifi = nil
+  #   notifi = if pw.save
+  #               {message: "input your product success", type: "1"}
+  #             else
+  #               {message: "input your product failed", type: "3"}
+  #             end
+  #   format.json{render json: {notifi: notifi, product: pw.product.get_thumb_image.image.url}}
+  # end
 
   private
   def product_warehouse

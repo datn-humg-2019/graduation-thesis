@@ -26,6 +26,7 @@
 //= require "icheck"
 //= require chosen-jquery
 //= require simplemde.min
+//= require jssor.slider.min
 
 $(function(){
   $.ajaxSetup({

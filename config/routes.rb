@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get "home/index"
     get "list_tag", to: "products#list_tag", as: "list_tag"
     get "list_product", to: "products#list_product", as: "list_product"
+    get "show_product", to: "products#show_product", as: "show_product"
     post "destroy_image", to: "images#destroy", as: "destroy_image"
     post "create_product_warehouses", to: "product_warehouses#create", as: "create_product_warehouses"
 

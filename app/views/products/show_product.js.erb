@@ -1,0 +1,3 @@
+var modal = $('#modal-product');
+modal.find('.modal-body').html('<%= j render "products/show_detail", product: @product %>');
+modal.modal();
