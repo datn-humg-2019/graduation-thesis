@@ -13,10 +13,16 @@
       </div>
     </div>
     <div class="col-md-6">
+      <h3 class="my-3">thong tin</h3>
+      <div class="row">
+        <%= render "products/pw", pw: @pw %>
+      </div>
       <h3 class="my-3">Tags</h3>
-        <div class="row">
-          <%= render "products/tag", tags: @product.tag, status: "show" %>
-        </div>
+      <div class="row">
+        <%= render "products/tag", tags: @product.tag, status: "show" %>
+      </div>
+    </div>
+    <div class="col-md-12">
       <strong>
         <h3 class="my-3">Description</h3>
       </strong>

@@ -9,6 +9,22 @@ class Product < ApplicationRecord
     where.not(id: user.list_product_id_has).pluck :id, :name
   end)
 
+  scope :get_by_ids, (lambda do |ids|
+    where id: ids
+  end)
+
+  scope :by_name, (lambda do |name|
+    ransack(name_cont: name).result
+  end)
+
+  scope :by_category, (lambda do |category_id|
+    ransack(category_id_eq: category_id).result
+  end)
+
+  scope :by_tag, (lambda do |tag|
+    ransack(tag_cont: tag).result
+  end)
+
   def get_images
     images.blank? ? "product.png" : images
   end

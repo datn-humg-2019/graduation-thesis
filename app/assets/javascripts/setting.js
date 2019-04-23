@@ -145,3 +145,13 @@ function onBlur(e){
 
   e.target.value = value ? localStringToNumber(value).toLocaleString(undefined, options) : ''
 }
+
+function setup_daterange() {
+  $('.start-to-end .input-daterange').datepicker({
+    clearBtn: true,
+    language: I18n.locale,
+    todayHighlight: true,
+    orientation: 'bottom auto',
+    format: I18n.t('date-js')
+  });
+}
