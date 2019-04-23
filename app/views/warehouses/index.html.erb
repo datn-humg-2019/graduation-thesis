@@ -2,6 +2,7 @@
   <div class="card">
     <div class="card-header">
       <%= render "overview", warehouse: @warehouse %>
+      <%= render "filter" %>
       <div class="list_pw hidden">
         <table class="table table-bordered table-striped" id="tbl_pw">
           <thead>
@@ -23,7 +24,7 @@
     </div>
     <hr>
     <div class="card-body">
-      <%= render "list_product",  products: @warehouse.product_warehouses %>
+      <%= render "list_product",  products: @products %>
     </div>
   </div>
 </div>

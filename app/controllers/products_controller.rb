@@ -72,6 +72,7 @@ class ProductsController < ApplicationController
 
   def get_product
     @product = Product.find_by id: params[:id]
+    @pw = current_user.check_has_product params[:id]
 
     return if @product
     flash[:danger] = t "user_not_found"
