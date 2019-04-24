@@ -1,0 +1,21 @@
+wb = xlsx_package.workbook
+wb.styles do |_s|
+  wb.add_worksheet(name: "Product") do |sheet|
+    sheet.column_widths 0.2, 20, 5, 15, 15, 15, 15
+    sheet.add_row ProductWarehouse.get_field_ex_im
+    sheet.add_row ProductWarehouse.get_field_temp
+    sheet.add_data_validation("B2:B100",
+      type: :list,
+      formula1: "data!A1:A#{Product.count}",
+      showDropDown: false,
+      showInputMessage: true,
+      promptTitle: "Select product",
+      prompt: "Please select a valid")
+  end
+  wb.add_worksheet(name: "data") do |sheet|
+    products = Product.pluck :id, :name
+    products.each do |p|
+      sheet.add_row ["P#{p.first}-#{p.last}"]
+    end
+  end
+end
