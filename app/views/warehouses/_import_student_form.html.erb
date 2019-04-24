@@ -1,0 +1,12 @@
+<div>
+  <%= form_tag import_pw_path, multipart: true do %>
+    <div class="form-group">
+      <%= label_tag :file_pw, "Select file input", class: "hover-hand" %>
+      <%= file_field_tag :file, class: "form-control-file hover-hand" %>
+    </div>
+    <%= link_to export_template_path(format: :xlsx), class: "btn btn-default" do %>
+      <i class="fa fa-file-excel-o"></i> Get file template
+    <% end %>
+    <%= submit_tag "submit", class: "btn btn-success" %>
+  <% end %>
+</div>

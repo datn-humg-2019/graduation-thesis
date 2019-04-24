@@ -1,0 +1,9 @@
+<div>
+  <%= form_tag import_pw_path, multipart: true do %>
+    <div class="form-group">
+      <%= label_tag "File" %>
+      <%= file_field_tag :file %>
+    </div>
+    <%= submit_tag "submit", class: "btn btn-success" %>
+  <% end %>
+</div>

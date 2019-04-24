@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     post "destroy_image", to: "images#destroy", as: "destroy_image"
     post "create_product_warehouses", to: "product_warehouses#create", as: "create_product_warehouses"
 
+    get "export_template", to: "import_export#export_template", as: "export_template"
+    post "import_pw", to: "import_export#import_pw", as: "import_pw"
+
     resources :products
     resources :warehouses do
       resources :product_warehouses

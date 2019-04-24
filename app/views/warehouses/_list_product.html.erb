@@ -1,6 +1,12 @@
 <div class="row" id="lst_preview_product">
-  <div class="col-sm-2 d-flex justify-content-center align-items-center">
-    <button class="btn btn-success" id="add_new_pw">
+  <div class="col-sm-2">
+    <%= link_to export_template_path(format: "xlsx"), class: "btn btn-success", title: "Export template excell", data: {toggle: "tooltip", placement: "bottom"}  do %>
+      <i class="fa fa-file-excel-o"></i>
+    <% end %>
+    <button class="btn btn-success" id="import_pw" title= "Import products with file", data-toggle= "tooltip", data-placement= "bottom">
+      <i class="fa fa-upload"></i>
+    </button>
+    <button class="btn btn-success" id="add_new_pw" title= "Add product", data-toggle= "tooltip", data-placement= "bottom">
       <i class="fa fa-plus-circle"></i>
     </button>
     <%= link_to new_product_path, class: "btn btn-success", title:"New and add product", data: {toggle: "tooltip", placement: "bottom"} do %>

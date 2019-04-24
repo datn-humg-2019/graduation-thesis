@@ -1,6 +1,6 @@
 <%= form_for @category, url: {controller: "categories", action: action} do |f| %>
   <%= render "shared/error_messages", object: f.object %>
-  <div class="box-body">
+  <div>
     <div class="form-group">
       <%= f.label :name, "Name" %>
       <%= f.text_field :name, placeholder: "name", class: "form-control", required: true %>
