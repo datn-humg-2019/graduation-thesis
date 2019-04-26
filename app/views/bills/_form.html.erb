@@ -1,0 +1,25 @@
+<%= form_for @bill, url: {controller: "bills", action: action} do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+  <div class="col-md-12">
+    <div class="form-group">
+      <%= f.label :to_user_id, "For user" %>
+      <%= f.collection_select :to_user_id, for_user_ctv, :last, :first,
+          {include_blank: false}, {class: "form-control chosen"} %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description, "description" %>
+      <%= f.text_area :description, placeholder: "Description", class: "form-control" %>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="float-right">
+      <button class="btn btn-success">
+        <i class="fa fa-plus-square"></i>
+      </button>
+    </div>
+  </div>
+  <div class="box-footer">
+    <%= link_to "Back", admin_users_path, class: "btn btn-default" %>
+    <%= f.button :submit, class: "btn btn-primary float-right" %>
+  </div>
+<% end %>

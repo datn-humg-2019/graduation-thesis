@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     post "import_pw", to: "import_export#import_pw", as: "import_pw"
 
     resources :products
+    resources :bills
     resources :warehouses do
       resources :product_warehouses
     end
