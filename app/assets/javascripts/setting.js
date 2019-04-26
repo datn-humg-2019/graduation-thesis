@@ -20,6 +20,7 @@ $(document).ready(function() {
   setTimeout(function() {$('.time-out').hide('slow');}, 3000);
   icheck();
   setup_datepiker();
+  set_up_chosen();
 });
 
 $(function () {

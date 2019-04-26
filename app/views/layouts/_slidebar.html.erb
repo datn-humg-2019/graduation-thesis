@@ -37,8 +37,11 @@
             <p>Warehouses</p>
           <% end %>
         </li>
-        <li>
-          Xuất hàng
+        <li class="<%= slide_active "bills" %>">
+          <%= link_to bills_path do %>
+            <i class="nc-icon nc-money-coins"></i>
+            <p>Xuất hàng</p>
+          <% end %>
         </li>
         <li>
           Quản lý bán hàng

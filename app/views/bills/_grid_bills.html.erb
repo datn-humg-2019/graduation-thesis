@@ -1,0 +1,31 @@
+<% bills.each do |b| %>
+  <tr>
+    <td>
+      <%= b.bill_code %>
+    </td>
+    <td>
+      <%= current_user.vip? ? b.to_user.name : b.from_user.name %>
+    </td>
+    <td>
+      <%= b.total_count %>
+    </td>
+    <td>
+      <%= b.total_money %>
+    </td>
+    <td>
+      <%= b.description %>
+    </td>
+    <td>
+      <%= b.confirmed %>
+    </td>
+    <td>
+      <%= b.confirmed %>
+    </td>
+    <td>
+      <%= b.created_at.localtime %>
+    </td>
+    <td>
+      <%= render "action", bill: b %>
+    </td>
+  </tr>
+<% end %>

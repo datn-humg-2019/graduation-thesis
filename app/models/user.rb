@@ -5,8 +5,14 @@ class User < ApplicationRecord
   has_many :images, as: :ref_image
   has_many :notifications, dependent: :destroy
   has_many :sells, dependent: :destroy
-  has_many :bills, foreign_key: "from_user_id", class_name: Bill.name
-  has_many :bills, foreign_key: "to_user_id", class_name: Bill.name
+
+  # lấy tất cả những hóa đơn đã xuất hàng
+  has_many :sales, class_name: Bill.name, foreign_key: :from_user_id, dependent: :destroy
+  # lấy tất cả những hóa đơn nhập hàng
+  has_many :buys, class_name: Bill.name, foreign_key: :to_user_id, dependent: :destroy
+  # has_many :vip_bills, through: :sale, source: :from_user
+  # has_many :ctv_bills, through: :buy, source: :to_user
+
   has_many :active_partners, class_name: Partner.name, foreign_key: :follower_id, dependent: :destroy
   has_many :passive_partners, class_name: Partner.name, foreign_key: :followed_id, dependent: :destroy
   has_many :following, through: :active_partners, source: :followed
@@ -25,6 +31,8 @@ class User < ApplicationRecord
   enum role: {admin: 0, vip: 1, ctv: 2}
 
   scope :manager_user, ->{where.not role: "admin"}
+
+  scope :ctv_user, ->{where role: "ctv"}
 
   scope :load_user, ->{select :id, :email, :phone, :name, :gender, :adress, :birth, :role}
 
