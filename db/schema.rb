@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_11_040618) do
+ActiveRecord::Schema.define(version: 2019_05_03_010613) do
 
   create_table "bills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "bill_code", null: false
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2019_04_11_040618) do
     t.boolean "confirmed", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["from_user_id", "to_user_id"], name: "index_bills_on_from_user_id_and_to_user_id", unique: true
+    t.index ["from_user_id", "to_user_id"], name: "index_bills_on_from_user_id_and_to_user_id"
     t.index ["from_user_id"], name: "index_bills_on_from_user_id"
     t.index ["to_user_id"], name: "index_bills_on_to_user_id"
   end

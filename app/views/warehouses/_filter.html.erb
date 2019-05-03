@@ -6,7 +6,7 @@
       </div>
       <div class="col-lg-10 col-sm-10 col-xs-10">
         <%= select_tag :category_id, options_for_select(category_list, params[:category_id]),
-          selected: 1, include_blank: t(".none"), class: "form-control" %>
+          selected: 1, include_blank: t(".none"), class: "form-control chosen" %>
       </div>
     </div>
     <div class="col-md-6 mb-3 row form-group">

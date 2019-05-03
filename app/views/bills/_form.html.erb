@@ -10,16 +10,38 @@
       <%= f.label :description, "description" %>
       <%= f.text_area :description, placeholder: "Description", class: "form-control" %>
     </div>
-  </div>
-  <div class="col-md-12">
-    <div class="float-right">
-      <button class="btn btn-success">
-        <i class="fa fa-plus-square"></i>
-      </button>
+    <div class="lst-bills">
+      <table class="table table-bordered table-striped" id="tbl_pw_bill">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>product</th>
+              <th>So luong</th>
+              <th>gia</th>
+              <th>action</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+      </table>
+    </div>
+    <div class="box-footer">
+      <%= link_to "Back", bills_path, class: "btn btn-default" %>
+      <%= f.button :submit, class: "btn btn-primary float-right" %>
     </div>
   </div>
-  <div class="box-footer">
-    <%= link_to "Back", admin_users_path, class: "btn btn-default" %>
-    <%= f.button :submit, class: "btn btn-primary float-right" %>
-  </div>
 <% end %>
+
+<p class="text-danger">Select product in your warehouse for bill</p>
+<hr>
+<div class="col-md-12 row">
+  <% @pws.each do |pw| %>
+    <div class="col-xs-4 col-sm-3 col-md-2 nopad text-center">
+      <label class="image-checkbox">
+        <%= image_tag  pw.product.get_thumb_image.image.url, class: "img-responsive", title: "#{pw.product.name} - *#{pw.count}", data: {toggle: "tooltip", placement: "bottom", price: pw.price_sale} %>
+        <input type="checkbox" name="image[]" value="" data-id="<%= "bill-#{pw.id}" %>" data-name="<%= pw.product.name %>" />
+        <i class="fa fa-check hidden"></i>
+      </label>
+    </div>
+  <% end %>
+</div>

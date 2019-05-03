@@ -19,10 +19,7 @@
       <%= b.confirmed %>
     </td>
     <td>
-      <%= b.confirmed %>
-    </td>
-    <td>
-      <%= b.created_at.localtime %>
+      <%= b.created_at.localtime.strftime("%Y/%m/%d  %H:%M:%S") %>
     </td>
     <td>
       <%= render "action", bill: b %>
