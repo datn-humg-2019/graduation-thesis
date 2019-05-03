@@ -17,7 +17,7 @@
     <div class="col-sm-2">
         <div class="item">
           <%= link_to show_product_path(id: p.id), method: :GET, data: {toggle: "modal", target: "#modal-product"}, remote: true do %>
-            <%= image_tag  p.get_thumb_image.image.url, class: "img-thumbnail" %>
+            <%= image_tag  p.get_thumb_image.image.url, class: "img-thumbnail", title: p.name, data: {toggle: "tooltip", placement: "bottom"} %>
           <% end %>
         </div>
     </div>
