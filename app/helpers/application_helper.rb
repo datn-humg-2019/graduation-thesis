@@ -41,4 +41,8 @@ module ApplicationHelper
     return "<i class='fa fa-female'> Nu</i>".html_safe if gender == false
     "<i class='fa fa-adjust'> Khac</i>".html_safe
   end
+
+  def to_currency number
+    number_to_currency(number, unit: "VNĐ", separator: ",", delimiter: ".", format: "%n %u")
+  end
 end

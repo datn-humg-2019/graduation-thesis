@@ -8,7 +8,9 @@ class BillsController < ApplicationController
     @bills = current_user.sales.ransack(params[:q]).result.page(params[:page]).per(20)
   end
 
-  def show; end
+  def show
+    @details = @bill.details
+  end
 
   def new
     @bill = Bill.new
