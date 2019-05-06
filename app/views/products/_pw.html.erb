@@ -5,10 +5,10 @@
   <p>Số lượng trong kho: <%= pw.count %></p>
 </div>
 <div class="col-md-6">
-  <p>Giá nhập: <%= pw.price_origin %> VNĐ</p>
+  <p>Giá nhập: <%= to_currency pw.price_origin %></p>
 </div>
 <div class="col-md-6">
-  <p>Giá bán: <%= pw.price_sale %> VNĐ</p>
+  <p>Giá bán: <%= to_currency pw.price_sale %></p>
 </div>
 <div class="col-md-6">
   <p>Ngày sản xuất: <%= pw.mfg %></p>

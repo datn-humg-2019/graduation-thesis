@@ -4,8 +4,11 @@
       <%= label_tag :bill_code_eq, "Bill code", for: "bill_code_eq" %>
       <%= f.search_field :bill_code_eq, class: "form-control", placeholder: "Bill code" %>
     </div>
+    <div class="col-md-6 mb-3">
+      <%= label_tag :to_user_id_eq, "To User", for: "to_user_id_eq" %>
+      <%= f.select :to_user_id_eq, options_for_select(get_to_user, selected: params[:to_user_id]), { include_blank: true }, {class: "form-control chosen"} %>
+    </div>
   </div>
-
   <div>
     <%= link_to new_bill_path, class: "float-left btn btn-success" do %>
       <i class="fa fa-user-plus"></i> New Bill
