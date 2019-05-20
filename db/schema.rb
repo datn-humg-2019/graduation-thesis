@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_03_010613) do
+ActiveRecord::Schema.define(version: 2019_05_16_090033) do
 
   create_table "bills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "bill_code", null: false
@@ -40,6 +40,18 @@ ActiveRecord::Schema.define(version: 2019_05_03_010613) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_warehouse_id"], name: "index_details_on_product_warehouse_id"
+  end
+
+  create_table "histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "count", null: false
+    t.float "price", null: false
+    t.integer "from"
+    t.bigint "product_id", null: false
+    t.bigint "warehouse_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_histories_on_product_id"
+    t.index ["warehouse_id"], name: "index_histories_on_warehouse_id"
   end
 
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -135,6 +147,8 @@ ActiveRecord::Schema.define(version: 2019_05_03_010613) do
   end
 
   add_foreign_key "details", "product_warehouses"
+  add_foreign_key "histories", "products"
+  add_foreign_key "histories", "warehouses"
   add_foreign_key "notifications", "users"
   add_foreign_key "product_warehouses", "products"
   add_foreign_key "product_warehouses", "warehouses"

@@ -1,6 +1,7 @@
 class Warehouse < ApplicationRecord
   belongs_to :user
   has_many :product_warehouses, dependent: :destroy
+  has_many :histories, dependent: :destroy
 
   def product_ids
     product_warehouses.pluck :product_id
