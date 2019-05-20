@@ -53,4 +53,13 @@ class Api::BaseController < ActionController::API
 
     @current_user = User.find_by id: payload.first["user_id"]
   end
+
+  def check_admin?
+    unless @current_user&.admin?
+      render json: {status: 200, error: true,
+                    message: "You have no rights",
+                    data: nil}, status: 200
+      return
+    end
+  end
 end
