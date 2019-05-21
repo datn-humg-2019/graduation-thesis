@@ -5,6 +5,7 @@ class Product < ApplicationRecord
   has_many :histories, dependent: :destroy
 
   scope :load_product, ->{select :id, :name, :description, :tag, :category_id}
+  scope :api_load_products, ->{select(:id, :name, :description, :tag, :category_id).map{|p| p.load_structure}}
 
   scope :list_product_can_add, (lambda do |user|
     where.not(id: user.list_product_id_has).pluck :id, :name
@@ -32,6 +33,28 @@ class Product < ApplicationRecord
 
   def get_thumb_image
     images.blank? ? "product.png" : images.first
+  end
+
+  def load_structure
+    result = {
+      id: id,
+      name: name,
+      description: description,
+      tag: tag,
+      category_id: category_id,
+      images: load_images
+    }
+    result
+  end
+
+  def load_images
+    arr = []
+    images.each do |img|
+      url = img.image.url
+      url ||= img.image.metadata["url"]
+      arr.push url
+    end
+    arr
   end
 
   class << self
