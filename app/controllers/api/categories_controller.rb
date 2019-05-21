@@ -22,8 +22,4 @@ class Api::CategoriesController < Api::BaseController
       render_json nil, category.errors.messages, true
     end
   end
-
-  def destroy
-
-  end
 end
