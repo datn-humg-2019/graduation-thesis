@@ -35,6 +35,7 @@ class User < ApplicationRecord
   scope :ctv_user, ->{where role: "ctv"}
 
   scope :load_user, ->{select :id, :email, :phone, :name, :gender, :adress, :birth, :role}
+  scope :api_load_users, ->{select(:id, :email, :phone, :name, :gender, :adress, :birth, :role).map{|u| u.load_structure}}
 
   def login
     @login || phone || email
@@ -99,6 +100,21 @@ class User < ApplicationRecord
     else
       "Khac"
     end
+  end
+
+  def load_structure
+    result = {
+      id: id,
+      email: email,
+      phone: phone,
+      name: name,
+      gender: get_gender,
+      adress: adress,
+      birth: birth,
+      role: role,
+      avatar: get_avatar_api
+    }
+    result
   end
 
   def load_attribute_user
