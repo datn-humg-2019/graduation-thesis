@@ -5,7 +5,7 @@ class Api::BaseController < ActionController::API
   before_action :set_locale
   helper_method :render_json
 
-  def render_json data = nil, message = "", code = 0
+  def render_json message = "", data = nil, code = 0
     options = {
       code: code,
       message: message,

@@ -4,7 +4,7 @@ class Api::ProductsController < Api::BaseController
 
   def index
     products = Product.api_load_products
-    render_json products, "succsess"
+    render_json "succsess", products
   end
 
   def create
@@ -13,9 +13,9 @@ class Api::ProductsController < Api::BaseController
       params[:images].each do |img|
         product.images.create!(image: img)
       end
-      render_json Product.find(product.id).load_structure, "create succsess"
+      render_json "create succsess", Product.find(product.id).load_structure
     else
-      render_json nil, "errors #{product.errors.full_messages.to_sentence}"
+      render_json "errors #{product.errors.full_messages.to_sentence}", nil, 1
     end
   end
 
