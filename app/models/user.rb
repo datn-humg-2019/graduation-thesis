@@ -118,7 +118,6 @@ class User < ApplicationRecord
   end
 
   def load_attribute_user
-    authorize_token = JsonWebToken.encode user_id: id
     {
       name: name,
       email: email,
@@ -127,8 +126,14 @@ class User < ApplicationRecord
       adress: adress,
       birth: birth,
       role: role,
-      avatar: get_avatar_api,
-      token: authorize_token
+      avatar: get_avatar_api
+    }
+  end
+
+  def load_token_user
+    authorize_token = JsonWebToken.encode user_id: id
+    {
+      loginToken: authorize_token
     }
   end
 
