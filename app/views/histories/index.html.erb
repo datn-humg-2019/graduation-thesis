@@ -1,1 +1,38 @@
-hihi
+<%= render "url", action: "index" %>
+<hr>
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <%= render "filter" %>
+    </div>
+    <hr>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead class=" text-primary">
+            <tr>
+              <th>
+                Day
+              </th>
+              <th>
+                Total count
+              </th>
+              <th>
+                Total money
+              </th>
+              <th>
+                ACTION
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render "grid_histories", histories: @histories %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div >
+      <%= paginate @histories %>
+    </div>
+  </div>
+</div>
