@@ -4,7 +4,7 @@ class Api::CategoriesController < Api::BaseController
 
   def index
     categories = Category.api_load_categories
-    render_json categories, "succsess"
+    render_json "Lấy categories thành công", categories
   end
 
   def create
@@ -17,9 +17,9 @@ class Api::CategoriesController < Api::BaseController
         image.image = params[:image]
         image.save
       end
-      render_json Category.find(category.id).load_structure, "create success"
+      render_json "create success", Category.find(category.id).load_structure
     else
-      render_json nil, category.errors.messages, true
+      render_json category.errors.messages, nil, 1
     end
   end
 end
