@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_16_090033) do
+ActiveRecord::Schema.define(version: 2019_05_29_025631) do
 
   create_table "bills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "bill_code", null: false
@@ -68,6 +68,15 @@ ActiveRecord::Schema.define(version: 2019_05_16_090033) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "otps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "otp", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "otp_type", default: 0
+    t.index ["user_id"], name: "index_otps_on_user_id"
   end
 
   create_table "partners", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -150,6 +159,7 @@ ActiveRecord::Schema.define(version: 2019_05_16_090033) do
   add_foreign_key "histories", "products"
   add_foreign_key "histories", "warehouses"
   add_foreign_key "notifications", "users"
+  add_foreign_key "otps", "users"
   add_foreign_key "product_warehouses", "products"
   add_foreign_key "product_warehouses", "warehouses"
   add_foreign_key "products", "categories"

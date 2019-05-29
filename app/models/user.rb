@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_one :warehouse, dependent: :destroy
   has_many :images, as: :ref_image
   has_many :notifications, dependent: :destroy
+  has_many :otps, dependent: :destroy
   has_many :sells, dependent: :destroy
 
   # lấy tất cả những hóa đơn đã xuất hàng
@@ -54,6 +55,10 @@ class User < ApplicationRecord
               "C"
             end
     "#{rcode}-#{format('%03d', id)}"
+  end
+
+  def check_otp_forgot
+    otps.where(otp_type: 0)
   end
 
   def age
