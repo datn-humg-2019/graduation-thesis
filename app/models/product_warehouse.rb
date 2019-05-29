@@ -14,6 +14,8 @@ class ProductWarehouse < ApplicationRecord
     where("date(exp) <= ?", exp) unless exp.blank?
   end)
 
+  scope :load_inventory, ->{select("sum(count) total_count, sum(count * price_origin) total_price, product_id").group(:product_id)}
+
   def endcode_pw
     "PW-#{id}-#{product_id}"
   end
