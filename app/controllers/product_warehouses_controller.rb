@@ -10,6 +10,7 @@ class ProductWarehousesController < ApplicationController
       pw.stop_providing = false
       notifi = nil
       notifi = if pw.save
+                 pw.save_history
                  {message: "input your product success", type: "1"}
                else
                  {message: "input your product failed", type: "3"}

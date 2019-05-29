@@ -1,0 +1,18 @@
+<% histories.each do |b| %>
+  <tr>
+    <td>
+      <%= b.day_input %>
+    </td>
+    <td>
+      <%= b.count_input %>
+    </td>
+    <td>
+      <%= to_currency b.price_input %>
+    </td>
+    <td>
+      <%= link_to history_path(id: 0, date: b.day_input), method: :GET, class: "btn btn-info" do %>
+        <i class="fa fa-eye"></i> Detail
+      <% end %>
+    </td>
+  </tr>
+<% end %>

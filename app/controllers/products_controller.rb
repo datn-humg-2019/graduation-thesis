@@ -68,6 +68,7 @@ class ProductsController < ApplicationController
     pw.exp = convert_date params[:exp_pw] if params[:exp_pw].present?
     pw.stop_providing = false
     pw.save
+    pw.save_history
   end
 
   def get_product

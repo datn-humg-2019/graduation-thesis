@@ -18,6 +18,15 @@ class ProductWarehouse < ApplicationRecord
     "PW-#{id}-#{product_id}"
   end
 
+  def save_history p_count = nil, p_price = nil, from_user = nil
+    warehouse.histories.create!(
+      count: p_count.nil? ? count : p_count,
+      price: p_price.nil? ? price_origin : p_price,
+      product_id: product_id,
+      from: from_user
+    )
+  end
+
   class << self
     def get_field_ex_im
       ["STT", "Product", "Count", "Price origin", "Price sale", "mfg", "exp"]

@@ -18,4 +18,12 @@ class Warehouse < ApplicationRecord
   def auto_update
     update_attributes total_count: product_warehouses.sum(:count), total_money: product_warehouses.sum("count * price_origin")
   end
+
+  def histories_in_day date
+    histories.where("DATE(created_at) = ?", date)
+  end
+
+  def all_histories
+    histories.select("DATE(created_at) day_input, sum(count) count_input, sum(count * price) price_input").group("date(created_at)")
+  end
 end
