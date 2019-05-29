@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_one :warehouse, dependent: :destroy
   has_many :images, as: :ref_image
   has_many :notifications, dependent: :destroy
+  has_many :otps, dependent: :destroy
   has_many :sells, dependent: :destroy
 
   # lấy tất cả những hóa đơn đã xuất hàng
@@ -54,6 +55,14 @@ class User < ApplicationRecord
               "C"
             end
     "#{rcode}-#{format('%03d', id)}"
+  end
+
+  def check_otp_forgot
+    otps.where(otp_type: 0)
+  end
+
+  def check_otp otp, type = 0
+    otps.where(otp_type: type, otp: otp)
   end
 
   def age
@@ -118,7 +127,6 @@ class User < ApplicationRecord
   end
 
   def load_attribute_user
-    authorize_token = JsonWebToken.encode user_id: id
     {
       name: name,
       email: email,
@@ -127,8 +135,14 @@ class User < ApplicationRecord
       adress: adress,
       birth: birth,
       role: role,
-      avatar: get_avatar_api,
-      token: authorize_token
+      avatar: get_avatar_api
+    }
+  end
+
+  def load_token_user
+    authorize_token = JsonWebToken.encode user_id: id
+    {
+      loginToken: authorize_token
     }
   end
 

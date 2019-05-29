@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Yêu cầu đổi mật khẩu cho tài khoản <%= @email %></h1>
+    <p>
+      Mã OTP để đổi mật khẩu là : <%= @otp %>
+      <br>
+      Mã có thời hạn trong 2h.
+      <br>
+      Truy cập vào <%= Figaro.env.link_change_pass %> để tiến hành đổi mật khẩu
+    </p>
+    <p>Cảm ơn bạn đã sử dụng dịch vụ. Chúc một ngày tốt lành!</p>
+  </body>
+</html>

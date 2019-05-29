@@ -1,11 +1,15 @@
 class Api::UsersController < Api::BaseController
   # skip_before_action :authenticate_request!, only: :create
-  before_action :authenticate_request!, only: [:index, :create_account]
+  before_action :authenticate_request!, only: [:index, :create_account, :show]
   before_action :check_admin?, only: [:index, :create_account]
 
   def index
     users = User.api_load_users
     render_json users, "get user succsess"
+  end
+
+  def show
+    render_json current_user.load_attribute_user, "Lấy dữ liệu thành công"
   end
 
   def create_account
@@ -29,10 +33,16 @@ class Api::UsersController < Api::BaseController
         image.image = params[:user][:avatar]
         image.save
       end
-      render_json user.load_attribute_user, I18n.t("api.users.create.create_success")
+      render_json user.load_attribute_user, "Tạo tài khoản thành công"
     else
-      render_json nil, user.errors.messages, true, 200
+      render_json nil, user.errors.messages, 1
     end
+  end
+
+  def forgot_password
+    user = User.find_by email: params[:email]
+    ForgotPasswordMailer.forgot_email(user).deliver_now if user&.check_otp_forgot.blank?
+    render_json nil, "Thành công, vui lòng kiểm tra email", 0
   end
 
   private

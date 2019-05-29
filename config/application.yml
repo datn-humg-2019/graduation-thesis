@@ -9,8 +9,14 @@
 development:
   pass_mysql: Doanhnhan
   SECRET_KEY_BASE: 60789e1b206ab0a1c3d7d61c01fe7f685b936ac4b9e17d94419111a82962f804f6ede90ceb5f69c7fc2b395f9b9ac5c89911e6c1a8eb6575820079bf87594a5c
+  gmail_username: 'tuanpahumg@gmail.com'
+  gmail_password: 'helloitme'
+  link_change_pass: "http://localhost:3000/change_pass"
 production:
   database: gcx5p9me1dph91x1
   username: cyxjtp6us7ysvvrn
   pass_mysql: sem6328y8ux9fn8b
   SECRET_KEY_BASE: 60789e1b206ab0a1c3d7d61c01fe7f685b936ac4b9e17d94419111a82962f804f6ede90ceb5f69c7fc2b395f9b9ac5c89911e6c1a8eb6575820079bf87594a5c
+  gmail_username: 'tuanpahumg@gmail.com'
+  gmail_password: 'helloitme'
+  link_change_pass: "https://kiot-viet.herokuapp.com/change_pass"

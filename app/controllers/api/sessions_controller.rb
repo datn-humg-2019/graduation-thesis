@@ -7,11 +7,11 @@ class Api::SessionsController < Api::BaseController
   private
 
   def load_user_authentication
-    user = User.find_by("email = ? OR phone = ?", params[:username], params[:username])
+    user = User.find_by("email = ? OR phone = ?", params[:email], params[:username])
     if user&.valid_password?(params[:password])
-      render_json user.load_attribute_user, I18n.t("api.session.success")
+      render_json user.load_token_user, "Đăng nhập thành công"
     else
-      render_json nil, I18n.t("api.session.failed"), true, 400
+      render_json nil, "Đăng nhập thất bại", 1
     end
   end
 end
