@@ -61,6 +61,10 @@ class User < ApplicationRecord
     otps.where(otp_type: 0)
   end
 
+  def check_otp otp, type = 0
+    otps.where(otp_type: type, otp: otp)
+  end
+
   def age
     return "????" if birth.nil?
     now = Time.now.utc.to_date

@@ -1,0 +1,26 @@
+<h1>Thay đổi mật khẩu</h1>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4">
+      <%= form_for "", url: {controller: "change_pass", action: "update"}, html: {id: "form_change"} do |f| %>
+        <div>
+          <div class="form-group">
+            <%= f.text_field :email, placeholder: "Your email", class: "form-control", required: true %>
+          </div>
+          <div class="form-group">
+            <%= f.text_field :otp, placeholder: "OTP", class: "form-control", required: true %>
+          </div>
+          <div class="form-group">
+            <%= f.password_field :new_pass, placeholder: "New password", class: "form-control", id: "new_pass", required: true %>
+          </div>
+          <div class="form-group">
+            <%= f.password_field :confirm_pass, placeholder: "Confirm Password", class: "form-control", id: "con_new_pass", required: true %>
+          </div>
+        </div>
+        <div class="box-footer">
+          <%= f.button :submit, class: "btn btn-primary float-right btn-change-pass" %>
+        </div>
+      <% end %>
+		</div>
+	</div>
+</div>
