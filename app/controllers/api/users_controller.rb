@@ -41,8 +41,12 @@ class Api::UsersController < Api::BaseController
 
   def forgot_password
     user = User.find_by email: params[:email]
-    ForgotPasswordMailer.forgot_email(user).deliver_now if user&.check_otp_forgot.blank?
-    render_json nil, "Thành công, vui lòng kiểm tra email", 0
+    if !user.nil? && user.check_otp_forgot.blank?
+      ForgotPasswordMailer.forgot_email(user).deliver_now
+      render_json nil, "Thành công, vui lòng kiểm tra email", 0
+    else
+      render_json nil, "Email không tồn tại trong hệ thống. vui lòng kiểm tra lại!", 1
+    end
   end
 
   def change_pass
