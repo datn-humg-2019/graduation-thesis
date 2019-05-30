@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
     get "export_template", to: "import_export#export_template", as: "export_template"
     post "import_pw", to: "import_export#import_pw", as: "import_pw"
+    get "select_from_user", to: "bills#select_from_user", as: "select_from_user"
+    get "update_confirmed", to: "bills#update_confirmed", as: "update_confirmed"
 
     resources :products
     resources :bills

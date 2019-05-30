@@ -87,7 +87,7 @@ function add_product_to_choose(id_choose){
       select.append(`<option value="${lst_product[i][0]}">${lst_product[i][1]}</option>`);
     }
   }
-  select.trigger("chosen:updated");  
+  select.trigger("chosen:updated");
 }
 
 function get_count_max() {

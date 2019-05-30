@@ -34,6 +34,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def true? obj
+    obj.to_s == "true"
+  end
+
   # def user_confirmed
   #   return if current_user.nil?
   #   render "pages/404" unless current_user.confirmed

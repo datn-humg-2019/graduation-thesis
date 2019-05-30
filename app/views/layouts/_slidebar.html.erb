@@ -34,20 +34,20 @@
         <li class="<%= slide_active "warehouses" %>">
           <%= link_to warehouses_path do %>
             <i class="nc-icon nc-box-2"></i>
-            <p>Warehouses</p>
+            <p>Kho hàng</p>
           <% end %>
         </li>
         <li class="<%= slide_active "bills" %>">
           <%= link_to bills_path do %>
             <i class="nc-icon nc-money-coins"></i>
-            <p>Xuất hàng</p>
+            <p><%= current_user.vip? ? "Xuất hàng" : "Nhập hàng" %></p>
           <% end %>
         </li>
         <li>
         <li class="<%= slide_active "histories" %>">
           <%= link_to histories_path do %>
             <i class="nc-icon nc-ambulance"></i>
-            <p>Lịch sử Nhập hàng</p>
+            <p>lịch sử Nhập hàng</p>
           <% end %>
         </li>
         <li>

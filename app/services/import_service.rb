@@ -24,6 +24,7 @@ class ImportService
       pw.price_sale = row[4].to_f unless row[4].to_f.zero?
       pw.mfg = row[5] unless row[5].blank?
       pw.exp = row[6] unless row[6].blank?
+      pw.save_history row[2].to_i
     else
       pw = @user.warehouse.product_warehouses.build
       pw.product_id = product_id
@@ -33,6 +34,7 @@ class ImportService
       pw.mfg = row[5]
       pw.exp = row[5]
       pw.stop_providing = false
+      pw.save_history
     end
     pw.save
   end

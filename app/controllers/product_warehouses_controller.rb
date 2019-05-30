@@ -19,6 +19,10 @@ class ProductWarehousesController < ApplicationController
     end
   end
 
+  def get_pw_user
+    User.find_by(id: params[:user_id]).warehouse.product_warehouses
+  end
+
   # def update
   #   pw = current_user.check_has_product params[:product_warehouse][:product_id]
   #   if pw.present?

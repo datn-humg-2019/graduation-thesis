@@ -2,9 +2,13 @@
   <%= render "shared/error_messages", object: f.object %>
   <div class="col-md-12">
     <div class="form-group">
-      <%= f.label :to_user_id, "For user" %>
-      <%= f.collection_select :to_user_id, for_user_ctv, :last, :first,
-          {include_blank: false}, {class: "form-control chosen"} %>
+      <% if current_user.vip? %>
+        <%= f.label :to_user_id, "For user" %>
+        <%= f.collection_select :to_user_id, for_user_ctv, :last, :first, {include_blank: false}, {class: "form-control chosen"} %>
+      <% else %>
+        <%= f.label :to_user_id, "Form user" %>
+        <%= f.collection_select :from_user_id, form_user_vip(@bill.from_user_id), :last, :first, {include_blank: false}, {class: "form-control chosen"} %>
+      <% end %>
     </div>
     <div class="form-group">
       <%= f.label :description, "description" %>
@@ -15,10 +19,10 @@
           <thead>
             <tr>
               <th>STT</th>
-              <th>product</th>
-              <th>So luong</th>
-              <th>gia</th>
-              <th>action</th>
+              <th>Hàng hóa</th>
+              <th>Số lượng</th>
+              <th><%= current_user.vip? ? "Giá bán" : "Giá nhập" %></th>
+              <th>hành động</th>
             </tr>
           </thead>
           <tbody>
@@ -26,7 +30,7 @@
       </table>
     </div>
     <div class="box-footer">
-      <%= link_to "Back", bills_path, class: "btn btn-default" %>
+      <%= link_to "Back", current_user.vip? ? bills_path : select_from_user_path, class: "btn btn-default" %>
       <%= f.button :submit, class: "btn btn-primary float-right" %>
     </div>
   </div>

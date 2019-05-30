@@ -5,5 +5,7 @@
     <%= link_to t(".title"), bills_path %> > <%= t(".new_title") %>
   <% elsif action == "show" %>
     <%= link_to t(".title"), bills_path %> > <%= t(".edit_title") %>
+  <% else %>
+    <%= link_to t(".title"), bills_path %> > <%= "select vip user" %>
   <% end %>
 </h2>
