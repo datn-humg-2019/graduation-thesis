@@ -24,7 +24,7 @@ class BillsController < ApplicationController
 
   def create
     if current_user.vip?
-      bill = current_user.sales.build bill_params_sale
+      bill = current_user.sales.build bill_params_sales
       bill.bill_code = "XH"
       bill.confirmed = true
     else
