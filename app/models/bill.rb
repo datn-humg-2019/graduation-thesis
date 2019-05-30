@@ -10,6 +10,17 @@ class Bill < ApplicationRecord
     where(from_user_id: user_id).or(Bill.where(to_user_id: user_id))
   end)
 
+  scope :list_with_date, (lambda do |from_date, to_date|
+    where("DATE(bills.created_at) >= ? and Date(bills.created_at) <= ?", from_date, to_date)
+  end)
+
+  scope :list_turnover, (lambda do |from_date, to_date, is_count, type_user|
+    joins(:details)
+    .where("DATE(bills.created_at) >= ? and Date(bills.created_at) <= ?", from_date, to_date)
+    .select(is_count ? "#{type_user}, sum(count) total" : "#{type_user}, sum(price) total")
+    .group(type_user)
+  end)
+
   def of_user user_id
     from_user_id == user_id || to_user_id == user_id ? true : false
   end
@@ -20,6 +31,14 @@ class Bill < ApplicationRecord
 
   def total_money
     details.sum("count * price")
+  end
+
+  def get_info_sales is_count = true
+    {
+      id: id,
+      name: from_user.name,
+      turnover: is_count ? total_count : total_money
+    }
   end
 
   def update_pw_to_user
