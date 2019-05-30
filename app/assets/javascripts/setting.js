@@ -79,10 +79,9 @@ function setup_datepiker() {
     setDate: date,
     clearBtn: true,
     todayBtn: true,
-    language: I18n.locale,
     todayHighlight: true,
     autoclose: true,
-    dateFormat: I18n.t('date-js')
+    dateFormat: 'mm/dd/yyyy'
   });
 }
 
@@ -150,9 +149,8 @@ function onBlur(e){
 function setup_daterange() {
   $('.start-to-end .input-daterange').datepicker({
     clearBtn: true,
-    language: I18n.locale,
     todayHighlight: true,
     orientation: 'bottom auto',
-    format: I18n.t('date-js')
+    format: 'mm/dd/yyyy'
   });
 }

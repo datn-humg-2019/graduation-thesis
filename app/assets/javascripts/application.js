@@ -20,9 +20,6 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require Chart.min
-//= require i18n
-//= require i18n.js
-//= require i18n/translations
 //= require "icheck"
 //= require chosen-jquery
 //= require simplemde.min
