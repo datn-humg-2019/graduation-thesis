@@ -34,6 +34,7 @@ class User < ApplicationRecord
   scope :manager_user, ->{where.not role: "admin"}
 
   scope :ctv_user, ->{where role: "ctv"}
+  scope :vip_user, ->{where role: "vip"}
 
   scope :load_user, ->{select :id, :email, :phone, :name, :gender, :adress, :birth, :role}
   scope :api_load_users, ->{select(:id, :email, :phone, :name, :gender, :adress, :birth, :role).map{|u| u.load_structure}}
@@ -74,6 +75,7 @@ class User < ApplicationRecord
 
   def default_password
     "#{format('%02d', birth.day)}#{format('%02d', birth.month)}#{birth.year}"
+    "123456"
   end
 
   def get_avatar

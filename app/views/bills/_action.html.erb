@@ -1,3 +1,9 @@
-  <%= link_to bill_path(id: bill), method: :GET, class: "btn btn-info" do %>
-    <i class="fa fa-eye"></i> Detail
+<%= link_to bill_path(id: bill), method: :GET, class: "btn btn-info" do %>
+  <i class="fa fa-eye"></i> Detail
+<% end %>
+
+<% if !bill.confirmed && current_user.vip? %>
+  <%= link_to update_confirmed_path(id: bill, confirm: true), method: :GET, data: {confirm: "Are you sure?"}, class: "btn btn-success" do %>
+    <i class="fa fa-check"></i> Xác nhận
   <% end %>
+<% end %>

@@ -7,8 +7,5 @@ class HistoriesController < ApplicationController
     @histories = current_user.warehouse.all_histories.page(params[:page]).per(20)
   end
 
-  def show
-  end
-
-  private
+  def show; end
 end

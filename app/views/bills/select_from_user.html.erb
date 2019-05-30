@@ -1,0 +1,20 @@
+<%= render "url", action: "" %>
+<hr>
+<div class="col-md-6">
+  <div class="card">
+    <div class="card-body">
+      <%= form_tag new_bill_path, method: :get do %>
+        <div class="col-md-12">
+          <div class="form-group">
+            <%= label :from_user_id, "From user" %>
+            <%= select_tag :from_user_id, options_for_select(form_user_vip(nil)), selected: 1, class: "form-control chosen" %>
+          </div>
+          <div class="box-footer">
+            <%= link_to "Back", bills_path, class: "btn btn-default" %>
+            <%= submit_tag "Next", class: "btn btn-primary float-right" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
