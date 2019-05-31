@@ -13,13 +13,13 @@ class Api::BillsController < Api::BaseController
   private
   def list_sales count
     list_sale = Bill.list_turnover(params[:fromDate], params[:toDate], count, "from_user_id")
-                    .map{|b| {id: b.from_user.id, name: b.from_user.name, turnover: b.total}}
+                    .map{|b| {id: b.from_user.id, name: b.from_user.name, image: b.from_user.get_avatar_api, turnover: b.total}}
     list_sale.sort{|a, b| b[:turnover] <=> a[:turnover]}
   end
 
   def list_buys count
     list_sale = Bill.list_turnover(params[:fromDate], params[:toDate], count, "from_user_id")
-                    .map{|b| {id: b.from_user.id, name: b.from_user.name, turnover: b.total}}
+                    .map{|b| {id: b.from_user.id, name: b.from_user.name, image: b.from_user.get_avatar_api, turnover: b.total}}
     list_sale.sort{|a, b| b[:turnover] <=> a[:turnover]}
   end
 end

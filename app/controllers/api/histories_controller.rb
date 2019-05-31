@@ -13,7 +13,7 @@ class Api::HistoriesController < Api::BaseController
   private
   def list_buys count
     list_buy = History.list_his_turnover(params[:fromDate], params[:toDate], count)
-                      .map{|h| {id: h.warehouse.user.id, name: h.warehouse.user.name, turnover: h.total}}
+                      .map{|h| {id: h.warehouse.user.id, name: h.warehouse.user.name, image: h.warehouse.user.get_avatar_api, turnover: h.total}}
     list_buy.sort{|a, b| b[:turnover] <=> a[:turnover]}
   end
 end
