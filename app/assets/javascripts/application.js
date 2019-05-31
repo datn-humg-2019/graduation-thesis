@@ -16,6 +16,7 @@
 //= require activestorage
 //= require bootstrap-datepicker
 //= require_tree .
+//= require perfect-scrollbar.jquery.min
 //= require paper-dashboard
 //= require popper
 //= require bootstrap-sprockets
