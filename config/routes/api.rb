@@ -11,6 +11,8 @@ namespace :api, defaults: {format: "json"} do
   post "/list_sales_price", to: "bills#list_sales_price"
   post "/list_buys_count", to: "histories#list_buys_count"
   post "/list_buys_price", to: "histories#list_buys_price"
+  post "/admin_chart_sales", to: "charts#admin_chart_sales"
+  post "/admin_chart_buys", to: "charts#admin_chart_buys"
   resources :users, only: [:index]
   resources :categories, only: [:index, :create]
   resources :products, only: [:index, :create]
