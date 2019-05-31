@@ -21,6 +21,14 @@ class Bill < ApplicationRecord
     .group(type_user)
   end)
 
+
+  scope :data_by_times, (lambda do |from_date, to_date|
+    joins(:details)
+    .where("DATE(bills.created_at) >= ? and Date(bills.created_at) <= ?", from_date, to_date)
+    .select("Date(bills.created_at) date, sum(count) total_count, sum(price) total_price")
+    .group("Date(bills.created_at)")
+  end)
+
   def of_user user_id
     from_user_id == user_id || to_user_id == user_id ? true : false
   end

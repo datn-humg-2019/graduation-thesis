@@ -11,4 +11,10 @@ class History < ApplicationRecord
     .select(is_count ? "warehouse_id, sum(count) total" : "warehouse_id, sum(price) total")
     .group(:warehouse_id)
   end)
+
+  scope :data_by_times, (lambda do |from_date, to_date|
+    where("date(created_at) >= ? and date(created_at) <= ?", from_date, to_date)
+    .select("Date(created_at) date, sum(count) total_count, sum(price) total_price")
+    .group("Date(created_at)")
+  end)
 end
