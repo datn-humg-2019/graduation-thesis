@@ -24,6 +24,11 @@ class Warehouse < ApplicationRecord
   end
 
   def all_histories
-    histories.select("DATE(created_at) day_input, sum(count) count_input, sum(count * price) price_input").group("date(created_at)")
+    histories.select("DATE(created_at) day_input, sum(count) count_input, sum(count * price) price_input").order("day_input desc")
+             .group("date(created_at)")
+  end
+
+  def detail_history date
+    histories.where("DATE(created_at) = ?", date)
   end
 end

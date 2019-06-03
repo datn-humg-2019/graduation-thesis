@@ -4,13 +4,19 @@
       <%= i + 1 %>
     </td>
     <td>
-      <%= d.product_warehouse.product.name %>
+      <%= d.product.name %>
     </td>
     <td>
       <%= d.count %>
     </td>
     <td>
       <%= to_currency d.price %>
+    </td>
+    <td>
+      <%= d.from ? User.find_by(id: d.from).name : "" %>
+    </td>
+    <td>
+      <%= d.created_at.getlocal.strftime("%H:%M:%S") %>
     </td>
   </tr>
 <% end %>
@@ -19,9 +25,13 @@
     TOTAL
   </td>
   <td>
-    <%= @bill.total_count %>
+    <%= details.sum :count %>
   </td>
   <td>
-    <%= to_currency @bill.total_money %>
+    <%= to_currency details.sum("count * price") %>
+  </td>
+  <td>
+  </td>
+  <td>
   </td>
 </tr>

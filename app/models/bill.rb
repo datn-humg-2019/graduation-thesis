@@ -60,7 +60,7 @@ class Bill < ApplicationRecord
       to_pw.price_sale = detail.price
       to_pw.stop_providing = false
       to_pw.save
-      to_pw.save_history
+      to_pw.save_history nil, nil, pw.warehouse.user.id
       pw.count -= detail.count
       pw.save
     end
