@@ -1,1 +1,42 @@
-asdadsasdas
+<%= render "url", action: "show" %>
+<hr>
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead class=" text-primary">
+            <tr>
+              <th>
+                STT
+              </th>
+              <th>
+                Product
+              </th>
+              <th>
+                COUNT
+              </th>
+              <th>
+                PRICE
+              </th>
+              <th>
+                From user
+              </th>
+              <th>
+                Time (hh:mm:ss)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render "details", details: @history_details %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-success float-right">
+        Export report
+      </button>
+    </div>
+  </div>
+</div>
