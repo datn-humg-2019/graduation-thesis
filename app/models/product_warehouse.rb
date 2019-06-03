@@ -29,6 +29,21 @@ class ProductWarehouse < ApplicationRecord
     )
   end
 
+  def load_attribute_product
+    {
+      id: id,
+      code: endcode_pw,
+      count: count,
+      price_origin: price_origin,
+      price_sale: price_sale,
+      mfg: mfg,
+      exp: exp,
+      decription: product.description,
+      images: product.load_images,
+      category: product.category.load_structure_detail
+    }
+  end
+
   class << self
     def get_field_ex_im
       ["STT", "Product", "Count", "Price origin", "Price sale", "mfg", "exp"]

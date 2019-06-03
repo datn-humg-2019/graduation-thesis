@@ -19,4 +19,11 @@ class Category < ApplicationRecord
     }
     result
   end
+
+  def load_structure_detail
+    result = {
+      id: id,
+      name: name
+    }
+  end
 end

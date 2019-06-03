@@ -19,6 +19,10 @@ class Product < ApplicationRecord
     ransack(name_cont: name).result
   end)
 
+  scope :by_id, (lambda do |product_id|
+    ransack(id_eq: product_id).result
+  end)
+
   scope :by_category, (lambda do |category_id|
     ransack(category_id_eq: category_id).result
   end)
