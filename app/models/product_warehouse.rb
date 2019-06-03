@@ -32,6 +32,7 @@ class ProductWarehouse < ApplicationRecord
   def load_attribute_product
     {
       id: id,
+      name: product.name,
       code: endcode_pw,
       count: count,
       price_origin: price_origin,
