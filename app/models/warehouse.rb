@@ -7,12 +7,20 @@ class Warehouse < ApplicationRecord
     product_warehouses.pluck :product_id
   end
 
+  def product_inventory
+    product_warehouses.where("count > 0 and stop_providing = 0")
+  end
+
+  def stop_providing_product product_id
+    product_warehouses.find_by(product_id: product_id).update_attributes(stop_providing: true)
+  end
+
   def sum_count
     product_warehouses.sum :count
   end
 
   def sum_price_origin
-    "#{product_warehouses.sum('count * price_origin')} VNĐ"
+    product_warehouses.sum("count * price_origin")
   end
 
   def auto_update
