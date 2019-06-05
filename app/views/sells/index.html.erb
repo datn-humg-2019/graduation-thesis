@@ -1,0 +1,47 @@
+<%= render "url", action: "index" %>
+<hr>
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <%= render "filter" %>
+    </div>
+    <hr>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead class=" text-primary">
+            <tr>
+              <th>
+                STT
+              </th>
+              <th>
+                Sell code
+              </th>
+              <th>
+                Count
+              </th>
+              <th>
+                Money
+              </th>
+              <th>
+                Description
+              </th>
+              <th>
+                Created date
+              </th>
+              <th>
+                ACTION
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render "grid_sells", sells: @sells %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div >
+      <%= paginate @sells %>
+    </div>
+  </div>
+</div>

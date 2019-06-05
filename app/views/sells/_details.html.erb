@@ -1,0 +1,27 @@
+<% details.each_with_index do |d, i| %>
+  <tr>
+    <td>
+      <%= i + 1 %>
+    </td>
+    <td>
+      <%= d.product_warehouse.product.name %>
+    </td>
+    <td>
+      <%= d.count %>
+    </td>
+    <td>
+      <%= to_currency d.price %>
+    </td>
+  </tr>
+<% end %>
+<tr>
+  <td colspan="2">
+    TOTAL
+  </td>
+  <td>
+    <%= @sell.sum_count %>
+  </td>
+  <td>
+    <%= to_currency @sell.sum_price %>
+  </td>
+</tr>

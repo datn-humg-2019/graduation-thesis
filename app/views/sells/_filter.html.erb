@@ -1,0 +1,30 @@
+<%= search_form_for @q, url: sells_path, method: :GET do |f| %>
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <%= label_tag :sell_code_eq, "Sell code", for: "sell_code_eq" %>
+      <%= f.search_field :sell_code_eq, class: "form-control", placeholder: "Sell code" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= label_tag :lbl_from_to, "From date - To date" %>
+      <div class="start-to-end">
+        <div class="input-daterange row" id="datepicker">
+          <div class="col">
+            <%= text_field_tag :from_date, params[:from_date], class: "form-control", placeholder: "From date", readonly: true %>
+          </div>
+          <div class="col">
+            <%= text_field_tag :to_date, params[:to_date], class: "form-control", placeholder: "To date", class: "form-control", readonly: true %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <%= link_to new_sell_path, class: "float-left btn btn-success" do %>
+      <i class="fa fa-user-plus"></i> New sell
+    <% end %>
+    <button class="float-right btn btn-primary" type="submit">
+      <i class="fa fa-search"></i>
+      Search
+    </button>
+  </div>
+<% end %>

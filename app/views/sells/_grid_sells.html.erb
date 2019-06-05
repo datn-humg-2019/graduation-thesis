@@ -1,0 +1,25 @@
+<% sells.each_with_index do |s, i| %>
+  <tr>
+    <td>
+      <%= i + 1 %>
+    </td>
+    <td>
+      <%= s.sell_code %>
+    </td>
+    <td>
+      <%= s.total_count %>
+    </td>
+    <td>
+      <%= to_currency s.total_price %>
+    </td>
+    <td>
+      <%= s.description %>
+    </td>
+    <td>
+      <%= s.created_at.localtime.strftime("%Y/%m/%d  %H:%M:%S") %>
+    </td>
+    <td>
+      <%= render "action", sell: s %>
+    </td>
+  </tr>
+<% end %>

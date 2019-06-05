@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :products
     resources :bills
     resources :histories
+    resources :sells
     resources :warehouses do
       resources :product_warehouses
     end
