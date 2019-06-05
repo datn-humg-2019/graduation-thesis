@@ -15,6 +15,9 @@ namespace :api, defaults: {format: "json"} do
   post "/admin_chart_buys", to: "charts#admin_chart_buys"
   post "/warehouses", to: "warehouses#index"
   post "/list_categories", to: "warehouses#list_categories"
+  post "/create_product_warehouse", to: "user_apis#create_product_warehouse"
+  post "/user_inventory", to: "warehouses#user_inventory"
+  post "/user_stop_providing", to: "warehouses#user_stop_providing"
   resources :users, only: [:index]
   resources :categories, only: [:index, :create]
   resources :products, only: [:index, :create]
