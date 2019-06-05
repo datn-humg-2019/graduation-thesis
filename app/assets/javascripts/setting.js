@@ -3,7 +3,7 @@ $(document).ready(function() {
     var simplemde = new SimpleMDE({
       element: document.getElementById("markdown")
     });
-  
+
     simplemde.codemirror.on('refresh', function() {
       if (simplemde.isFullscreenActive()) {
         $('.sidebar').addClass('hidden');
@@ -151,6 +151,6 @@ function setup_daterange() {
     clearBtn: true,
     todayHighlight: true,
     orientation: 'bottom auto',
-    format: 'mm/dd/yyyy'
+    format: 'yyyy/mm/dd'
   });
 }

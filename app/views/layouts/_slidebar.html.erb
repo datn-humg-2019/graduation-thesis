@@ -43,7 +43,12 @@
             <p><%= current_user.vip? ? "Xuất hàng" : "Nhập hàng" %></p>
           <% end %>
         </li>
-        <li>
+        <li class="<%= slide_active "sells" %>">
+          <%= link_to sells_path do %>
+            <i class="nc-icon nc-bag-16"></i>
+            <p>Bán hàng</p>
+          <% end %>
+        </li>
         <li class="<%= slide_active "histories" %>">
           <%= link_to histories_path do %>
             <i class="nc-icon nc-ambulance"></i>
@@ -51,9 +56,10 @@
           <% end %>
         </li>
         <li>
-          Quản lý bán hàng - lịch sử bán
           hóa đơn
+          <br>
           những người mua
+          <br>
           biểu đồ ở trang chính
         </li>
         <li>

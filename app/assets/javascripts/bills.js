@@ -7,9 +7,9 @@ $(document).ready(function() {
       $(this).removeClass('image-checkbox-checked');
     }
   });
-  
+
   $(".image-checkbox").on("click", function (e) {
-    var pw_count = $(this).children('img').attr('title').split('*').slice(-1).pop();
+    var pw_count = $(this).children('img').attr('tooltip_title').split('*').slice(-1).pop();
     var pw_price_sale = $(this).children('img').data('price');
     if(parseInt(pw_count) == 0){
       alert('hàng đã hết');
