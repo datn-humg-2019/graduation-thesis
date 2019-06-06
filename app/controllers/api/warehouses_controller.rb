@@ -40,9 +40,44 @@ class Api::WarehousesController < Api::BaseController
   def user_stop_providing
     if current_user.admin?
       render_json "Bạn không có quyền thực hiện công việc này", nil, 1
+    elsif params["product_id"].blank?
+      render_json "Dữ liệu ko hợp lệ", nil, 1
     else
-      current_user.warehouse.stop_providing_product params["product_id"]
+      current_user.warehouse.stop_providing_product params["product_id"].to_i, true
       render_json "Sản phẩm đã được dừng cung cấp"
+    end
+  end
+
+  def user_stop_providing_category
+    if current_user.admin?
+      render_json "Bạn không có quyền thực hiện công việc này", nil, 1
+    elsif params["category_id"].blank?
+      render_json "Dữ liệu ko hợp lệ", nil, 1
+    else
+      current_user.warehouse.stop_providing_category params["category_id"].to_i, true
+      render_json "Nhóm sản phẩm đã được dừng cung cấp"
+    end
+  end
+
+  def user_start_providing
+    if current_user.admin?
+      render_json "Bạn không có quyền thực hiện công việc này", nil, 1
+    elsif params["product_id"].blank?
+      render_json "Dữ liệu ko hợp lệ", nil, 1
+    else
+      current_user.warehouse.stop_providing_product params["product_id"].to_i, false
+      render_json "Sản phẩm đã được cung cấp lại"
+    end
+  end
+
+  def user_start_providing_category
+    if current_user.admin?
+      render_json "Bạn không có quyền thực hiện công việc này", nil, 1
+    elsif params["category_id"].blank?
+      render_json "Dữ liệu ko hợp lệ", nil, 1
+    else
+      current_user.warehouse.stop_providing_category params["category_id"].to_i, false
+      render_json "Nhóm sản phẩm đã được cung cấp lại"
     end
   end
 
