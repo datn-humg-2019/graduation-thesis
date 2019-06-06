@@ -11,8 +11,14 @@ class Warehouse < ApplicationRecord
     product_warehouses.where("count > 0 and stop_providing = 0")
   end
 
-  def stop_providing_product product_id
-    product_warehouses.find_by(product_id: product_id).update_attributes(stop_providing: true)
+  def stop_providing_product product_id, stage
+    product_warehouses.find_by(product_id: product_id).update_attributes(stop_providing: stage)
+  end
+
+  def stop_providing_category category_id, stage
+    product_warehouses.each do |pw|
+      pw.update_stop_providing(stage) if pw.product.category_id == category_id
+    end
   end
 
   def sum_count

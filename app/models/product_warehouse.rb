@@ -24,6 +24,10 @@ class ProductWarehouse < ApplicationRecord
     "PW-#{id}-#{product_id}"
   end
 
+  def update_stop_providing stage
+    update_attributes(stop_providing: stage)
+  end
+
   def save_history p_count = nil, p_price = nil, from_user = nil
     warehouse.histories.create!(
       count: p_count.nil? ? count : p_count,
