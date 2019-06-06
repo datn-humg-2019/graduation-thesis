@@ -173,73 +173,6 @@ demo = {
       }
     });
 
-
-    ctx = document.getElementById('chartEmail').getContext("2d");
-
-    myChart = new Chart(ctx, {
-      type: 'pie',
-      data: {
-        labels: [1, 2, 3],
-        datasets: [{
-          label: "Emails",
-          pointRadius: 0,
-          pointHoverRadius: 0,
-          backgroundColor: [
-            '#e3e3e3',
-            '#4acccd',
-            '#fcc468',
-            '#ef8157'
-          ],
-          borderWidth: 0,
-          data: [342, 480, 530, 120]
-        }]
-      },
-
-      options: {
-
-        legend: {
-          display: false
-        },
-
-        pieceLabel: {
-          render: 'percentage',
-          fontColor: ['white'],
-          precision: 2
-        },
-
-        tooltips: {
-          enabled: false
-        },
-
-        scales: {
-          yAxes: [{
-
-            ticks: {
-              display: false
-            },
-            gridLines: {
-              drawBorder: false,
-              zeroLineColor: "transparent",
-              color: 'rgba(255,255,255,0.05)'
-            }
-
-          }],
-
-          xAxes: [{
-            barPercentage: 1.6,
-            gridLines: {
-              drawBorder: false,
-              color: 'rgba(255,255,255,0.1)',
-              zeroLineColor: "transparent"
-            },
-            ticks: {
-              display: false,
-            }
-          }]
-        },
-      }
-    });
-
     var speedCanvas = document.getElementById("speedChart");
 
     var dataFirst = {
@@ -406,3 +339,82 @@ demo = {
   }
 
 };
+
+$(document).ready(function() {
+  if (window.location.pathname.includes("admin")){
+    // chart user
+    $.ajax({
+      type: 'GET',
+      url: '/admin/count_user',
+      dataType: 'json',
+      data: null,
+      success: function(data){
+        user_chart(document.getElementById('chartUser').getContext("2d"), data.list_count_user)
+      },
+      error: function (error){
+        console.log(error);
+        alert('has an error');
+      }
+    });
+
+    // chart
+  }
+});
+
+
+function user_chart(ctx, datas) {
+  userChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['ADMIN', 'VIP', 'CTV'],
+      datasets: [{
+        label: "Users",
+        pointRadius: 0,
+        pointHoverRadius: 0,
+        backgroundColor: [
+          '#ef8157',
+          '#fcc468',
+          '#4acccd'
+        ],
+        borderWidth: 0,
+        data: datas.map(d => d[1])
+      }]
+    },
+
+    options: {
+      legend: {
+        display: false
+      },
+      pieceLabel: {
+        render: 'percentage',
+        fontColor: ['white'],
+        precision: 2
+      },
+      scales: {
+        yAxes: [{
+
+          ticks: {
+            display: false
+          },
+          gridLines: {
+            drawBorder: false,
+            zeroLineColor: "transparent",
+            color: 'rgba(255,255,255,0.05)'
+          }
+
+        }],
+        xAxes: [{
+          barPercentage: 1.6,
+          gridLines: {
+            drawBorder: false,
+            color: 'rgba(255,255,255,0.1)',
+            zeroLineColor: "transparent"
+          },
+          ticks: {
+            display: false,
+          }
+        }]
+      },
+    }
+  });
+}

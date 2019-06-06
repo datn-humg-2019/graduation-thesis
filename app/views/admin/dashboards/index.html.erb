@@ -5,13 +5,13 @@
         <div class="row">
           <div class="col-5 col-md-4">
             <div class="icon-big text-center icon-warning">
-              <i class="nc-icon nc-globe text-warning"></i>
+              <i class="nc-icon nc-single-02 text-warning"></i>
             </div>
           </div>
           <div class="col-7 col-md-8">
             <div class="numbers">
-              <p class="card-category">Capacity</p>
-              <p class="card-title">150GB
+              <p class="card-category">Tổng người dùng</p>
+              <p class="card-title"><%= @datas_lable[:total_user] %>
                 <p>
             </div>
           </div>
@@ -20,7 +20,7 @@
       <div class="card-footer ">
         <hr>
         <div class="stats">
-          <i class="fa fa-refresh"></i> Update Now
+          <i class="fa fa-rocket"></i> Liên tục có người dùng đăng ký
         </div>
       </div>
     </div>
@@ -31,13 +31,13 @@
         <div class="row">
           <div class="col-5 col-md-4">
             <div class="icon-big text-center icon-warning">
-              <i class="nc-icon nc-money-coins text-success"></i>
+              <i class="nc-icon nc-send text-success"></i>
             </div>
           </div>
           <div class="col-7 col-md-8">
             <div class="numbers">
-              <p class="card-category">Revenue</p>
-              <p class="card-title">$ 1,345
+              <p class="card-category">Tổng hóa đơn xuất</p>
+              <p class="card-title"><%= @datas_lable[:total_output] %>
                 <p>
             </div>
           </div>
@@ -46,7 +46,7 @@
       <div class="card-footer ">
         <hr>
         <div class="stats">
-          <i class="fa fa-calendar-o"></i> Last day
+          <i class="fa fa-calendar-o"></i> Lần xuất hàng cuối: <%= Bill.last.created_at.localtime.strftime("%Y/%m/%d %H:%M:%S") %>
         </div>
       </div>
     </div>
@@ -57,13 +57,13 @@
         <div class="row">
           <div class="col-5 col-md-4">
             <div class="icon-big text-center icon-warning">
-              <i class="nc-icon nc-vector text-danger"></i>
+              <i class="nc-icon nc-ambulance text-danger"></i>
             </div>
           </div>
           <div class="col-7 col-md-8">
             <div class="numbers">
-              <p class="card-category">Errors</p>
-              <p class="card-title">23
+              <p class="card-category">Tổng hóa đơn nhập</p>
+              <p class="card-title"><%= @datas_lable[:total_input] %>
                 <p>
             </div>
           </div>
@@ -72,7 +72,7 @@
       <div class="card-footer ">
         <hr>
         <div class="stats">
-          <i class="fa fa-clock-o"></i> In the last hour
+          <i class="fa fa-calendar-o"></i> Lần nhập hàng cuối: <%= History.last.created_at.localtime.strftime("%Y/%m/%d %H:%M:%S") %>
         </div>
       </div>
     </div>
@@ -83,13 +83,13 @@
         <div class="row">
           <div class="col-5 col-md-4">
             <div class="icon-big text-center icon-warning">
-              <i class="nc-icon nc-favourite-28 text-primary"></i>
+              <i class="nc-icon nc-money-coins text-primary"></i>
             </div>
           </div>
           <div class="col-7 col-md-8">
             <div class="numbers">
-              <p class="card-category">Followers</p>
-              <p class="card-title">+45K
+              <p class="card-category">Tổng hàng tồn kho</p>
+              <p class="card-title"><%= @datas_lable[:product_inventory] %>
                 <p>
             </div>
           </div>
@@ -98,7 +98,7 @@
       <div class="card-footer ">
         <hr>
         <div class="stats">
-          <i class="fa fa-refresh"></i> Update now
+          <i class="fa fa-money"></i> Thành tiền: <%= to_currency @datas_lable[:price_inventory] %>
         </div>
       </div>
     </div>
@@ -127,22 +127,21 @@
   <div class="col-md-4">
     <div class="card ">
       <div class="card-header ">
-        <h5 class="card-title">Email Statistics</h5>
-        <p class="card-category">Last Campaign Performance</p>
+        <h5 class="card-title">User</h5>
+        <p class="card-category">Không tính các quản trị viên</p>
       </div>
       <div class="card-body ">
-        <canvas id="chartEmail"></canvas>
+        <canvas id="chartUser"></canvas>
       </div>
       <div class="card-footer ">
         <div class="legend">
-          <i class="fa fa-circle text-primary"></i> Opened
-          <i class="fa fa-circle text-warning"></i> Read
-          <i class="fa fa-circle text-danger"></i> Deleted
-          <i class="fa fa-circle text-gray"></i> Unopened
+          <i class="fa fa-circle text-danger"></i> ADMIN
+          <i class="fa fa-circle text-primary"></i> VIP
+          <i class="fa fa-circle text-warning"></i> CTV
         </div>
         <hr>
         <div class="stats">
-          <i class="fa fa-calendar"></i> Number of emails sent
+          <i class="fa fa-calendar"></i>Số lượng người dùng
         </div>
       </div>
     </div>

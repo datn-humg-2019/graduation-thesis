@@ -16,6 +16,10 @@ class ProductWarehouse < ApplicationRecord
 
   scope :load_inventory, ->{select("sum(count) total_count, sum(count * price_origin) total_price, product_id").group(:product_id)}
 
+  scope :inventory_count, ->{where(stop_providing: false).sum(:count)}
+
+  scope :inventory_price, ->{where(stop_providing: false).sum("count * price_origin")}
+
   def endcode_pw
     "PW-#{id}-#{product_id}"
   end
