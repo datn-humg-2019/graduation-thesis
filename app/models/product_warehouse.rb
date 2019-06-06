@@ -44,6 +44,7 @@ class ProductWarehouse < ApplicationRecord
       mfg: mfg,
       exp: exp,
       decription: product.description,
+      stop_providing: stop_providing,
       images: product.load_images,
       category: product.category.load_structure_detail
     }
