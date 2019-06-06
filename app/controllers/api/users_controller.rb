@@ -25,6 +25,7 @@ class Api::UsersController < Api::BaseController
 
   def create
     user = User.new user_params true
+    user.password_confirmation = user.password
     user.role = "ctv"
     user.gender = true
     user.adress = ""
@@ -71,7 +72,7 @@ class Api::UsersController < Api::BaseController
   private
   def user_params signup
     if signup
-      params.require(:user).permit :email, :phone, :name, :password, :password_confirmation
+      params.require(:user).permit :email, :phone, :name, :password
     else
       params.require(:user).permit :email, :phone, :name, :gender, :adress, :birth, :role
     end

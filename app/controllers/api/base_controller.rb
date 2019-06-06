@@ -41,16 +41,22 @@ class Api::BaseController < ActionController::API
       return
     end
 
-    payload = JsonWebToken.decode token
+    begin
+      payload = JsonWebToken.decode token
 
-    if payload.nil? || !JsonWebToken.valid_payload(payload.first)
-      render json: {status: 402, error: true,
-                    message: "Please log in",
-                    data: nil}, status: 402
+      if payload.nil? || !JsonWebToken.valid_payload(payload.first)
+        render json: {status: 402, error: true,
+                      message: "Please log in",
+                      data: nil}, status: 402
+        return
+      end
+
+      @current_user = User.find_by id: payload.first["user_id"]
+    rescue
+      render json: {code: 1, message: "Log in False", data: nil}, status: 501
       return
     end
 
-    @current_user = User.find_by id: payload.first["user_id"]
   end
 
   def check_admin?
