@@ -8,7 +8,7 @@ class Api::WarehousesController < Api::BaseController
       products = Product.by_category(params[:category_id])
                         .by_name(params[:name])
                         .by_id(params[:product_id])
-                        .pluck :id
+                        .ids
 
       warehouse = current_user.warehouse.product_warehouses
                               .where(product_id: products)
@@ -21,10 +21,10 @@ class Api::WarehousesController < Api::BaseController
     if current_user.admin?
       render_json "Bạn không có quyền thực hiện công việc này", nil, 1
     else
-      ids = current_user.warehouse.product_warehouses
-                        .map{|pw| pw.product.category.id}.uniq
+      ids = current_user.warehouse.product_warehouses.map{|pw| pw.product.category.id}.uniq
+      ids_start = current_user.warehouse.product_warehouses.where(stop_providing: false).map{|pw| pw.product.category.id}.uniq
 
-      categories = Category.where(id: ids).map{|c| c.load_structure }
+      categories = Category.where(id: ids).map{|c| c.load_structure(ids_start.include?(c.id) ? false : true)}
       render_json "Lấy dữ liệu thành công", categories
     end
   end
