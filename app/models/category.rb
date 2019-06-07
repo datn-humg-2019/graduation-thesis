@@ -11,17 +11,17 @@ class Category < ApplicationRecord
     images.blank? ? "category.png" : images.first.image.url
   end
 
-  def load_structure
-    result = {
+  def load_structure stage
+    {
       id: id,
       name: name,
-      image: get_image
+      image: get_image,
+      stop_providing: stage
     }
-    result
   end
 
   def load_structure_detail
-    result = {
+    {
       id: id,
       name: name
     }
