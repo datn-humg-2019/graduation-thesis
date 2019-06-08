@@ -62,7 +62,16 @@ class Api::BaseController < ActionController::API
   def check_admin?
     unless @current_user&.admin?
       render json: {status: 200, error: true,
-                    message: "You have no rights",
+                    message: "Bạn không phải admin",
+                    data: nil}, status: 200
+      return
+    end
+  end
+
+  def not_admin?
+    if @current_user&.admin?
+      render json: {status: 200, error: true,
+                    message: "Bạn không có quyền thực hiện công việc này",
                     data: nil}, status: 200
       return
     end

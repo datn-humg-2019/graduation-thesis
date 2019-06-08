@@ -46,7 +46,7 @@
       <div class="card-footer ">
         <hr>
         <div class="stats">
-          <i class="fa fa-calendar-o"></i> Lần xuất hàng cuối: <%= Bill.last.created_at.localtime.strftime("%Y/%m/%d %H:%M:%S") %>
+          <i class="fa fa-calendar-o"></i> Lần xuất hàng cuối: <%= Bill.last.created_at.localtime.strftime("%Y/%m/%d %H:%M:%S") if Bill.last %>
         </div>
       </div>
     </div>

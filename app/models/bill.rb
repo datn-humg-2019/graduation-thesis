@@ -14,6 +14,14 @@ class Bill < ApplicationRecord
     where("DATE(bills.created_at) >= ? and Date(bills.created_at) <= ?", from_date, to_date)
   end)
 
+  scope :from_date, (lambda do |from_date|
+    where("date(created_at) >= ?", from_date) unless from_date.blank?
+  end)
+
+  scope :to_date, (lambda do |to_date|
+    where("date(created_at) <= ?", to_date) unless to_date.blank?
+  end)
+
   scope :list_turnover, (lambda do |from_date, to_date, is_count, type_user|
     joins(:details)
     .where("DATE(bills.created_at) >= ? and Date(bills.created_at) <= ?", from_date, to_date)
@@ -64,5 +72,16 @@ class Bill < ApplicationRecord
       pw.count -= detail.count
       pw.save
     end
+  end
+
+  def load_structure? vip
+    {
+      id: id,
+      code: bill_code,
+      description:  description,
+      confirmed: confirmed,
+      created: created_at.localtime.strftime("%Y/%m/%d %H:%M:%S"),
+      user: vip ? {type: "to user", id: to_user.id,name: to_user.name} : {type: "from user", id: from_user.id,name: from_user.name}
+    }
   end
 end

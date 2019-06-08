@@ -54,6 +54,15 @@ class ProductWarehouse < ApplicationRecord
     }
   end
 
+  def load_simple_product
+    {
+      id: product_id,
+      name: product.name,
+      code: endcode_pw,
+      images: product.get_thumb_image.image.url
+    }
+  end
+
   class << self
     def get_field_ex_im
       ["STT", "Product", "Count", "Price origin", "Price sale", "mfg", "exp"]

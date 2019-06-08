@@ -33,4 +33,16 @@ class Sell < ApplicationRecord
   def of_user user_id
     user_id == user_id
   end
+
+  def load_structure
+    {
+      id: id,
+      sell_code: sell_code,
+      count: total_count,
+      price: total_price,
+      description: description,
+      created: created_at.localtime.strftime("%Y/%m/%d %H:%M:%S"),
+      detail: details.map{|d| d.load_structure}
+    }
+  end
 end

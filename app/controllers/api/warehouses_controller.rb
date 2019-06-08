@@ -1,46 +1,33 @@
 class Api::WarehousesController < Api::BaseController
   before_action :authenticate_request!
+  before_action :not_admin?
 
   def index
-    if current_user.admin?
-      render_json "Bạn không có quyền thực hiện công việc này", nil, 1
-    else
-      products = Product.by_category(params[:category_id])
-                        .by_name(params[:name])
-                        .by_id(params[:product_id])
-                        .ids
+    products = Product.by_category(params[:category_id])
+                      .by_name(params[:name])
+                      .by_id(params[:product_id])
+                      .ids
 
-      warehouse = current_user.warehouse.product_warehouses
-                              .where(product_id: products)
-                              .map{|x| x.load_attribute_product}
-      render_json "Lấy dữ liệu thành công", warehouse
-    end
+    warehouse = current_user.warehouse.product_warehouses
+                            .where(product_id: products)
+                            .map{|x| x.load_attribute_product}
+    render_json "Lấy dữ liệu thành công", warehouse
   end
 
   def list_categories
-    if current_user.admin?
-      render_json "Bạn không có quyền thực hiện công việc này", nil, 1
-    else
-      ids = current_user.warehouse.product_warehouses.map{|pw| pw.product.category.id}.uniq
-      ids_start = current_user.warehouse.product_warehouses.where(stop_providing: false).map{|pw| pw.product.category.id}.uniq
+    ids = current_user.warehouse.product_warehouses.map{|pw| pw.product.category.id}.uniq
+    ids_start = current_user.warehouse.product_warehouses.where(stop_providing: false).map{|pw| pw.product.category.id}.uniq
 
-      categories = Category.where(id: ids).map{|c| c.load_structure(ids_start.include?(c.id) ? false : true)}
-      render_json "Lấy dữ liệu thành công", categories
-    end
+    categories = Category.where(id: ids).map{|c| c.load_structure(ids_start.include?(c.id) ? false : true)}
+    render_json "Lấy dữ liệu thành công", categories
   end
 
   def user_inventory
-    if current_user.admin?
-      render_json "Bạn không có quyền thực hiện công việc này", nil, 1
-    else
-      render_json "Lấy dữ liệu thành công", list_pws
-    end
+    render_json "Lấy dữ liệu thành công", list_pws
   end
 
   def user_stop_providing
-    if current_user.admin?
-      render_json "Bạn không có quyền thực hiện công việc này", nil, 1
-    elsif params["product_id"].blank?
+    if params["product_id"].blank?
       render_json "Dữ liệu ko hợp lệ", nil, 1
     else
       current_user.warehouse.stop_providing_product params["product_id"].to_i, true
@@ -49,9 +36,7 @@ class Api::WarehousesController < Api::BaseController
   end
 
   def user_stop_providing_category
-    if current_user.admin?
-      render_json "Bạn không có quyền thực hiện công việc này", nil, 1
-    elsif params["category_id"].blank?
+    if params["category_id"].blank?
       render_json "Dữ liệu ko hợp lệ", nil, 1
     else
       current_user.warehouse.stop_providing_category params["category_id"].to_i, true
@@ -60,9 +45,7 @@ class Api::WarehousesController < Api::BaseController
   end
 
   def user_start_providing
-    if current_user.admin?
-      render_json "Bạn không có quyền thực hiện công việc này", nil, 1
-    elsif params["product_id"].blank?
+    if params["product_id"].blank?
       render_json "Dữ liệu ko hợp lệ", nil, 1
     else
       current_user.warehouse.stop_providing_product params["product_id"].to_i, false
@@ -71,9 +54,7 @@ class Api::WarehousesController < Api::BaseController
   end
 
   def user_start_providing_category
-    if current_user.admin?
-      render_json "Bạn không có quyền thực hiện công việc này", nil, 1
-    elsif params["category_id"].blank?
+    if params["category_id"].blank?
       render_json "Dữ liệu ko hợp lệ", nil, 1
     else
       current_user.warehouse.stop_providing_category params["category_id"].to_i, false
