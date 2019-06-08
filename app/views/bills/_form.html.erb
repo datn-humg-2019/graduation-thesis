@@ -42,7 +42,7 @@
   <% @pws.each do |pw| %>
     <div class="col-xs-4 col-sm-3 col-md-2 nopad text-center">
       <label class="image-checkbox">
-        <%= image_tag  pw.product.get_thumb_image.image.url, class: "img-responsive", title: "#{pw.product.name} - *#{pw.count}", data: {toggle: "tooltip", placement: "bottom", price: pw.price_sale} %>
+        <%= image_tag  pw.product.get_thumb_image.image.url, class: "img-responsive", title: "#{pw.product.name} - *#{pw.count}", tooltip_title: "#{pw.product.name} - *#{pw.count}", data: {toggle: "tooltip", placement: "bottom", price: pw.price_sale} %>
         <input type="checkbox" name="image[]" value="" data-id="<%= "bill-#{pw.id}" %>" data-name="<%= pw.product.name %>" />
         <i class="fa fa-check hidden"></i>
       </label>
