@@ -9,7 +9,7 @@
     </style>
   </head>
   <body>
-    <% if @sell.nil? %>
+    <% if !@sell.nil? %>
       <h1> HÓA ĐƠN BÁN HÀNG NGÀY <%= @sell.created_at.localtime.strftime("%Y/%m/%d  %H:%M:%S") %></h1>
       <table style="width:100%">
         <tr>
@@ -19,7 +19,7 @@
           <th>Số lượng</th>
           <th>Giá tiền</th>
         </tr>
-        <% @sells.details.each_with_index do |d, i| %>
+        <% @sell.details.each_with_index do |d, i| %>
           <tr>
             <td>
               <%= i + 1 %>
@@ -34,7 +34,7 @@
               <%= d.count %>
             </td>
             <td>
-              <%= to_currency d.price %>
+              <%= number_to_currency(d.price, unit: "VNĐ", separator: ",", delimiter: ".", format: "%n %u") %>
             </td>
           </tr>
         <% end %>
@@ -46,12 +46,12 @@
             <%= @sell.sum_count %>
           </td>
           <td>
-            <%= to_currency @sell.sum_price %>
+            <%= number_to_currency(@sell.sum_price, unit: "VNĐ", separator: ",", delimiter: ".", format: "%n %u") %>
           </td>
         </tr>
       </table>
     <% else %>
-      <h1> HÓA ĐƠN BÁN HÀNG bị lỗi %></h1>
+      <h1> HÓA ĐƠN BÁN HÀNG bị lỗi</h1>
     <% end %>
   </body>
 </html>
