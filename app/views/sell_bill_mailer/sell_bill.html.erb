@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <style>
+      table, th, td {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <% if @sell.nil? %>
+      <h1> HÓA ĐƠN BÁN HÀNG NGÀY <%= @sell.created_at.localtime.strftime("%Y/%m/%d  %H:%M:%S") %></h1>
+      <table style="width:100%">
+        <tr>
+          <th>STT</th>
+          <th>Mã hàng hóa</th>
+          <th>Tên hàng hóa</th>
+          <th>Số lượng</th>
+          <th>Giá tiền</th>
+        </tr>
+        <% @sells.details.each_with_index do |d, i| %>
+          <tr>
+            <td>
+              <%= i + 1 %>
+            </td>
+            <td>
+              <%= d.product_warehouse.product.id %>
+            </td>
+            <td>
+              <%= d.product_warehouse.product.name %>
+            </td>
+            <td>
+              <%= d.count %>
+            </td>
+            <td>
+              <%= to_currency d.price %>
+            </td>
+          </tr>
+        <% end %>
+        <tr>
+          <td colspan="3">
+            TOTAL
+          </td>
+          <td>
+            <%= @sell.sum_count %>
+          </td>
+          <td>
+            <%= to_currency @sell.sum_price %>
+          </td>
+        </tr>
+      </table>
+    <% else %>
+      <h1> HÓA ĐƠN BÁN HÀNG bị lỗi %></h1>
+    <% end %>
+  </body>
+</html>
