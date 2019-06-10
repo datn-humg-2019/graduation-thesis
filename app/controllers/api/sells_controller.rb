@@ -52,7 +52,7 @@ class Api::SellsController < Api::BaseController
   def details sell, p_ids, counts
     pws = current_user.warehouse.product_warehouses.where(product_id: p_ids)
     pws.each_with_index do |pw, i|
-      next if counts[i].zero?
+      next if counts[i].to_i == 0
       detail = sell.details.build
       detail.product_warehouse_id = pw.id
       detail.count = counts[i]
