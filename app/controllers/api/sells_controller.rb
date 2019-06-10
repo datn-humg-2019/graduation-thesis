@@ -8,7 +8,7 @@ class Api::SellsController < Api::BaseController
   end
 
   def sell_product
-    if params[:product_ids].blank? || params[:counts].blank?
+    if params[:product_ids].blank? || params[:counts].blank? || params[:email].blank?
       render_json "Dữ liệu ko hợp lệ", nil, 1
     else
       p_ids = params[:product_ids].split(",").map{|p| p.strip.to_i}
@@ -27,6 +27,7 @@ class Api::SellsController < Api::BaseController
 
       if sell.save
         details sell, p_ids, counts
+        SellBillMailer.sell_bill(sell, params[:email]).deliver_now unless params[:email].blank?
         render_json "Bán hàng thành công", sell.load_structure, 1
       else
         render_json "Thất bại: #{sell.errors.messages}", nil, 1
