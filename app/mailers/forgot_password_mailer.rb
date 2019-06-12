@@ -1,6 +1,6 @@
 # https://mangxuyenviet.vn/article/Gmail-cho-phep-ung-dung-kem-an-toan-581.html
 class ForgotPasswordMailer < ApplicationMailer
-  default from: "tuanpahumg@gmail.com"
+  default from: "kotviet.vn@gmail.com"
 
   def forgot_email user
     char = [("a".."z"), ("A".."Z"), (0..9)].map(&:to_a).flatten
