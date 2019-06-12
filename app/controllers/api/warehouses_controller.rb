@@ -62,6 +62,15 @@ class Api::WarehousesController < Api::BaseController
     end
   end
 
+  def list_url_product
+    arr = []
+    url = "#{request.base_url}/product?u_id=#{current_user.id}&p_id="
+    current_user.warehouse.product_warehouses.pluck(:product_id).sort.uniq do |p_id|
+      arr << url + p_id.to_s
+    end
+    render_json "Lấy thành công", arr
+  end
+
   private
   def list_pws
     warehouse = current_user.warehouse

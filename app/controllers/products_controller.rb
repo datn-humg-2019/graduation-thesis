@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :show_product_public
   before_action :get_product, only: :show_product
 
   def new
@@ -20,6 +20,18 @@ class ProductsController < ApplicationController
 
   def show_product
     repond_js
+  end
+
+  def show_product_public
+    user = User.find_by id: params[:u_id]
+    @pw = user.check_has_product params[:p_id] if user
+
+    return if @pw
+    respond_to do |format|
+      format.html{render file: "#{Rails.root}/public/500", layout: false, status: :error}
+      format.xml{head :not_found}
+      format.any{head :not_found}
+    end
   end
 
   def list_tag
