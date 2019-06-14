@@ -10,7 +10,7 @@ class Api::WarehousesController < Api::BaseController
 
     warehouse = current_user.warehouse.product_warehouses
                             .where(product_id: products)
-                            .map{|x| x.load_attribute_product}
+                            .map{|x| x.load_attribute_product(request.base_url)}
     render_json "Lấy dữ liệu thành công", warehouse
   end
 

@@ -12,7 +12,7 @@ class Api::UserApisController < Api::BaseController
           product.images.create!(image: img)
         end
         save_pw product.id
-        render_json "create succsess", current_user.warehouse.product_warehouses.find_by(product_id: product.id).load_attribute_product
+        render_json "create succsess", current_user.warehouse.product_warehouses.find_by(product_id: product.id).load_attribute_product(request.base_url)
       else
         render_json "errors #{product.errors.full_messages.to_sentence}", nil, 1
       end
