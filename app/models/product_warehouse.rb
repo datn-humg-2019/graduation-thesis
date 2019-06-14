@@ -37,7 +37,7 @@ class ProductWarehouse < ApplicationRecord
     )
   end
 
-  def load_attribute_product
+  def load_attribute_product url
     {
       id: product_id,
       name: product.name,
@@ -50,7 +50,8 @@ class ProductWarehouse < ApplicationRecord
       decription: product.description,
       stop_providing: stop_providing,
       images: product.load_images,
-      category: product.category.load_structure_detail
+      category: product.category.load_structure_detail,
+      url: "#{url}/product?u_id=#{warehouse.user.id}&p_id=#{product_id}"
     }
   end
 
