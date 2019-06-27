@@ -37,7 +37,7 @@ class User < ApplicationRecord
   scope :vip_user, ->{where role: "vip"}
 
   scope :load_user, ->{select :id, :email, :phone, :name, :gender, :adress, :birth, :role}
-  scope :api_load_users, ->{select(:id, :email, :phone, :name, :gender, :adress, :birth, :role).map{|u| u.load_structure}}
+  scope :api_load_users, ->{select(:id, :email, :phone, :name, :gender, :adress, :birth, :role).map(&:load_structure)}
 
   scope :count_user_not_admin, ->{where.not role: "admin"}
 

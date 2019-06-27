@@ -39,6 +39,6 @@ class Api::ChartsController < Api::BaseController
         prices << 0
       end
     end
-    { days: days.reverse!, counts: counts.reverse!, prices: prices.reverse! }
+    {days: days.reverse!, counts: counts.reverse!, prices: prices.reverse!}
   end
 end

@@ -52,11 +52,10 @@ class Api::BaseController < ActionController::API
       end
 
       @current_user = User.find_by id: payload.first["user_id"]
-    rescue
+    rescue StandardError
       render json: {code: 1, message: "Log in False", data: nil}, status: 501
       return
     end
-
   end
 
   def check_admin?
@@ -64,7 +63,7 @@ class Api::BaseController < ActionController::API
       render json: {status: 200, error: true,
                     message: "Bạn không phải admin",
                     data: nil}, status: 200
-      return
+      nil
     end
   end
 
@@ -73,7 +72,7 @@ class Api::BaseController < ActionController::API
       render json: {status: 200, error: true,
                     message: "Bạn không có quyền thực hiện công việc này",
                     data: nil}, status: 200
-      return
+      nil
     end
   end
 end
