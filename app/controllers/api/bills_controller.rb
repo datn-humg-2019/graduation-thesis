@@ -26,7 +26,7 @@ class Api::BillsController < Api::BaseController
       if bill.nil?
         render_json "Hóa đơn không tồn tại", nil, 1
       else
-        render_json "Lấy dữ liệu thành công", bill.details.map{|d| d.load_structure}
+        render_json "Lấy dữ liệu thành công", bill.details.map(&:load_structure)
       end
     end
   end

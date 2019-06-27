@@ -29,7 +29,6 @@ class Bill < ApplicationRecord
     .group(type_user)
   end)
 
-
   scope :data_by_times, (lambda do |from_date, to_date|
     joins(:details)
     .where("DATE(bills.created_at) >= ? and Date(bills.created_at) <= ?", from_date, to_date)
@@ -81,7 +80,7 @@ class Bill < ApplicationRecord
       description:  description,
       confirmed: confirmed,
       created: created_at.localtime.strftime("%Y/%m/%d %H:%M:%S"),
-      user: vip ? {type: "to user", id: to_user.id,name: to_user.name} : {type: "from user", id: from_user.id,name: from_user.name}
+      user: vip ? {type: "to user", id: to_user.id, name: to_user.name} : {type: "from user", id: from_user.id, name: from_user.name}
     }
   end
 end

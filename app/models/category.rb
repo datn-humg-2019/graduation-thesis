@@ -5,7 +5,7 @@ class Category < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   scope :load_categories, ->{select :id, :name}
-  scope :api_load_categories, ->{select(:id, :name).map{|ca| ca.load_structure}}
+  scope :api_load_categories, ->{select(:id, :name).map(&:load_structure)}
 
   def get_image
     images.blank? ? "category.png" : images.first.image.url

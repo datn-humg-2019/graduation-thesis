@@ -15,7 +15,7 @@ class Sell < ApplicationRecord
   end
 
   def sum_price
-    details.sum('count * price')
+    details.sum("count * price")
   end
 
   def auto_update_attribute
@@ -42,7 +42,7 @@ class Sell < ApplicationRecord
       price: total_price,
       description: description,
       created: created_at.localtime.strftime("%Y/%m/%d %H:%M:%S"),
-      detail: details.map{|d| d.load_structure}
+      detail: details.map(&:load_structure)
     }
   end
 end

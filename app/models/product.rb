@@ -5,7 +5,7 @@ class Product < ApplicationRecord
   has_many :histories, dependent: :destroy
 
   scope :load_product, ->{select :id, :name, :description, :tag, :category_id}
-  scope :api_load_products, ->{select(:id, :name, :description, :tag, :category_id).map{|p| p.load_structure}}
+  scope :api_load_products, ->{select(:id, :name, :description, :tag, :category_id).map(&:load_structure)}
 
   scope :list_product_can_add, (lambda do |user|
     where.not(id: user.list_product_id_has).pluck :id, :name

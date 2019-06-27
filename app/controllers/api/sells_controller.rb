@@ -3,7 +3,7 @@ class Api::SellsController < Api::BaseController
   before_action :not_admin?
 
   def index
-    sells = current_user.sells.map{|s| s.load_structure}
+    sells = current_user.sells.map(&:load_structure)
     render_json "Lấy dữ liệu thành công", sells
   end
 
