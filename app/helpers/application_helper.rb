@@ -45,4 +45,9 @@ module ApplicationHelper
   def to_currency number
     number_to_currency(number, unit: "VNĐ", separator: ",", delimiter: ".", format: "%n %u")
   end
+
+  def today_to_string
+    today = Date.current
+    "Hà nội, ngày #{today.day} tháng #{today.month} năm #{today.year}"
+  end
 end

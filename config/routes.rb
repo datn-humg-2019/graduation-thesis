@@ -23,6 +23,9 @@ Rails.application.routes.draw do
     get "select_from_user", to: "bills#select_from_user", as: "select_from_user"
     get "update_confirmed", to: "bills#update_confirmed", as: "update_confirmed"
 
+    get "bill_pdf", to: "pdfs#bill_pdf", as: "bill_pdf"
+    get "sell_pdf", to: "pdfs#sell_pdf", as: "sell_pdf"
+
     resources :products
     resources :bills
     resources :histories

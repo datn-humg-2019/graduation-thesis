@@ -28,12 +28,12 @@
       </div>
     </div>
     <div class="card-footer">
-      <button class="btn btn-default float-right">
+      <button class="btn btn-default float-right btn-margin">
         <i class="fa fa-file-excel-o"></i> Excel
       </button>
-      <button class="btn btn-danger float-right">
-        <i class="fa fa-file-pdf-o"></i> PDF
-      </button>
+      <%= link_to bill_pdf_path(id: @bill, format: "pdf"), target: :_blank, class: "btn btn-danger float-right btn-margin" do %>
+        <i class="fa fa-file-pdf-o"></i> Xuất hóa đơn
+      <% end %>
     </div>
   </div>
 </div>
