@@ -30,6 +30,7 @@ gem "jwt"
 gem "kaminari"
 gem "mini_magick", "4.7.0"
 gem "mysql2", ">= 0.4.4", "< 0.6.0"
+gem "pdfkit"
 gem "puma", "~> 3.11"
 gem "pygments.rb", "~> 0.6.3"
 gem "rails", "~> 5.2.2", ">= 5.2.2.1"
@@ -41,6 +42,7 @@ gem "rubyzip", ">= 1.2.1"
 gem "sass-rails", "~> 5.0"
 gem "simplemde-rails"
 gem "uglifier", ">= 1.3.0"
+gem "wkhtmltopdf-binary"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]

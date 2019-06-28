@@ -10,4 +10,8 @@ class Detail < ApplicationRecord
       product_warehouse_id: product_warehouse.load_simple_product
     }
   end
+
+  def total
+    count * price
+  end
 end
