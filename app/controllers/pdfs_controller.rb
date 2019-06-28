@@ -6,29 +6,27 @@ class PdfsController < ApplicationController
 
   def bill_pdf
     respond_to do |format|
-      format.pdf
-      format.html{render_sample_html("bill_pdf", @bill)} if Rails.env.development?
+      format.html{render_sample_html("bill_pdf", @bill)}
     end
   end
 
   def sell_pdf
     respond_to do |format|
-      format.pdf
-      format.html{render_sample_html("sell_pdf", @sell)} if Rails.env.development?
+      format.html{render_sample_html("sell_pdf", @sell)}
     end
   end
 
   private
-  # def create_pw_pdf
-  #   PdfService.new @pw
-  # end
+  def create_bill_pdf
+    PdfService.new @bill, "bill_pdf"
+  end
 
-  # def send_pw_pdf
-  #   send_file create_pw_pdf.to_pdf,
-  #     filename: "#{Time.current.to_i}.pdf",
-  #     type: "application/pdf",
-  #     disposition: "inline"
-  # end
+  def send_pw_pdf
+    send_file create_bill_pdf.to_pdf,
+      filename: "bill_#{Time.current.to_i}.pdf",
+      type: "application/pdf",
+      disposition: "inline"
+  end
 
   def render_sample_html template, datas
     render template: "pdfs/#{template}", layout: "invoice_pdf", locals: {datas: datas}
