@@ -1,18 +1,18 @@
 <div class="col-md-6">
-  <p><%= pw.stop_providing ? "Ngừng cung cấp" : "Tiếp tục cung cấp" %></p>
+  <p><%= stop_providing pws.last.stop_providing %></p>
 </div>
 <div class="col-md-6">
-  <p>Số lượng trong kho: <%= pw.count %></p>
+  <p>Số lượng trong kho: <%= pws.sum(:count) %></p>
 </div>
 <div class="col-md-6">
-  <p>Giá nhập: <%= to_currency pw.price_origin %></p>
+  <p>Giá nhập: <%= link_to "Chi tiết", "#{inventories_path}#p-#{pws.last.product_id}" %></p>
 </div>
 <div class="col-md-6">
-  <p>Giá bán: <%= to_currency pw.price_sale %></p>
+  <p>Giá bán: <%= to_currency pws.last.price_sale %></p>
 </div>
 <div class="col-md-6">
-  <p>Ngày sản xuất: <%= pw.mfg %></p>
+  <p>Ngày sản xuất: <%= pws.last.mfg.localtime.strftime("%Y/%m/%d") if pws.last.mfg %></p>
 </div>
 <div class="col-md-6">
-  <p>Ngày hết hạn: <%= pw.exp %></p>
+  <p>Ngày hết hạn: <%= pws.last.exp.localtime.strftime("%Y/%m/%d") if pws.last.exp %></p>
 </div>

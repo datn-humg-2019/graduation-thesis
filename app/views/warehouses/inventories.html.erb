@@ -1,0 +1,27 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <%= render "overview", warehouse: @warehouse %>
+      <%= render "filter", style: "inventory" %>
+    </div>
+    <hr>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-condensed" style="border-collapse:collapse;">
+          <thead class=" text-primary">
+            <tr>
+              <th>&nbsp;</th>
+              <th>Tên hàng hóa</th>
+              <th>Trạng thái</th>
+              <th>Tổng số</th>
+              <th>Tổng tiền</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render "grid_inventory", products: @products %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def slide_active name
-    "active" if controller_name == name || (controller_name == "dashboards" && name == "admin")
+    "active" if request.path == "/#{name}" || (request.path == "/dashboards" && name == "admin")
   end
 
   def working_label working
@@ -33,6 +33,15 @@ module ApplicationHelper
       "<span class='label bg-blue'>Teacher</span>".html_safe
     when "student_parent"
       "<span class='label bg-yellow'>Parent</span>".html_safe
+    end
+  end
+
+  def stop_providing flag
+    case flag
+    when true
+      "<h5><span class='badge badge-danger'>Ngừng cung cấp</span></h5>".html_safe
+    when false
+      "<h5><span class='badge badge-success'>Đang cung cấp</span></h5>".html_safe
     end
   end
 

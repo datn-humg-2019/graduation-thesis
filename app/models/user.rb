@@ -99,7 +99,7 @@ class User < ApplicationRecord
   end
 
   def check_has_product product_id
-    warehouse.product_warehouses.find_by(product_id: product_id)
+    warehouse.product_warehouses.where product_id: product_id
   end
 
   def list_product_id_has

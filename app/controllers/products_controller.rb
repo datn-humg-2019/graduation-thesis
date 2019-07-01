@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
 
   def show_product_public
     user = User.find_by id: params[:u_id]
-    @pw = user.check_has_product params[:p_id] if user
+    @pw = user.check_has_product(params[:p_id]).last if user
 
     return if @pw
     respond_to do |format|
@@ -42,7 +42,8 @@ class ProductsController < ApplicationController
   end
 
   def list_product
-    list_product = Product.list_product_can_add current_user
+    # list_product = Product.list_product_can_add current_user
+    list_product = Product.pluck :id, :name
     respond_to do |format|
       format.json{render json: {list_product: list_product}}
     end
@@ -76,8 +77,8 @@ class ProductsController < ApplicationController
     pw.count = params[:count_pw]
     pw.price_origin = convert_price params[:price_origin_pw]
     pw.price_sale = convert_price params[:price_sale_pw]
-    pw.mfg = convert_date params[:mfg_pw] if params[:mfg_pw].present?
-    pw.exp = convert_date params[:exp_pw] if params[:exp_pw].present?
+    pw.mfg = params[:mfg_pw].present? ? convert_date(params[:mfg_pw]) : nil
+    pw.exp = params[:exp_pw].present? ? convert_date(params[:exp_pw]) : nil
     pw.stop_providing = false
     pw.save
     pw.save_history
@@ -85,7 +86,7 @@ class ProductsController < ApplicationController
 
   def get_product
     @product = Product.find_by id: params[:id]
-    @pw = current_user.check_has_product params[:id]
+    @pws = current_user.check_has_product params[:id]
 
     return if @product
     flash[:danger] = t "user_not_found"

@@ -15,7 +15,18 @@
     <div class="col-md-6">
       <h3 class="my-3">thong tin</h3>
       <div class="row">
-        <%= render "products/pw", pw: @pw %>
+        <div class="col-md-6">
+          <p><%= stop_providing @pw.stop_providing %></p>
+        </div>
+        <div class="col-md-12">
+          <p>Giá bán: <%= to_currency @pw.price_sale %></p>
+        </div>
+        <div class="col-md-6">
+          <p>Ngày sản xuất: <%= @pw.mfg.localtime.strftime("%Y/%m/%d") if @pw.mfg %></p>
+        </div>
+        <div class="col-md-6">
+          <p>Ngày hết hạn: <%= @pw.exp.localtime.strftime("%Y/%m/%d") if @pw.exp %></p>
+        </div>
       </div>
       <h3 class="my-3">Tags</h3>
       <div class="row">
