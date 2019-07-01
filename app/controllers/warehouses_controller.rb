@@ -8,7 +8,7 @@ class WarehousesController < ApplicationController
   def inventories
     @warehouse = current_user.warehouse
     ids = @warehouse.product_warehouses.pluck :product_id
-    @products = Product.get_by_ids(ids).by_category(params[:category_id]).by_name(params[:name])
+    @products = Product.get_by_ids(ids).by_category(params[:category_id]).by_name(params[:name]).page(params[:page]).per(5)
   end
 
   private

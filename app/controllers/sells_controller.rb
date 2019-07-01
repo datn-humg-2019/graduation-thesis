@@ -16,6 +16,7 @@ class SellsController < ApplicationController
 
   def new
     @sell = Sell.new
+    @products = Product.get_by_ids(current_user.warehouse.product_ids)
     @pws = current_user.warehouse.product_warehouses
   end
 
@@ -41,15 +42,27 @@ class SellsController < ApplicationController
   end
 
   def details sell
-    pws = params[:bill_pw]
+    pws_all = current_user.warehouse.product_warehouses
+    pw_ids = params[:bill_pw]
     counts = params[:bill_count]
     prices = params[:bill_price].map{|e| convert_price e}
-    pws.each_with_index do |pw, i|
-      detail = sell.details.build
-      detail.product_warehouse_id = pw
-      detail.count = counts[i]
-      detail.price = prices[i]
-      detail.save
+    pw_ids.each_with_index do |p_id, i|
+      pws = pws_all.where(product_id: p_id).where.not(count: 0)
+      count = counts[i].to_i
+
+      next if count > pws.sum(:count)
+
+      if pws.first.count >= count
+        sell.details.build(product_warehouse_id: pws.first.id, count: count, price: prices[i]).save
+      else
+        index = 0
+        while count.positive? do
+          count_temp = pws[index].count <= count ? pws[index].count : count
+          sell.details.build(product_warehouse_id: pws[index].id, count: count_temp, price: prices[i]).save
+          index += 1
+          count -= count_temp
+        end
+      end
     end
     sell.update_product_in_warehouse
     sell.auto_update_attribute
