@@ -37,6 +37,12 @@
             <p>Kho hàng</p>
           <% end %>
         </li>
+        <li class="<%= slide_active "inventories" %>">
+          <%= link_to inventories_path do %>
+            <i class="nc-icon nc-ambulance"></i>
+            <p>tồn kho</p>
+          <% end %>
+        </li>
         <li class="<%= slide_active "bills" %>">
           <%= link_to bills_path do %>
             <i class="nc-icon nc-money-coins"></i>
@@ -54,16 +60,6 @@
             <i class="nc-icon nc-ambulance"></i>
             <p>lịch sử Nhập hàng</p>
           <% end %>
-        </li>
-        <li>
-          hóa đơn
-          <br>
-          những người mua
-          <br>
-          biểu đồ ở trang chính
-        </li>
-        <li>
-          Kho hàng -> Sinh barcode
         </li>
       <% end %>
     </ul>

@@ -1,53 +1,83 @@
-<%= form_tag "", id: "form-submit", method: :get do %>
-  <div class="row">
-    <div class="col-md-6 mb-3 row form-group">
-      <div class="col-lg-2 col-lg-2 col-sm-2 ">
-        <%= label_tag :category_id, "Category" %>
+<% if style == "warehouse" %>
+  <%= form_tag "", id: "form-submit", method: :get do %>
+    <div class="row">
+      <div class="col-md-6 mb-3 row form-group">
+        <div class="col-lg-2 col-lg-2 col-sm-2 ">
+          <%= label_tag :category_id, "Category" %>
+        </div>
+        <div class="col-lg-10 col-sm-10 col-xs-10">
+          <%= select_tag :category_id, options_for_select(category_list, params[:category_id]),
+            selected: 1, include_blank: t(".none"), class: "form-control chosen" %>
+        </div>
       </div>
-      <div class="col-lg-10 col-sm-10 col-xs-10">
-        <%= select_tag :category_id, options_for_select(category_list, params[:category_id]),
-          selected: 1, include_blank: t(".none"), class: "form-control chosen" %>
+      <div class="col-md-6 mb-3 row form-group">
+        <div class="col-lg-2 col-lg-2 col-sm-2 ">
+          <%= label_tag :name, "Name" %>
+        </div>
+        <div class="col-lg-10 col-sm-10 col-xs-10">
+          <%= text_field_tag :name, params[:name],
+            class: "form-control search-box", placeholder: "Name" %>
+        </div>
       </div>
-    </div>
-    <div class="col-md-6 mb-3 row form-group">
-      <div class="col-lg-2 col-lg-2 col-sm-2 ">
-        <%= label_tag :name, "Name" %>
+      <div class="col-md-6 mb-3 row form-group">
+        <div class="col-lg-2 col-lg-2 col-sm-2 ">
+          <%= label_tag :tag, "Tag" %>
+        </div>
+        <div class="col-lg-10 col-sm-10 col-xs-10">
+          <%= text_field_tag :tag, params[:tag],
+            class: "form-control search-box", placeholder: "Tag" %>
+        </div>
       </div>
-      <div class="col-lg-10 col-sm-10 col-xs-10">
-        <%= text_field_tag :name, params[:name],
-          class: "form-control search-box", placeholder: "Name" %>
-      </div>
-    </div>
-    <div class="col-md-6 mb-3 row form-group">
-      <div class="col-lg-2 col-lg-2 col-sm-2 ">
-        <%= label_tag :tag, "Tag" %>
-      </div>
-      <div class="col-lg-10 col-sm-10 col-xs-10">
-        <%= text_field_tag :tag, params[:tag],
-          class: "form-control search-box", placeholder: "Tag" %>
-      </div>
-    </div>
-    <div class="col-md-6 mb-3 row">
-      <div class="col-lg-2 col-lg-2 col-sm-2 ">
-        <%= label_tag :lbl_start_end, "mfg and exp" %>
-      </div>
-      <div class="col-lg-10 col-sm-10 col-xs-10">
-        <div class="start-to-end">
-          <div class="input-daterange row" id="datepicker">
-            <div class="col">
-              <%= text_field_tag :mfg, params[:mfg], class: "form-control", placeholder: "start date", readonly: true %>
+      <div class="col-md-6 mb-3 row">
+        <div class="col-lg-2 col-lg-2 col-sm-2 ">
+          <%= label_tag :lbl_start_end, "mfg and exp" %>
+        </div>
+        <div class="col-lg-10 col-sm-10 col-xs-10">
+          <div class="start-to-end">
+            <div class="input-daterange row" id="datepicker">
+              <div class="col">
+                <%= text_field_tag :mfg, params[:mfg], class: "form-control", placeholder: "start date", readonly: true %>
+              </div>
+              <div class="col">
+                <%= text_field_tag :exp, params[:exp], class: "form-control", placeholder: "end date", class: "form-control", readonly: true %>
+              </div>
             </div>
-            <div class="col">
-              <%= text_field_tag :exp, params[:exp], class: "form-control", placeholder: "end date", class: "form-control", readonly: true %>
-            </div>
-          </div>
-      </div>
+        </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="form-group">
-    <button class="btn btn-info float-right">
-      <i class="fa fa-search"></i>
-    </button>
-  </div>
+    <div class="form-group">
+      <button class="btn btn-info float-right">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+  <% end %>
+<% else %>
+  <%= form_tag "", id: "form-submit", method: :get do %>
+    <div class="row">
+      <div class="col-md-6 mb-3 row form-group">
+        <div class="col-lg-2 col-lg-2 col-sm-2 ">
+          <%= label_tag :category_id, "Category" %>
+        </div>
+        <div class="col-lg-10 col-sm-10 col-xs-10">
+          <%= select_tag :category_id, options_for_select(category_list, params[:category_id]),
+            selected: 1, include_blank: t(".none"), class: "form-control chosen" %>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3 row form-group">
+        <div class="col-lg-2 col-lg-2 col-sm-2 ">
+          <%= label_tag :name, "Name" %>
+        </div>
+        <div class="col-lg-10 col-sm-10 col-xs-10">
+          <%= text_field_tag :name, params[:name],
+            class: "form-control search-box", placeholder: "Name" %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-info float-right">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+  <% end %>
 <% end %>

@@ -16,26 +16,15 @@ class ImportService
 
   def save_update row
     product_id = row[1].split("-")[0][1..-1]
-    pw = @user.check_has_product(product_id)
-    if pw.present?
-      pw.product_id = product_id
-      pw.count += row[2].to_i
-      pw.price_origin = row[3].to_f unless row[3].to_f.zero?
-      pw.price_sale = row[4].to_f unless row[4].to_f.zero?
-      pw.mfg = row[5] unless row[5].blank?
-      pw.exp = row[6] unless row[6].blank?
-      pw.save_history row[2].to_i
-    else
-      pw = @user.warehouse.product_warehouses.build
-      pw.product_id = product_id
-      pw.count = row[2].to_i
-      pw.price_origin = row[3].to_f
-      pw.price_sale = row[4].to_f
-      pw.mfg = row[5]
-      pw.exp = row[5]
-      pw.stop_providing = false
-      pw.save_history
-    end
+    pw = @user.warehouse.product_warehouses.build
+    pw.product_id = product_id
+    pw.count = row[2].to_i
+    pw.price_origin = row[3].to_f
+    pw.price_sale = row[4].to_f
+    pw.mfg = row[5]
+    pw.exp = row[5]
+    pw.stop_providing = false
+    pw.save_history
     pw.save
   end
 

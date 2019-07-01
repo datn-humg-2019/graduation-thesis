@@ -30,7 +30,7 @@ class Warehouse < ApplicationRecord
   end
 
   def auto_update
-    update_attributes total_count: product_warehouses.sum(:count), total_money: product_warehouses.sum("count * price_origin")
+    update_attributes total_count: sum_count, total_money: sum_price_origin
   end
 
   def histories_in_day date
