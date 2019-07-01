@@ -8,7 +8,7 @@ class Api::SellsController < Api::BaseController
   end
 
   def sell_product
-    if params[:product_ids].blank? || params[:counts].blank? || params[:email].blank?
+    if params[:product_ids].blank? || params[:counts].blank?
       render_json "Dữ liệu ko hợp lệ", nil, 1
     else
       p_ids = params[:product_ids].split(",").map{|p| p.strip.to_i}
@@ -50,14 +50,27 @@ class Api::SellsController < Api::BaseController
 
   private
   def details sell, p_ids, counts
-    pws = current_user.warehouse.product_warehouses.where(product_id: p_ids)
-    pws.each_with_index do |pw, i|
-      next if counts[i].to_i == 0
-      detail = sell.details.build
-      detail.product_warehouse_id = pw.id
-      detail.count = counts[i]
-      detail.price = pw.price_sale
-      detail.save
+    pws_all = current_user.warehouse.product_warehouses
+    pw_ids = p_ids
+    counts = counts
+    pw_ids.each_with_index do |p_id, i|
+      pws = pws_all.where(product_id: p_id).where.not(count: 0)
+      count = counts[i].to_i
+      price = pws.last.price_sale
+
+      next if count > pws.sum(:count)
+
+      if pws.first.count >= count
+        sell.details.build(product_warehouse_id: pws.first.id, count: count, price: price).save
+      else
+        index = 0
+        while count.positive? do
+          count_temp = pws[index].count <= count ? pws[index].count : count
+          sell.details.build(product_warehouse_id: pws[index].id, count: count_temp, price: price).save
+          index += 1
+          count -= count_temp
+        end
+      end
     end
     sell.update_product_in_warehouse
     sell.auto_update_attribute

@@ -30,11 +30,13 @@
 <p class="text-danger">Select product in your warehouse for sell</p>
 <hr>
 <div class="col-md-12 row">
-  <% @pws.each do |pw| %>
+  <% @products.each do |product| %>
+    <% pws = @pws.where(product_id: product)%>
     <div class="col-xs-4 col-sm-3 col-md-2 nopad text-center">
       <label class="image-checkbox">
-        <%= image_tag  pw.product.get_thumb_image.image.url, class: "img-responsive", title: "#{pw.product.name} - *#{pw.count}", tooltip_title: "#{pw.product.name} - *#{pw.count}", data: {toggle: "tooltip", placement: "bottom", price: pw.price_sale} %>
-        <input type="checkbox" name="image[]" value="" data-id="<%= "bill-#{pw.id}" %>" data-name="<%= pw.product.name %>" />
+        <%= image_tag  product.get_thumb_image.image.url, class: "img-responsive", title: "#{product.name} - *#{pws.sum(:count)}",
+          tooltip_title: "#{product.name} - *#{pws.sum(:count)}", data: {toggle: "tooltip", placement: "bottom", price: pws.last.price_sale} %>
+        <input type="checkbox" name="image[]" value="" data-id="<%= "bill-#{product.id}" %>" data-name="<%= product.name %>" />
         <i class="fa fa-check hidden"></i>
       </label>
     </div>
