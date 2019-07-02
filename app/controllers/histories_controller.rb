@@ -7,6 +7,7 @@ class HistoriesController < ApplicationController
   end
 
   def show
-    @history_details = current_user.warehouse.detail_history params["date"]
+    @details = current_user.warehouse.detail_history(params["date"])
+    @history_details = @details.page(params[:page]).per(20)
   end
 end

@@ -2,6 +2,11 @@
 <hr>
 <div class="col-md-12">
   <div class="card">
+    <div class="card-header">
+      <button class="btn btn-success">
+        <i class="fa fa-file-excel-o"></i> Xuất toàn bộ dữ liệu
+      </button>
+    </div>
     <div class="card-body">
       <div class="table-responsive">
         <table class="table table-bordered">
@@ -9,6 +14,9 @@
             <tr>
               <th>
                 STT
+              </th>
+              <th>
+                Time (hh:mm:ss)
               </th>
               <th>
                 Product
@@ -22,24 +30,16 @@
               <th>
                 From user
               </th>
-              <th>
-                Time (hh:mm:ss)
-              </th>
             </tr>
           </thead>
           <tbody>
-            <%= render "details", details: @history_details %>
+            <%= render "details", history_details: @history_details %>
           </tbody>
         </table>
       </div>
     </div>
-    <div class="card-footer">
-      <button class="btn btn-default float-right">
-        <i class="fa fa-file-excel-o"></i> Excel
-      </button>
-      <button class="btn btn-danger float-right">
-        <i class="fa fa-file-pdf-o"></i> PDF
-      </button>
+    <div>
+      <%= paginate @history_details %>
     </div>
   </div>
 </div>
