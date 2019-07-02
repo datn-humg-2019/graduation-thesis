@@ -11,7 +11,7 @@ class SellsController < ApplicationController
   end
 
   def show
-    @details = @sell.details
+    @list_items = @sell.details.hash_product_details
   end
 
   def new
@@ -47,21 +47,17 @@ class SellsController < ApplicationController
     counts = params[:bill_count]
     prices = params[:bill_price].map{|e| convert_price e}
     pw_ids.each_with_index do |p_id, i|
-      pws = pws_all.where(product_id: p_id).where.not(count: 0)
+      pws = pws_all.can_sell(p_id)
       count = counts[i].to_i
 
       next if count > pws.sum(:count)
 
-      if pws.first.count >= count
-        sell.details.build(product_warehouse_id: pws.first.id, count: count, price: prices[i]).save
-      else
-        index = 0
-        while count.positive? do
-          count_temp = pws[index].count <= count ? pws[index].count : count
-          sell.details.build(product_warehouse_id: pws[index].id, count: count_temp, price: prices[i]).save
-          index += 1
-          count -= count_temp
-        end
+      index = 0
+      while count.positive?
+        count_temp = pws[index].count <= count ? pws[index].count : count
+        sell.details.build(product_warehouse_id: pws[index].id, count: count_temp, price: prices[i]).save
+        index += 1
+        count -= count_temp
       end
     end
     sell.update_product_in_warehouse

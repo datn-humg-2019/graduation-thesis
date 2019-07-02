@@ -56,20 +56,17 @@ class Bill < ApplicationRecord
     }
   end
 
-  def update_pw_to_user
+  def update_pw_to_user detail_ids
     return unless confirmed
-    details.each do |detail|
-      pw = detail.product_warehouse
-      to_pw = pw.dup
-      to_pw.warehouse_id = to_user.warehouse.id
-      to_pw.count = detail.count
-      to_pw.price_origin = detail.price
-      to_pw.price_sale = detail.price
-      to_pw.stop_providing = false
-      to_pw.save
-      to_pw.save_history nil, nil, pw.warehouse.user.id
-      pw.count -= detail.count
-      pw.save
+    begin
+      arr_details = details.where(id: detail_ids)
+      arr_details.each{|d| new_details(d)}
+
+      arr_details.destroy_all
+      from_user.warehouse.auto_update
+      to_user.warehouse.auto_update
+    rescue => error
+      puts error.inspect
     end
   end
 
@@ -82,5 +79,39 @@ class Bill < ApplicationRecord
       created: created_at.localtime.strftime("%Y/%m/%d %H:%M:%S"),
       user: vip ? {type: "to user", id: to_user.id, name: to_user.name} : {type: "from user", id: from_user.id, name: from_user.name}
     }
+  end
+
+  private
+
+  def new_details detail
+    p_id = detail.product_warehouse.product_id
+
+    from_pws = from_user.warehouse.product_warehouses.can_sell(p_id)
+    count = detail.count
+    price = detail.price
+
+    return if count > from_pws.sum(:count)
+
+    index = 0
+    while count.positive?
+      pw = from_pws[index]
+      count_temp = pw.count <= count ? pw.count : count
+      details.build(product_warehouse_id: pw.id, count: count_temp, price: price).save
+      pw.decrement!(:count, count_temp)
+      index += 1
+      count -= count_temp
+    end
+
+    to_pw = to_user.warehouse.product_warehouses.build(
+      product_id: p_id,
+      count: detail.count,
+      price_origin: price,
+      price_sale: price * 1.1,
+      mfg: detail.product_warehouse.mfg,
+      exp: detail.product_warehouse.exp,
+      stop_providing: false
+    )
+    to_pw.save!
+    to_pw.save_history nil, nil, from_user.id
   end
 end

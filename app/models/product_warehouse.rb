@@ -14,6 +14,10 @@ class ProductWarehouse < ApplicationRecord
     where("date(exp) <= ?", exp) unless exp.blank?
   end)
 
+  scope :can_sell, (lambda do |p_id|
+    where(product_id: p_id, stop_providing: false).where.not(count: 0).order(created_at: :asc)
+  end)
+
   scope :load_inventory, ->{select("sum(count) total_count, sum(count * price_origin) total_price, product_id").group(:product_id)}
 
   scope :inventory_count, ->{where(stop_providing: false).sum(:count)}

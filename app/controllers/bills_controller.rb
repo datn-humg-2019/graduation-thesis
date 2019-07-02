@@ -5,7 +5,7 @@ class BillsController < ApplicationController
 
   def index
     @q = Bill.ransack(params[:q])
-    @bills = get_bills.order(:confirmed).ransack(params[:q]).result.page(params[:page]).per(20)
+    @bills = get_bills.order(:confirmed, created_at: :desc).ransack(params[:q]).result.page(params[:page]).per(20)
   end
 
   def show
@@ -15,10 +15,13 @@ class BillsController < ApplicationController
   def new
     if current_user.vip?
       @bill = Bill.new
+      @products = Product.get_by_ids(current_user.warehouse.product_ids)
       @pws = current_user.warehouse.product_warehouses
     else
       @bill = Bill.new(from_user_id: params[:from_user_id])
-      @pws = User.find_by(id: params[:from_user_id]).warehouse.product_warehouses
+      vip_user_warehouse = User.find_by(id: params[:from_user_id]).warehouse
+      @products = Product.get_by_ids(vip_user_warehouse.product_ids)
+      @pws = vip_user_warehouse.product_warehouses
     end
   end
 
@@ -46,9 +49,8 @@ class BillsController < ApplicationController
 
   def update_confirmed
     if true? params[:confirm]
-      @bill.confirmed = true
-      @bill.save
-      @bill.update_pw_to_user
+      @bill.update_attributes(confirmed: true)
+      @bill.update_pw_to_user @bill.details.ids
     end
     redirect_to bills_path
   end
@@ -63,17 +65,18 @@ class BillsController < ApplicationController
   end
 
   def details bill
-    pws = params[:bill_pw]
+    warehouse = bill.from_user.warehouse
+    pids = params[:bill_pw]
     counts = params[:bill_count]
     prices = params[:bill_price].map{|e| convert_price e}
-    pws.each_with_index do |pw, i|
+    pids.each_with_index do |p_id, i|
       detail = bill.details.build
-      detail.product_warehouse_id = pw
+      detail.product_warehouse_id = warehouse.get_first_pw(p_id).id
       detail.count = counts[i]
       detail.price = prices[i]
       detail.save
     end
-    bill.update_pw_to_user
+    bill.update_pw_to_user bill.details.ids
   end
 
   def get_bill
