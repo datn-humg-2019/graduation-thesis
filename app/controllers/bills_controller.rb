@@ -5,11 +5,11 @@ class BillsController < ApplicationController
 
   def index
     @q = Bill.ransack(params[:q])
-    @bills = get_bills.order(:confirmed, created_at: :desc).ransack(params[:q]).result.page(params[:page]).per(20)
+    @bills = get_bills.order(:confirmed, created_at: :desc).ransack(params[:q]).result.page(params[:page]).per(10)
   end
 
   def show
-    @details = @bill.details
+    @list_items = @bill.details.hash_product_details
   end
 
   def new
@@ -28,11 +28,11 @@ class BillsController < ApplicationController
   def create
     if current_user.vip?
       bill = current_user.sales.build bill_params_sales
-      bill.bill_code = "XH"
+      bill.bill_code = "XH-#{bill.from_user.id}-#{bill.to_user.id}-#{Time.current.to_i}"
       bill.confirmed = true
     else
       bill = current_user.buys.build bill_params_buys
-      bill.bill_code = "NH"
+      bill.bill_code = "NH-#{bill.from_user.id}-#{bill.to_user.id}-#{Time.current.to_i}"
       bill.confirmed = false
     end
     if bill.save
@@ -51,6 +51,8 @@ class BillsController < ApplicationController
     if true? params[:confirm]
       @bill.update_attributes(confirmed: true)
       @bill.update_pw_to_user @bill.details.ids
+    else
+      @bill.update_attributes(confirmed: nil)
     end
     redirect_to bills_path
   end
