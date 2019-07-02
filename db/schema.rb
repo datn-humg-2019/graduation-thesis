@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_29_025631) do
+ActiveRecord::Schema.define(version: 2019_07_02_074550) do
 
   create_table "bills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "bill_code", null: false
     t.integer "from_user_id", null: false
     t.integer "to_user_id", null: false
-    t.string "description", null: false
-    t.boolean "confirmed", null: false
+    t.boolean "confirmed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "description"
     t.index ["from_user_id", "to_user_id"], name: "index_bills_on_from_user_id_and_to_user_id"
     t.index ["from_user_id"], name: "index_bills_on_from_user_id"
     t.index ["to_user_id"], name: "index_bills_on_to_user_id"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 2019_05_29_025631) do
     t.bigint "warehouse_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description"
     t.index ["product_id"], name: "index_product_warehouses_on_product_id"
     t.index ["warehouse_id"], name: "index_product_warehouses_on_warehouse_id"
   end

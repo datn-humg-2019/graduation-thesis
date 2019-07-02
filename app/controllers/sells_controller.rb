@@ -7,7 +7,7 @@ class SellsController < ApplicationController
     params[:to_date] = convert_date params[:to_date] if params[:to_date].present?
     params[:to_date] = convert_date params[:to_date] if params[:to_date].present?
     @q = Sell.ransack(params[:q])
-    @sells = current_user.sells.from_date(params[:from_date]).to_date(params[:to_date]).order(created_at: :desc).ransack(params[:q]).result.page(params[:page]).per(20)
+    @sells = current_user.sells.from_date(params[:from_date]).to_date(params[:to_date]).order(created_at: :desc).ransack(params[:q]).result.page(params[:page]).per(10)
   end
 
   def show

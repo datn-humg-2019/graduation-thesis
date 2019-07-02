@@ -22,9 +22,11 @@ module BillsHelper
   def status_confirmed confirmed
     case confirmed
     when true
-      "<h5><span class='badge badge-success'>Đã giải quyết</span></h5>".html_safe
+      "<h5><span class='badge badge-success'>Hoàn thành</span></h5>".html_safe
+    when false
+      "<h5><span class='badge badge-warning'>Chờ xác nhận</span></h5>".html_safe
     else
-      "<h5><span class='badge badge-danger'>Đang chờ giải quyết</span></h5>".html_safe
+      "<h5><span class='badge badge-danger'>Đã hủy</span></h5>".html_safe
     end
   end
 end

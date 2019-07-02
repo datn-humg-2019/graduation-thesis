@@ -2,8 +2,12 @@
   <i class="fa fa-eye"></i> Detail
 <% end %>
 
-<% if !bill.confirmed && current_user.vip? %>
+<% if bill.confirmed == false && current_user.vip? %>
   <%= link_to update_confirmed_path(id: bill, confirm: true), method: :GET, data: {confirm: "Are you sure?"}, class: "btn btn-success" do %>
     <i class="fa fa-check"></i> Xác nhận
+  <% end %>
+
+  <%= link_to update_confirmed_path(id: bill, confirm: nil), method: :GET, data: {confirm: "Are you sure?"}, class: "btn btn-danger" do %>
+    <i class="fa fa-trash"></i> Hủy đơn
   <% end %>
 <% end %>
