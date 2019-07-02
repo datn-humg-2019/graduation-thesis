@@ -47,6 +47,7 @@ gem "wkhtmltopdf-binary"
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "pry", "~> 0.12.2"
+  gem "pry-rails"
   gem "rubocop", "~> 0.54.0", require: false
 end
 

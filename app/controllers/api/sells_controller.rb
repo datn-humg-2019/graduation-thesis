@@ -54,7 +54,7 @@ class Api::SellsController < Api::BaseController
     pw_ids = p_ids
     counts = counts
     pw_ids.each_with_index do |p_id, i|
-      pws = pws_all.where(product_id: p_id).where.not(count: 0)
+      pws = pws_all.can_sell(p_id)
       count = counts[i].to_i
       price = pws.last.price_sale
 
@@ -64,7 +64,7 @@ class Api::SellsController < Api::BaseController
         sell.details.build(product_warehouse_id: pws.first.id, count: count, price: price).save
       else
         index = 0
-        while count.positive? do
+        while count.positive?
           count_temp = pws[index].count <= count ? pws[index].count : count
           sell.details.build(product_warehouse_id: pws[index].id, count: count_temp, price: price).save
           index += 1

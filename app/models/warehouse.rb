@@ -15,6 +15,10 @@ class Warehouse < ApplicationRecord
     product_warehouses.find_by(product_id: product_id).update_attributes(stop_providing: stage)
   end
 
+  def get_first_pw p_id
+    product_warehouses.where(product_id: p_id).first
+  end
+
   def stop_providing_category category_id, stage
     product_warehouses.each do |pw|
       pw.update_stop_providing(stage) if pw.product.category_id == category_id
