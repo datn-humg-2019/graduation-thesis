@@ -47,6 +47,6 @@ class Warehouse < ApplicationRecord
   end
 
   def detail_history date
-    histories.where("DATE(created_at) = ?", date)
+    histories.where("DATE(created_at) = ?", date).order(created_at: :desc)
   end
 end

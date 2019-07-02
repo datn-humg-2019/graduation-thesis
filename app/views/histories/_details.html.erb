@@ -1,7 +1,10 @@
-<% details.each_with_index do |d, i| %>
+<% history_details.each_with_index do |d, i| %>
   <tr>
     <td>
       <%= i + 1 %>
+    </td>
+    <td>
+      <%= d.created_at.getlocal.strftime("%H:%M:%S") %>
     </td>
     <td>
       <%= d.product.name %>
@@ -13,22 +16,19 @@
       <%= to_currency d.price %>
     </td>
     <td>
-      <%= d.from ? User.find_by(id: d.from).name : "" %>
-    </td>
-    <td>
-      <%= d.created_at.getlocal.strftime("%H:%M:%S") %>
+      <%= d.from ? User.find_by(id: d.from).name : "Tự nhập hàng" %>
     </td>
   </tr>
 <% end %>
 <tr>
-  <td colspan="2">
-    TOTAL
+  <td colspan="3">
+    TOTAL IN DAY
   </td>
   <td>
-    <%= details.sum :count %>
+    <%= @details.sum :count %>
   </td>
   <td>
-    <%= to_currency details.sum("count * price") %>
+    <%= to_currency @details.sum("count * price") %>
   </td>
   <td>
   </td>
