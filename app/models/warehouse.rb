@@ -46,6 +46,12 @@ class Warehouse < ApplicationRecord
              .group("date(created_at)")
   end
 
+  def all_histories_search_date  from_date, to_date
+    histories.from_date(from_date).to_date(to_date)
+             .select("DATE(created_at) day_input, sum(count) count_input, sum(count * price) price_input").order("day_input desc")
+             .group("date(created_at)")
+  end
+
   def detail_history date
     histories.where("DATE(created_at) = ?", date).order(created_at: :desc)
   end

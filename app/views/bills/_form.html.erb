@@ -39,6 +39,7 @@
 <p class="text-danger">Select product in your warehouse for bill</p>
 <hr>
 <div class="col-md-12 row">
+  <%= "<h3><span class='badge badge-danger'>Người dùng không có hàng hóa trong kho</span></h3>".html_safe if @products.blank? %>
   <% @products.each do |product| %>
     <% pws = @pws.where(product_id: product)%>
     <div class="col-xs-4 col-sm-3 col-md-2 nopad text-center">

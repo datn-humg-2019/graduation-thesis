@@ -19,6 +19,10 @@ module BillsHelper
     User.where(id: current_user.sales.pluck(:to_user_id).uniq).pluck :name, :id
   end
 
+  def get_confirmed_filter
+    [["Hoàn thành", true], ["Chờ xác nhận", false], ["Đã hủy", "nil"]]
+  end
+
   def status_confirmed confirmed
     case confirmed
     when true

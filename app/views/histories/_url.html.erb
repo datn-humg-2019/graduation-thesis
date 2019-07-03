@@ -1,9 +1,7 @@
 <h2>
   <% if action == "index" %>
-    <%= t(".title") %>
-  <% elsif action == "new" %>
-    <%= link_to t(".title"), bills_path %> > <%= t(".new_title") %>
+    <%= "Danh sách nhập" %>
   <% elsif action == "show" %>
-    <%= link_to t(".title"), bills_path %> > <%= t(".edit_title") %>
+    <%= link_to "Danh sách nhập", histories_path %> > <%= "Chi tiết hàng nhập trong ngày: #{params[:date]}" %>
   <% end %>
 </h2>

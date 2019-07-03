@@ -1,7 +1,7 @@
 <% sells.each_with_index do |s, i| %>
   <tr>
     <td>
-      <%= i + 1 %>
+      <%= stt_index params[:page], 10, i %>
     </td>
     <td>
       <%= s.sell_code %>

@@ -1,11 +1,9 @@
 <h2>
   <% if action == "index" %>
-    <%= t(".title") %>
+    <%= "Danh sách hóa đơn bán" %>
   <% elsif action == "new" %>
-    <%= link_to t(".title"), bills_path %> > <%= t(".new_title") %>
+    <%= link_to "Danh sách hóa đơn bán", sells_path %> > <%= "Bán Hàng" %>
   <% elsif action == "show" %>
-    <%= link_to t(".title"), bills_path %> > <%= t(".edit_title") %>
-  <% else %>
-    <%= link_to t(".title"), bills_path %> > <%= "select vip user" %>
+    <%= link_to "Danh sách hóa đơn bán", sells_path %> > <%= "Chi tiết hóa đơn bán" %>
   <% end %>
 </h2>

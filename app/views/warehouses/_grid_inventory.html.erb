@@ -1,18 +1,25 @@
 <% products.each_with_index do |p, i| %>
   <% pws = @warehouse.product_warehouses.where(product_id: p.id).order(created_at: :desc) %>
   <tr data-toggle="collapse" data-target='<%= "#p-#{p.id}" %>'' class="accordion-toggle">
-    <td><button class="btn btn-info"><span class="fa fa-eye"></span></button></td>
     <td>
-      <%= p.name %>
+      <%= stt_index params[:page], 5, i %>
     </td>
     <td>
-      <%= stop_providing pws.last.stop_providing %>
+      <%= p.name %>
     </td>
     <td>
       <%= pws.sum(:count) %>
     </td>
     <td>
       <%= to_currency pws.sum("count * price_origin") %>
+    </td>
+    <td>
+      <%= stop_providing pws.last.stop_providing %>
+    </td>
+    <td>
+      <a href="#" class="btn btn-danger btn-sm">
+        <i class="fa fa-cog"></i>
+      </a>
     </td>
   </tr>
   <tr>
@@ -25,7 +32,6 @@
               <th>Số lượng</th>
               <th>Giá nhập</th>
               <th>Tổng tiền</th>
-              <th>Chỉnh sửa</th>
             </tr>
           </thead>
             <tbody>
@@ -42,11 +48,6 @@
                   </td>
                   <td>
                     <%= to_currency pw.count * pw.price_origin %>
-                  </td>
-                  <td>
-                    <a href="#" class="btn btn-danger btn-sm">
-                      <i class="fa fa-cog"></i>
-                    </a>
                   </td>
                 </tr>
               <% end %>

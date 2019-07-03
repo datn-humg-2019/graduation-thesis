@@ -1,0 +1,24 @@
+<%= form_tag "", id: "form-submit", method: :get do %>
+  <div class="form-row">
+    <div class="col-md-12 mb-3">
+      <div class="start-to-end">
+        <div class="input-daterange row" id="datepicker">
+          <div class="col">
+            <%= text_field_tag :from_date, params[:from_date], class: "form-control", placeholder: "From date", readonly: true %>
+          </div>
+          <div class="col">
+            <%= text_field_tag :to_date, params[:to_date], class: "form-control", placeholder: "To date", class: "form-control", readonly: true %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-info float-right">
+      <i class="fa fa-search"></i>
+    </button>
+    <%= link_to histories_path, class: "float-left btn btn-success float-right" do %>
+      <i class="fa fa-refresh"></i> Clear
+    <% end %>
+  </div>
+<% end %>

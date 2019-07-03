@@ -1,11 +1,13 @@
 <h2>
   <% if action == "index" %>
-    <%= t(".title") %>
+    <%= current_user.vip? ? "Xuất hàng hóa" : "Nhập hàng hóa" %>
   <% elsif action == "new" %>
-    <%= link_to t(".title"), bills_path %> > <%= t(".new_title") %>
+    <%= link_to "Nhập hàng hóa", bills_path %> >
+    <%= link_to("Lựa chọn người bán", select_from_user_path) + " > " if current_user.ctv? %>
+    <%= "Thêm mới" %>
+  <% elsif action == "select" %>
+    <%= link_to "Nhập hàng hóa", bills_path %> > <%= "Lựa chọn người bán" %>
   <% elsif action == "show" %>
-    <%= link_to t(".title"), bills_path %> > <%= t(".edit_title") %>
-  <% else %>
-    <%= link_to t(".title"), bills_path %> > <%= "select vip user" %>
+    <%= link_to "Nhập hàng hóa", bills_path %> > <%= "Chi tiết nhập hàng" %>
   <% end %>
 </h2>
