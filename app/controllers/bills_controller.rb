@@ -5,7 +5,9 @@ class BillsController < ApplicationController
 
   def index
     @q = Bill.ransack(params[:q])
-    @bills = get_bills.order(:confirmed, created_at: :desc).ransack(params[:q]).result.page(params[:page]).per(10)
+    search = get_bills.order(confirmed: :asc, created_at: :desc).ransack(params[:q])
+    search.build_grouping({confirmed_null: true}) if params[:q]&["confirmed_eq"] == "nil"
+    @bills = search.result.page(params[:page]).per(10)
   end
 
   def show

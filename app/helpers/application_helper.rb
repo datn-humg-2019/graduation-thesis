@@ -15,24 +15,22 @@ module ApplicationHelper
 
   def working_label working
     status = "success"
-    text = "Working"
+    text = "Hoạt động"
     unless working
       status = "danger"
       text = "Inactivity"
     end
-    "<span class='label label-#{status}'>#{text}</span>".html_safe
+    "<span class='badge badge-#{status}'>#{text}</span>".html_safe
   end
 
   def role_label role
     case role
     when "admin"
-      "<span class='label bg-red'>Admin</span>".html_safe
-    when "manage"
-      "<span class='label bg-orange'>Mange</span>".html_safe
-    when "teacher"
-      "<span class='label bg-blue'>Teacher</span>".html_safe
-    when "student_parent"
-      "<span class='label bg-yellow'>Parent</span>".html_safe
+      "<span class='badge badge-danger'>Admin</span>".html_safe
+    when "vip"
+      "<span class='badge badge-primary'>Bán buôn</span>".html_safe
+    when "ctv"
+      "<span class='badge badge-info'>CTV</span>".html_safe
     end
   end
 
@@ -58,5 +56,9 @@ module ApplicationHelper
   def today_to_string
     today = Date.current
     "Hà nội, ngày #{today.day} tháng #{today.month} năm #{today.year}"
+  end
+
+  def stt_index page, per, index
+    page.to_i.zero? ? index + 1 : (page.to_i - 1) * per.to_i + index + 1
   end
 end

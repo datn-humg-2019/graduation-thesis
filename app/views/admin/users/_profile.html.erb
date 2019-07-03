@@ -14,13 +14,7 @@
       <div class="col-xs-12 col-sm-9">
         <h4 class="user-title">
           <span class="middle">
-            <%= "#{user.name} -" %>
-          </span>
-          <span>
-            <%= role_label user.role %>
-          </span>
-          <span>
-            <%= working_label "working" %>
+            <%= "Người dùng: #{user.name}" %>
           </span>
         </h4>
         <div class="profile-user-info">
@@ -79,6 +73,18 @@
               <span>
                 <%= convert_date @user.created_at %>
               </span>
+            </div>
+          </div>
+          <div class="profile-info-row">
+            <div class="profile-info-name"> Role </div>
+            <div class="profile-info-value">
+              <%= role_label user.role %>
+            </div>
+          </div>
+          <div class="profile-info-row">
+            <div class="profile-info-name"> Status </div>
+            <div class="profile-info-value">
+              <%= working_label "working" %>
             </div>
           </div>
         </div>

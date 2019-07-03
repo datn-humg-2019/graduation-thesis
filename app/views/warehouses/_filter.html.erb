@@ -57,7 +57,7 @@
     <div class="row">
       <div class="col-md-6 mb-3 row form-group">
         <div class="col-lg-2 col-lg-2 col-sm-2 ">
-          <%= label_tag :category_id, "Category" %>
+          <%= label_tag :category_id, "Loại hàng hóa" %>
         </div>
         <div class="col-lg-10 col-sm-10 col-xs-10">
           <%= select_tag :category_id, options_for_select(category_list, params[:category_id]),
@@ -66,7 +66,7 @@
       </div>
       <div class="col-md-6 mb-3 row form-group">
         <div class="col-lg-2 col-lg-2 col-sm-2 ">
-          <%= label_tag :name, "Name" %>
+          <%= label_tag :name, "Tên hàng hóa" %>
         </div>
         <div class="col-lg-10 col-sm-10 col-xs-10">
           <%= text_field_tag :name, params[:name],

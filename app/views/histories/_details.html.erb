@@ -1,7 +1,7 @@
 <% history_details.each_with_index do |d, i| %>
   <tr>
     <td>
-      <%= i + 1 %>
+      <%= stt_index params[:page], 20, i %>
     </td>
     <td>
       <%= d.created_at.getlocal.strftime("%H:%M:%S") %>

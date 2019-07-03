@@ -2,6 +2,14 @@ class History < ApplicationRecord
   belongs_to :warehouse
   belongs_to :product
 
+  scope :from_date, (lambda do |from_date|
+    where("date(created_at) >= ?", from_date) unless from_date.blank?
+  end)
+
+  scope :to_date, (lambda do |to_date|
+    where("date(created_at) <= ?", to_date) unless to_date.blank?
+  end)
+
   scope :histories_of_user, (lambda do |_warehouse_id|
     where(from_user_id: user_id).or(Bill.where(to_user_id: user_id))
   end)

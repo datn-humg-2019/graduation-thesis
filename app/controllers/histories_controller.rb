@@ -3,7 +3,9 @@ class HistoriesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @histories = current_user.warehouse.all_histories.page(params[:page]).per(10)
+    params[:to_date] = convert_date params[:to_date] if params[:to_date].present?
+    params[:to_date] = convert_date params[:to_date] if params[:to_date].present?
+    @histories = current_user.warehouse.all_histories_search_date(params[:from_date], params[:to_date]).page(params[:page]).per(10)
   end
 
   def show
