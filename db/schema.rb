@@ -16,10 +16,10 @@ ActiveRecord::Schema.define(version: 2019_07_02_074550) do
     t.string "bill_code", null: false
     t.integer "from_user_id", null: false
     t.integer "to_user_id", null: false
+    t.string "description", null: false
     t.boolean "confirmed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "description"
     t.index ["from_user_id", "to_user_id"], name: "index_bills_on_from_user_id_and_to_user_id"
     t.index ["from_user_id"], name: "index_bills_on_from_user_id"
     t.index ["to_user_id"], name: "index_bills_on_to_user_id"
@@ -95,8 +95,8 @@ ActiveRecord::Schema.define(version: 2019_07_02_074550) do
     t.integer "count", null: false
     t.float "price_origin", null: false
     t.float "price_sale", null: false
-    t.datetime "mfg", default: "2019-08-04 00:00:00"
-    t.datetime "exp", default: "2019-08-04 00:00:00"
+    t.datetime "mfg", default: "2019-06-04 00:00:00"
+    t.datetime "exp", default: "2019-06-04 00:00:00"
     t.boolean "stop_providing", default: false
     t.bigint "product_id", null: false
     t.bigint "warehouse_id", null: false
@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 2019_07_02_074550) do
     t.string "name", default: "", null: false
     t.boolean "gender"
     t.string "adress", default: ""
-    t.date "birth", default: "2019-08-04"
+    t.date "birth", default: "2019-06-04"
     t.integer "role", default: 0, null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

@@ -22,7 +22,7 @@ class SellsController < ApplicationController
 
   def create
     sell = current_user.sells.build sell_params
-    sell.sell_code = "BH"
+    sell.sell_code = "BH-#{sell.user.id}-#{Time.current.to_i}"
     sell.total_count = 0
     sell.total_price = 0
 

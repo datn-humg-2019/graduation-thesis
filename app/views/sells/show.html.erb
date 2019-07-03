@@ -11,29 +11,36 @@
                 STT
               </th>
               <th>
-                Name
+                Tên hàng hóa
               </th>
               <th>
-                Count
+                Số lượng
               </th>
               <th>
-                Price
+                Giá tiền
+              </th>
+              <th>
+                Thành tiền
               </th>
             </tr>
           </thead>
           <tbody>
-            <%= render "details", details: @details %>
+            <%= render "details" %>
           </tbody>
         </table>
       </div>
     </div>
-    <div class="card-footer">
-      <button class="btn btn-default float-right">
-        <i class="fa fa-file-excel-o"></i> Excel
-      </button>
-      <%= link_to sell_pdf_path(id: @sell, format: "pdf"), target: :_blank, class: "btn btn-danger float-right btn-margin" do %>
-        <i class="fa fa-file-pdf-o"></i> Xuất hóa đơn
-      <% end %>
-    </div>
+    <% unless @list_items.blank? %>
+      <div class="card-footer">
+        <%= link_to sell_gtgt_path(id: @sell, format: :pdf), target: :_blank,
+          class: "btn btn-success float-right btn-margin" do %>
+          <i class="fa fa-file-excel-o"></i> Hóa đơn GTGT
+        <% end %>
+        <%= link_to sell_pdf_path(id: @sell, format: "pdf"), target: :_blank,
+          class: "btn btn-danger float-right btn-margin" do %>
+          <i class="fa fa-file-pdf-o"></i> Hóa đơn bán hàng
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>

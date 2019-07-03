@@ -12,6 +12,9 @@
       <%= dt.sum(:count) %>
     </td>
     <td>
+      <%= to_currency dt.first.price %>
+    </td>
+    <td>
       <%= to_currency dt.sum("count * price") %>
     </td>
   </tr>
@@ -22,6 +25,8 @@
   </td>
   <td>
     <%= @sell.sum_count %>
+  </td>
+  <td>
   </td>
   <td>
     <%= to_currency @sell.sum_price %>

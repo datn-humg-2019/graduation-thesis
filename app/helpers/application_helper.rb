@@ -55,7 +55,7 @@ module ApplicationHelper
 
   def today_to_string
     today = Date.current
-    "Hà nội, ngày #{today.day} tháng #{today.month} năm #{today.year}"
+    "Hà nội, Ngày #{today.day} tháng #{today.month} năm #{today.year}"
   end
 
   def stt_index page, per, index

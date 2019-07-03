@@ -1,4 +1,6 @@
 class ImportExportController < ApplicationController
+  before_action :authenticate_user!
+
   def export_template
     respond_to do |format|
       format.html

@@ -2,7 +2,7 @@ class PdfsController < ApplicationController
   before_action :authenticate_user!
 
   before_action :get_bill, only: [:bill_pdf]
-  before_action :get_sell, only: [:sell_pdf]
+  before_action :get_sell, only: [:sell_pdf, :sell_gtgt]
 
   def bill_pdf
     respond_to do |format|
@@ -13,6 +13,13 @@ class PdfsController < ApplicationController
   def sell_pdf
     respond_to do |format|
       format.html{render_sample_html("sell_pdf", @sell)}
+    end
+  end
+
+  def sell_gtgt
+    @list_items = @sell.details.hash_product_details
+    respond_to do |format|
+      format.html{render_sample_html("sell_gtgt", @list_items)}
     end
   end
 
