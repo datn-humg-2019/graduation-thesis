@@ -1,41 +1,17 @@
 $(document).ready(function() {
   if (window.location.pathname == '/'){
-    var old_width = $('.chartAreaWrapper2').width();
+    var old_width = $('.chartAreaWrapperCount').width();
+    var old_width_p = $('.chartAreaWrapperPrice').width();
 
-    var io_config = {
-      type: 'line',
-      hover: false,
-      data: {
-        labels: createLables($('#select-times').val()),
-        datasets: []
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        responsiveAnimationDuration: 0,
-        animation: {
-          duration: 0
-        },
-        hover: {
-          mode: 'nearest',
-          intersect: true,
-          animationDuration: 0
-        },
-        tooltips: {
-          mode: 'index',
-          intersect: false,
-        },
-        legend: {
-          display: false,
-          position: 'top'
-        }
-      }
-    };
-
-    ajax_io(io_config, old_width);
+    ajax_io(old_width);
+    ajax_p_io(old_width_p);
 
     $('#select-times').change(function(){
-      ajax_io(io_config, old_width);
+      ajax_io(old_width);
+    });
+
+    $('#select-times-price').change(function(){
+      ajax_p_io(old_width_p);
     });
   }
 });
@@ -82,34 +58,35 @@ function createLables(type) {
   return labels;
 }
 
-function ajax_io(io_config, old_width) {
+function ajax_io(old_width) {
   $.ajax({
     type: 'POST',
     beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
     url: '/list_io',
-    data: {type: $('#select-times').val()},
+    data: {type_count: $('#select-times').val()},
     dataType: 'json',
     success: function(data){
+      var labels = [];
+      var datasets = [];
       if($('#select-times').val() == 6){
-        io_config.data.labels = data.label_year;
+        labels = data.label_year;
       } else {
-        io_config.data.labels = createLables($('#select-times').val());
+        labels = createLables($('#select-times').val());
       }
-      io_config.data.datasets = [
+      datasets = [
         createDataset(data.list_o, '#51CACF', 'Hàng hóa xuất'),
         createDataset(data.list_i, '#fbc658', 'Hàng hóa nhập')
       ];
-
-      var data_size = data.list_o.length;
+      var data_size = labels.length;
       if (data_size > 10) {
         new_width = Math.round(data_size * old_width / 10)
-        $('.chartAreaWrapper2').width(new_width);
+        $('.chartAreaWrapperCount').width(new_width);
       } else {
-        $('.chartAreaWrapper2').width(old_width);
+        $('.chartAreaWrapperCount').width(old_width);
       }
       $('#io-chart').remove();
-      $('.chartAreaWrapper2').append('<canvas id="io-chart"></canvas>');
-      new Chart(document.getElementById("io-chart"), io_config);
+      $('.chartAreaWrapperCount').append('<canvas id="io-chart"></canvas>');
+      new Chart(document.getElementById("io-chart"), createConfig(labels, datasets, false));
     },
     error: function (error){
       console.log(error);
@@ -117,4 +94,83 @@ function ajax_io(io_config, old_width) {
       alert('has an error');
     }
   });
+}
+
+function ajax_p_io(old_width_p) {
+  $.ajax({
+    type: 'POST',
+    beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+    url: '/list_p_io',
+    data: {type_price: $('#select-times-price').val()},
+    dataType: 'json',
+    success: function(data){
+      var labels = [];
+      var datasets = [];
+      if($('#select-times-price').val() == 6){
+        labels = data.label_year;
+      } else {
+        labels = createLables($('#select-times-price').val());
+      }
+      datasets = [
+        createDataset(data.list_o, '#69EC0F', 'Tiền bán hàng'),
+        createDataset(data.list_i, '#EC120F', 'Tiền nhập hàng')
+      ];
+
+      var data_size = labels.length;
+      if (data_size > 10) {
+        new_width = Math.round(data_size * old_width_p / 10)
+        $('.chartAreaWrapperPrice').width(new_width);
+      } else {
+        $('.chartAreaWrapperPrice').width(old_width_p);
+      }
+      $('#io-p-chart').remove();
+      $('.chartAreaWrapperPrice').append('<canvas id="io-p-chart"></canvas>');
+      new Chart(document.getElementById("io-p-chart"), createConfig(labels, datasets, true));
+    },
+    error: function (error){
+      console.log(error);
+      debugger
+      alert('has an error');
+    }
+  });
+}
+
+function createConfig(labels, datasets, is_price) {
+  return {
+    type: 'line',
+    hover: false,
+    data: {
+      labels: labels,
+      datasets: datasets
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      responsiveAnimationDuration: 0,
+      animation: {
+        duration: 0
+      },
+      hover: {
+        mode: 'nearest',
+        intersect: true,
+        animationDuration: 0
+      },
+      tooltips: {
+        mode: 'index',
+        intersect: false,
+        callbacks: {
+          label: function(tooltipItems, data) {
+            if(is_price == true){
+              return data.datasets[tooltipItems.datasetIndex].label + ':  ' + currencyFormatVND(tooltipItems.yLabel);
+            }
+            return data.datasets[tooltipItems.datasetIndex].label + ':  ' +tooltipItems.yLabel.toString();
+          }
+        }
+      },
+      legend: {
+        display: false,
+        position: 'top'
+      }
+    }
+  };
 }

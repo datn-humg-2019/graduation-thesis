@@ -146,6 +146,15 @@ function onBlur(e){
   e.target.value = value ? localStringToNumber(value).toLocaleString(undefined, options) : ''
 }
 
+function currencyFormatVND(num) {
+  return (
+    num
+      .toFixed(2) // always two decimal digits
+      .replace('.', ',') // replace decimal point character with ,
+      .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' VNĐ'
+  ) // use . as a separator
+}
+
 function setup_daterange() {
   $('.start-to-end .input-daterange').datepicker({
     clearBtn: true,
