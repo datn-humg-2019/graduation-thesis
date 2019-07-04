@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="col-lg-2 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="fa fa-pie-chart text-warning"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Lượng hàng tồn</p>
+              <p class="card-title"> <%= @warehouse.sum_count_inventory false %>
+                </p><p>
+            </p></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats">
+          <i class="fa fa-refresh"></i>Ngừng cung cấp: <%= @warehouse.sum_count_inventory true %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-money-coins text-success"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Giá trị hàng tồn</p>
+              <p class="card-title"> <%= to_currency @warehouse.sum_price_inventory false %>
+                </p><p>
+            </p></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats">
+          <i class="fa fa-calendar-o"></i> Ngừng cung cấp:  <%= to_currency @warehouse.sum_price_inventory true %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="fa fa-bar-chart text-danger"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Số Hàng xuất trong ngày</p>
+              <p class="card-title"> <%= @count_output %>
+                </p><p>
+            </p></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats">
+          <i class="fa fa-clock-o"></i> Số Hàng xuất hôm qua: <%= @count_output_yesterday %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="fa fa-line-chart text-primary"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Số Hàng nhập trong ngày</p>
+              <p class="card-title"> <%= @count_input %>
+                </p><p>
+            </p></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats">
+          <i class="fa fa-refresh"></i> Số Hàng nhập hôm qua: <%= @count_input_yesterday %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,6 +4,10 @@ class Detail < ApplicationRecord
 
   scope :hash_product_details, ->{joins(:product_warehouse).pluck(:product_id, :id).inject(Hash.new{|h, k| h[k] = []}){|h, (k, v)| h[k] << v; h}}
 
+  scope :by_ref_ids, (lambda do |ids, name|
+    where ref_detail_id: ids, ref_detail_type: name
+  end)
+
   def load_structure
     {
       id: id,
