@@ -28,10 +28,10 @@
       </div>
     </div>
     <div class="card-footer">
-      <button class="btn btn-default float-right btn-margin">
-        <i class="fa fa-file-excel-o"></i> Excel
-      </button>
-      <%= link_to bill_pdf_path(id: @bill, format: "pdf"), target: :_blank, class: "btn btn-danger float-right btn-margin" do %>
+      <%= link_to bill_gtgt_path(id: @bill, format: :pdf), target: :_blank, class: "btn btn-success float-right btn-margin" do %>
+        <i class="fa fa-file-excel-o"></i> Hóa đơn GTGT
+      <% end %>
+      <%= link_to bill_pdf_path(id: @bill, format: :pdf), target: :_blank, class: "btn btn-danger float-right btn-margin" do %>
         <i class="fa fa-file-pdf-o"></i> Xuất hóa đơn
       <% end %>
     </div>
