@@ -12,7 +12,13 @@ class HomeController < ApplicationController
 
   def chart_io
     respond_to do |format|
-      format.json{render json: date_to_datas(params[:type])}
+      format.json{render json: date_to_datas(params[:type_count])}
+    end
+  end
+
+  def chart_p_io
+    respond_to do |format|
+      format.json{render json: date_to_datas(params[:type_price], false)}
     end
   end
 
@@ -27,24 +33,17 @@ class HomeController < ApplicationController
     end
   end
 
-  def date_to_datas type
+  def date_to_datas type, is_count=true
     type = type.to_i
-    if [1, 2, 3].include? type
-      sell = current_user.sells.between_date(type).group("DATE(created_at)").sum(:total_count)
-      bill = Detail.by_ref_ids(current_user.sales.between_date(type).ids, "Bill").group("DATE(created_at)").sum(:count)
-      list_i = current_user.warehouse.histories.between_date(type).group("DATE(created_at)").sum(:count)
-    elsif [1, 2, 3].include? type
-      sell = current_user.sells.between_date(type).group("MONTH(created_at)").sum(:total_count)
-      bill = Detail.by_ref_ids(current_user.sales.between_date(type).ids, "Bill").group("MONTH(created_at)").sum(:count)
-      list_i = current_user.warehouse.histories.between_date(type).group("MONTH(created_at)").sum(:count)
-    else
-      sell = current_user.sells.between_date(type).group("YEAR(created_at)").sum(:total_count)
-      bill = Detail.by_ref_ids(current_user.sales.between_date(type).ids, "Bill").group("YEAR(created_at)").sum(:count)
-      list_i = current_user.warehouse.histories.between_date(type).group("YEAR(created_at)").sum(:count)
-    end
-    list_o = sell.merge(bill){|_key, val1, val2| val1 + val2}
-
     time = Time.current
+    condition = condition type
+
+    sum = is_count ? %w(total_count count) : ["total_count * total_price", "count * price"]
+
+    sell = current_user.sells.between_date(type).group(condition).sum(sum[0])
+    bill = Detail.by_ref_ids(current_user.sales.between_date(type).ids, "Bill").group(condition).sum(sum[1]) if current_user.vip?
+    list_i = current_user.warehouse.histories.between_date(type).group(condition).sum(sum[1])
+    list_o = current_user.vip? ? sell.merge(bill){|_key, val1, val2| val1 + val2} : sell
 
     case type
     when 1
@@ -83,5 +82,16 @@ class HomeController < ApplicationController
       lst << (datas.include?(date) ? datas[date] : 0)
     end
     lst
+  end
+
+  def condition type
+    condition = if [1, 2, 3].include? type
+                  "DATE(created_at)"
+                elsif [4, 5].include? type
+                  "MONTH(created_at)"
+                else
+                  "YEAR(created_at)"
+                end
+    condition
   end
 end

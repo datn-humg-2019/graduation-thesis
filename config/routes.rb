@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     get "sell_gtgt", to: "pdfs#sell_gtgt", as: "sell_gtgt"
 
     post "list_io", to: "home#chart_io", as: "list_io"
+    post "list_p_io", to: "home#chart_p_io", as: "list_p_io"
 
     get "inventories", to: "warehouses#inventories", as: "inventories"
 
