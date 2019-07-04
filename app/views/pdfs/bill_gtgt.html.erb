@@ -146,7 +146,7 @@
       <div class="">
         <span>Mấu số: 01 GTKT-3LL</span>
         <br/>
-        <span><%= @sell.sell_code %></span>
+        <span><%= @bill.bill_code %></span>
         <br/>
         <span>0049519</span>
       </div>
@@ -154,16 +154,17 @@
   </div>
 
   <hr>
-  <p>Đơn vị bán hàng: <%= @sell.user.name %></p>
-  <p>Địa chỉ:   <%= @sell.user.adress %></p>
+  <p>Đơn vị bán hàng: <%= @bill.from_user.name %></p>
+  <p>Địa chỉ:   <%= @bill.from_user.adress %></p>
   <p>Số tài khoản: 1954 7542 9874</p>
-  <p>Điện thoại:<%= @sell.user.phone %></p>
+  <p>Điện thoại:<%= @bill.from_user.phone %></p>
   <p>MST: <%= "0100109106" %></p>
 
   <hr>
-  <p>Họ tên người mua hàng:</p>
+  <p>Họ tên người mua hàng: <%= @bill.to_user.name %></p>
   <p>Tên đơn vị:</p>
-  <p>Địa chỉ:</p>
+  <p>Địa chỉ:<%= @bill.to_user.adress %></p>
+  <p>Điện thoại:<%= @bill.to_user.phone %></p>
   <p>Số tài khoản:</p>
   <p>Hình thức thanh toán:</p>
   <p>MST: <%= "0102688628" %></p>
@@ -216,17 +217,17 @@
             <tr>
               <td class="td-text"></td>
               <td class="td-text">Cộng tiền hàng: </td>
-              <td class="td-text"><%= to_currency @sell.sum_price %></td>
+              <td class="td-text"><%= to_currency @bill.total_money %></td>
             </tr>
             <tr>
               <td class="td-text">Thuế suất GTGT: 10%</td>
               <td class="td-text">Cộng tiền hàng: </td>
-              <td class="td-text"><%= to_currency @sell.sum_price*0.1 %></td>
+              <td class="td-text"><%= to_currency @bill.total_money*0.1 %></td>
             </tr>
             <tr>
               <td class="td-text"></td>
               <td class="td-text">Tổng cộng tiền thành toán: </td>
-              <td class="td-text"><%= to_currency @sell.sum_price + @sell.sum_price*0.1 %></td>
+              <td class="td-text"><%= to_currency @bill.total_money + @bill.total_money*0.1 %></td>
             </tr>
             <tr>
               <td class="td-text">Số tiền viết bằng chữ: </td>

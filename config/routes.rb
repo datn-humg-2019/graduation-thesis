@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     get "bill_pdf", to: "pdfs#bill_pdf", as: "bill_pdf"
     get "sell_pdf", to: "pdfs#sell_pdf", as: "sell_pdf"
     get "sell_gtgt", to: "pdfs#sell_gtgt", as: "sell_gtgt"
+    get "bill_gtgt", to: "pdfs#bill_gtgt", as: "bill_gtgt"
+
 
     post "list_io", to: "home#chart_io", as: "list_io"
     post "list_p_io", to: "home#chart_p_io", as: "list_p_io"

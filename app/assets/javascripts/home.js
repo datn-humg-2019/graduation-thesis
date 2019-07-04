@@ -90,7 +90,6 @@ function ajax_io(old_width) {
     },
     error: function (error){
       console.log(error);
-      debugger
       alert('has an error');
     }
   });
@@ -129,7 +128,6 @@ function ajax_p_io(old_width_p) {
     },
     error: function (error){
       console.log(error);
-      debugger
       alert('has an error');
     }
   });
