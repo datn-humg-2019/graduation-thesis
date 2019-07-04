@@ -27,6 +27,8 @@ Rails.application.routes.draw do
     get "sell_pdf", to: "pdfs#sell_pdf", as: "sell_pdf"
     get "sell_gtgt", to: "pdfs#sell_gtgt", as: "sell_gtgt"
 
+    post "list_io", to: "home#chart_io", as: "list_io"
+
     get "inventories", to: "warehouses#inventories", as: "inventories"
 
     resources :products

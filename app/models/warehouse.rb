@@ -29,6 +29,14 @@ class Warehouse < ApplicationRecord
     product_warehouses.sum :count
   end
 
+  def sum_count_inventory stop_providing
+    product_warehouses.where(stop_providing: stop_providing).sum :count
+  end
+
+  def sum_price_inventory stop_providing
+    product_warehouses.where(stop_providing: stop_providing).sum("count * price_origin")
+  end
+
   def sum_price_origin
     product_warehouses.sum("count * price_origin")
   end

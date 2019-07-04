@@ -154,3 +154,63 @@ function setup_daterange() {
     format: 'yyyy/mm/dd'
   });
 }
+
+function date_in_week(current) {
+  var week = new Array();
+  current.setDate((current.getDate() - current.getDay() +1));
+  for (var i = 0; i < 7; i++) {
+      week.push(
+          new Date(current)
+      );
+      current.setDate(current.getDate() +1);
+  }
+  return week;
+}
+
+function formatDate(date) {
+  var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
+
+  return [day, month, year].join('/');
+}
+
+function formatDateNotYear(date) {
+  var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate();
+
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
+
+  return [day, month].join('/');
+}
+
+function getDaysInLastMonth() {
+  var now = new Date();
+  now.setDate(0);
+  now.setDate(1);
+  month = now.getMonth();
+  var days = [];
+  while (now.getMonth() === month) {
+     days.push(new Date(now));
+     now.setDate(now.getDate() + 1);
+  }
+  return days;
+}
+
+function getDaysInThisMonth() {
+  var date = new Date();
+  var now = new Date(date.getFullYear(), date.getMonth(), 1);
+  month = now.getMonth();
+  var days = [];
+  while (now.getMonth() === month) {
+     days.push(new Date(now));
+     now.setDate(now.getDate() + 1);
+  }
+  return days;
+}
