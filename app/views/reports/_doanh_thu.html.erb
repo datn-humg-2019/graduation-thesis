@@ -1,36 +1,24 @@
-<%= render "url", action: "index" %>
-<hr>
 <div class="col-md-12">
   <div class="card">
     <div class="card-header">
       <%= render "filter" %>
     </div>
-    <hr>
     <div class="card-body">
-      <div class="table-responsive">
+      <div class="">
         <table class="table table-bordered">
-          <thead class=" text-primary">
+          <thead class=" text-danger">
             <tr>
               <th>
-                Mã hóa đơn
-              </th>
-              <th>
-                <%= current_user.vip? ? "Đến" : "Từ" %>
+                <%= params[:type].to_i == 2 ? "Năm" : "Tháng" %>
               </th>
               <th>
                 Số lượng
               </th>
               <th>
-                Tổng tiền
+                Doanh thu
               </th>
               <th>
-                Mô tả
-              </th>
-              <th>
-                Xác nhận
-              </th>
-              <th>
-                Ngày tạo
+                Lợi nhuận
               </th>
               <th>
                 Hành động
@@ -38,13 +26,10 @@
             </tr>
           </thead>
           <tbody>
-            <%= render "grid_bills", bills: @bills %>
+            <%= render "doanh_thu_list" %>
           </tbody>
         </table>
       </div>
-    </div>
-    <div >
-      <%= paginate @bills %>
     </div>
   </div>
 </div>

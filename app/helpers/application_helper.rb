@@ -61,4 +61,8 @@ module ApplicationHelper
   def stt_index page, per, index
     page.to_i.zero? ? index + 1 : (page.to_i - 1) * per.to_i + index + 1
   end
+
+  def type_report
+    [["Tháng", 1], ["Năm", 2]]
+  end
 end

@@ -1,0 +1,21 @@
+<% @revenue.each do |key, value| %>
+  <tr>
+    <td>
+      <%= key %>
+    </td>
+    <td>
+      <%= value[0] %>
+    </td>
+    <td>
+      <%= to_currency value[1] %>
+    </td>
+    <td>
+      <%= to_currency @profit[key] %>
+    </td>
+    <td>
+      <%= link_to report_path(date: key), method: :GET, class: "btn btn-info" do %>
+        <i class="fa fa-eye"></i> Chi tiết
+      <% end %>
+    </td>
+  </tr>
+<% end %>

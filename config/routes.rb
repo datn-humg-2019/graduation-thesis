@@ -34,6 +34,9 @@ Rails.application.routes.draw do
 
     get "inventories", to: "warehouses#inventories", as: "inventories"
 
+    get "report", to: "reports#show", as: "report"
+
+    resources :reports, only: :index
     resources :products
     resources :bills
     resources :histories

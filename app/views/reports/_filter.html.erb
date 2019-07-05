@@ -1,0 +1,16 @@
+<%= form_tag "", id: "form-submit", method: :get do %>
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+      <%= select_tag :type, options_for_select(type_report, params[:type]),
+        selected: 1, class: "form-control chosen" %>
+    </div>
+    <div class="col-md-4 mb-3 ">
+      <button class="btn btn-info float-right">
+        <i class="fa fa-search"></i>
+      </button>
+      <%= link_to reports_path, class: "float-left btn btn-success float-right" do %>
+        <i class="fa fa-refresh"></i> Clear
+      <% end %>
+    </div>
+  </div>
+<% end %>
