@@ -16,6 +16,8 @@ class History < ApplicationRecord
     when 5
       time = Time.current.prev_year
       where(created_at: time.beginning_of_year..time.end_of_year)
+    when 6
+      all
     else
       all
     end

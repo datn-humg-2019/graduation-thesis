@@ -24,8 +24,27 @@ class Sell < ApplicationRecord
     when 5
       time = Time.current.prev_year
       where(created_at: time.beginning_of_year..time.end_of_year)
-    else
+    when 6
       all
+    else
+      if type.include? "/"
+        month_year = type.split "/"
+        where("MONTH(created_at) = ? AND YEAR(created_at) = ?", month_year[0], month_year[1])
+      else
+        where("YEAR(created_at) = ?", type)
+      end
+    end
+  end)
+
+  scope :revenue_profit, (lambda do |type, type_group, condition|
+    if type_group == 2
+      select("#{condition} as date, sum(total_count) as count, sum(total_count * total_price) as revenue")
+        .between_date(type)
+        .group(condition)
+    else
+      select("YEAR(created_at) as year, MONTH(created_at) as month, sum(total_count) as count, sum(total_count * total_price) as revenue")
+        .between_date(type)
+        .group(condition)
     end
   end)
 
