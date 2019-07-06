@@ -4,9 +4,12 @@ class BillsController < ApplicationController
   before_action :get_bill, only: [:show, :update_confirmed]
 
   def index
+    params[:from_date] = convert_date params[:from_date] if params[:from_date].present?
+    params[:to_date] = convert_date params[:to_date] if params[:to_date].present?
     @q = Bill.ransack(params[:q])
-    search = get_bills.order(confirmed: :asc, created_at: :desc).ransack(params[:q])
-    search.build_grouping({confirmed_null: true}) if params[:q]&["confirmed_eq"] == "nil"
+    search = get_bills.from_date(params[:from_date]).to_date(params[:to_date])
+                      .order(confirmed: :asc, created_at: :desc).ransack(params[:q])
+    search.build_grouping({confirmed_null: true}) if params[:q] && params[:q]["confirmed_eq"] == "nil"
     @bills = search.result.page(params[:page]).per(10)
   end
 

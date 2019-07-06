@@ -1,0 +1,42 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="">
+        <table class="table table-bordered">
+          <thead class=" text-info">
+            <tr>
+              <th>
+                STT
+              </th>
+              <th>
+                Ngày
+              </th>
+              <th>
+                Số lượng
+              </th>
+              <th>
+                Doanh thu
+              </th>
+              <th>
+                Lợi nhuận
+              </th>
+              <th>
+                Hành động
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render "detail_list" %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-footer">
+      <%= link_to sell_gtgt_path(id: @sell, format: :pdf), target: :_blank,
+        class: "btn btn-success float-right btn-margin" do %>
+        <i class="fa fa-file-excel-o"></i>Xuất excell
+        <%= params[:date].include?("/") ? "Tháng #{params[:date]}" : "Năm #{params[:date]}" %>
+      <% end %>
+    </div>
+  </div>
+</div>

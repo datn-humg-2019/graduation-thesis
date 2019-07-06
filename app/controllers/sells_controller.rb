@@ -4,7 +4,7 @@ class SellsController < ApplicationController
   before_action :get_sell, only: :show
 
   def index
-    params[:to_date] = convert_date params[:to_date] if params[:to_date].present?
+    params[:from_date] = convert_date params[:from_date] if params[:from_date].present?
     params[:to_date] = convert_date params[:to_date] if params[:to_date].present?
     @q = Sell.ransack(params[:q])
     @sells = current_user.sells.from_date(params[:from_date]).to_date(params[:to_date]).order(created_at: :desc).ransack(params[:q]).result.page(params[:page]).per(10)

@@ -1,0 +1,84 @@
+<% dates = @revenue_profit.keys.uniq %>
+<% dates.each_with_index do |date, i| %>
+  <% from = params[:date].include?("/") ? date : Date.new(params[:date].to_i, date, 1) %>
+  <% to = params[:date].include?("/") ? date : from.end_of_month %>
+  <tr data-toggle="collapse" data-target='<%= "#b#{i + 1}" %>' class="accordion-toggle">
+    <td>
+      <%= i + 1 %>
+    </td>
+    <td>
+      <%= params[:date].include?("/") ? date : "Tháng #{date}" %>
+    </td>
+    <td>
+      <%= @revenue_profit[date][0] %>
+    </td>
+    <td>
+      <%= to_currency @revenue_profit[date][1] %>
+    </td>
+    <td>
+      <%= to_currency @revenue_profit[date][2] %>
+    </td>
+    <td>
+      <button class="btn btn-info">
+        <i class="fa fa-eye"></i> Show More
+      </button>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="12" class="hiddenRow">
+      <div class="accordian-body collapse" id="<%= "b#{i + 1}" %>">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Loại hình</th>
+              <th>Số lượng</th>
+              <th>Doanh thu</th>
+              <th>Lợi nhuận</th>
+              <th>Chi tiết</th>
+            </tr>
+          </thead>
+            <tbody>
+              <tr>
+                <% if current_user.vip? && !@bills_detail[date].nil? %>
+                  <td>
+                    Xuất hàng
+                  </td>
+                  <td>
+                    <%= @bills_detail[date][0] %>
+                  </td>
+                  <td>
+                    <%= to_currency @bills_detail[date][1] %>
+                  </td>
+                  <td>
+                    <%= to_currency @bills_detail[date][2] %>
+                  </td>
+                  <td>
+                    <%= link_to  "Chi tiết", bills_path(from_date: "#{from}", to_date: "#{to}"), target: :_blank %>
+                  </td>
+                <% end %>
+              </tr>
+              <tr>
+                <% unless @sells_detail[date].nil? %>
+                  <td>
+                    Bán hàng
+                  </td>
+                  <td>
+                    <%= @sells_detail[date][0] %>
+                  </td>
+                  <td>
+                    <%= to_currency @sells_detail[date][1] %>
+                  </td>
+                  <td>
+                    <%= to_currency @sells_detail[date][2] %>
+                  </td>
+                  <td>
+                    <%= link_to  "Chi tiết", sells_path(from_date: "#{from}", to_date: "#{to}"), target: :_blank %>
+                  </td>
+                <% end %>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </td>
+  </tr>
+<% end %>
