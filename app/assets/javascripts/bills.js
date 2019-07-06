@@ -1,4 +1,7 @@
 $(document).ready(function() {
+  if (window.location.pathname.includes("bills")){
+    setup_daterange();
+  }
   $(".image-checkbox").each(function () {
     if ($(this).find('input[type="checkbox"]').first().attr("checked")) {
       $(this).addClass('image-checkbox-checked');

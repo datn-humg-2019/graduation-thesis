@@ -1,14 +1,27 @@
 <%= search_form_for @q, url: bills_path, method: :GET do |f| %>
   <div class="form-row">
-    <div class="col-md-4 mb-3">
+    <div class="col-md-6 mb-3">
       <%= label_tag :bill_code_eq, "Bill code", for: "bill_code_eq" %>
       <%= f.search_field :bill_code_eq, class: "form-control", placeholder: "Bill code" %>
     </div>
-    <div class="col-md-4 mb-3">
+    <div class="col-md-6 mb-3">
+      <%= label_tag :lbl_from_to, "From date - To date" %>
+      <div class="start-to-end">
+        <div class="input-daterange row" id="datepicker">
+          <div class="col">
+            <%= text_field_tag :from_date, params[:from_date], class: "form-control", placeholder: "From date", readonly: true %>
+          </div>
+          <div class="col">
+            <%= text_field_tag :to_date, params[:to_date], class: "form-control", placeholder: "To date", class: "form-control", readonly: true %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
       <%= label_tag :to_user_id_eq, current_user.vip? ? "To user" : "From user", for: "to_user_id_eq" %>
       <%= f.select :to_user_id_eq, options_for_select(get_user_filter, selected: params[:to_user_id]), { include_blank: true }, {class: "form-control chosen"} %>
     </div>
-      <div class="col-md-4 mb-3">
+      <div class="col-md-6 mb-3">
       <%= label_tag :confirmed_eq, "confirmed", for: "confirmed_eq" %>
       <%= f.select :confirmed_eq, options_for_select(get_confirmed_filter, selected: params[:confirmed]), { include_blank: true }, {class: "form-control chosen"} %>
     </div>
