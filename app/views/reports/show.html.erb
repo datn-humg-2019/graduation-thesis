@@ -33,8 +33,8 @@
       </div>
     </div>
     <div class="card-footer">
-      <%= link_to sell_gtgt_path(id: @sell, format: :pdf), target: :_blank,
-        class: "btn btn-success float-right btn-margin" do %>
+      <%= link_to export_reports_path(date: params[:date], format: :xlsx),
+        class: "btn btn-success float-right btn-margin", target: :_blank do %>
         <i class="fa fa-file-excel-o"></i>Xuất excell
         <%= params[:date].include?("/") ? "Tháng #{params[:date]}" : "Năm #{params[:date]}" %>
       <% end %>

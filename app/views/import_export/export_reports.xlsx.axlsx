@@ -1,0 +1,71 @@
+wb = xlsx_package.workbook
+wb.styles do |style|
+  date_cell = style.add_style(format_code: "dd-mm-yyyy",
+    border: {style: :thin, color: "000000"}, sz: 12, font_name: "Times New Roman",  alignment: {horizontal: :center})
+
+  text_cell = style.add_style(border: {style: :thin, color: "000000"},
+    sz: 12, font_name: "Times New Roman", alignment: {horizontal: :left})
+
+  text_cell_child = style.add_style(border: {style: :thin, color: "000000"},
+      sz: 12, font_name: "Times New Roman", alignment: {horizontal: :left}, bg_color: "F7BE81")
+
+  style_header = style.add_style(sz: 26,
+    font_name: "Times New Roman", alignment: {horizontal: :center, vertical: :center})
+
+  style_date = style.add_style(sz: 13,
+    font_name: "Times New Roman", alignment: {horizontal: :center})
+
+  style_title = style.add_style(border: {style: :thin, color: "000000"},
+    b: true, sz: 12, font_name: "Times New Roman", bg_color: "004586", alignment: {horizontal: :center})
+  col_widths = [5, 25, 15, 25, 25]
+  wb.add_worksheet(name: "Product exports") do |sheet|
+    title = params[:date].include?("/") ? "Tháng: #{params[:date]}" : "Năm: #{params[:date]}"
+    title_column = params[:date].include?("/") ? "NGÀY" : "THANG"
+    sheet.add_row ["Chi Tiết Doanh Thu & Lợi Nhận Trong #{title}", "", ""],
+      style: style_header
+    sheet.merge_cells("A1:E3")
+    sheet.add_row ["", "", ""]
+    sheet.add_row ["", "", ""]
+
+    sheet.add_row ["Ngày xuất báo cáo: #{Time.current.strftime('%d-%m-%Y')}", "", ""], style: style_date
+    sheet.merge_cells("A4:E4")
+    sheet.add_row ["", "", ""]
+
+    sheet.add_row ["STT", title_column, "SỐ LƯỢNG", "DOANH THU", "LỢI NHUẬN"], style: style_title
+    sheet.column_widths *col_widths
+
+    idex = 6
+    dates = @revenue_profit.keys.uniq
+    sl = 0
+    dt = 0
+    ln = 0
+    dates.each_with_index do |date, i|
+      sl += @revenue_profit[date][0]
+      dt += @revenue_profit[date][1]
+      ln += @revenue_profit[date][2]
+      if params[:date].include?("/")
+        sheet.add_row [(i + 1), date, @revenue_profit[date][0], @revenue_profit[date][1], @revenue_profit[date][2]],
+            style: [text_cell, date_cell, text_cell, text_cell, text_cell]
+      else
+        sheet.add_row [(i + 1), "#{date}/#{params[:date]}", @revenue_profit[date][0], @revenue_profit[date][1], @revenue_profit[date][2]],
+          style: [text_cell, text_cell, text_cell, text_cell, text_cell]
+      end
+      idex += 1
+      first = idex
+      if current_user.vip? && !@bills_detail[date].nil?
+        sheet.add_row ["", "Xuất hàng", @bills_detail[date][0], @bills_detail[date][1], @bills_detail[date][2]],
+            style: [text_cell_child, text_cell_child, text_cell_child, text_cell_child, text_cell_child]
+        idex += 1
+      end
+      unless @sells_detail[date].nil?
+        sheet.add_row ["", "Bán hàng", @sells_detail[date][0], @sells_detail[date][1], @sells_detail[date][2]],
+            style: [text_cell_child, text_cell_child, text_cell_child, text_cell_child, text_cell_child]
+        idex += 1
+      end
+      end_line = idex
+      sheet.merge_cells("A#{first}:A#{end_line}")
+    end
+    sheet.add_row ["Tổng cộng", "", sl, dt, ln], style: [text_cell, date_cell, text_cell, text_cell, text_cell]
+    sheet.merge_cells("A#{idex + 1}:B#{idex + 1}")
+  end
+end

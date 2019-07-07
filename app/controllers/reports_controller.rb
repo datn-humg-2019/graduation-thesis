@@ -8,8 +8,7 @@ class ReportsController < ApplicationController
       end
       sells = current_user.sells.in_day.order(created_at: :desc)
 
-      @list = current_user.vip? ? bills + sells : sells
-      @list.sort! { |b, a|  a.created_at <=> b.created_at }
+      @list = (current_user.vip? ? bills + sells : sells).sort { |b, a|  a.created_at <=> b.created_at }
     else
       ids = current_user.sales.between_date(6).ids
       ids_s = current_user.sells.between_date(6).ids

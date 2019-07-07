@@ -12,5 +12,13 @@
         <% end %>
       </div>
     </div>
+    <% if params[:type].to_i.zero? %>
+      <div class="card-footer">
+        <%= link_to export_reports_inday_path(format: :xlsx),
+          class: "btn btn-success float-right btn-margin", target: :_blank do %>
+          <i class="fa fa-file-excel-o"></i>Xuất excell
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
