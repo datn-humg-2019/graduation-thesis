@@ -5,30 +5,11 @@
     </div>
     <div class="card-body">
       <div class="">
-        <table class="table table-bordered">
-          <thead class=" text-danger">
-            <tr>
-              <th>
-                <%= params[:type].to_i == 2 ? "Năm" : "Tháng" %>
-              </th>
-              <th>
-                Số lượng
-              </th>
-              <th>
-                Doanh thu
-              </th>
-              <th>
-                Lợi nhuận
-              </th>
-              <th>
-                Hành động
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= render "doanh_thu_list" %>
-          </tbody>
-        </table>
+        <% if params[:type].to_i.zero? %>
+          <%= render "today_reports" %>
+        <% else %>
+          <%= render "report_with" %>
+        <% end %>
       </div>
     </div>
   </div>

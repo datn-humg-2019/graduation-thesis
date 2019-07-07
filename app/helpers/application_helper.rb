@@ -63,6 +63,6 @@ module ApplicationHelper
   end
 
   def type_report
-    [["Tháng", 1], ["Năm", 2]]
+    [["Hôm nay", 0], ["Tháng", 1], ["Năm", 2]]
   end
 end

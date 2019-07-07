@@ -1,0 +1,19 @@
+<% list.each_with_index do |l, i| %>
+  <tr>
+    <td>
+      <%= i + 1 %>
+    </td>
+    <td>
+      <%= l.code %>
+    </td>
+    <td>
+      <%= l.total_count %>
+    </td>
+    <td>
+      <%= to_currency l.total_price %>
+    </td>
+    <td>
+      <%= to_currency l.profit %>
+    </td>
+  </tr>
+<% end %>
