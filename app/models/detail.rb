@@ -34,6 +34,8 @@ class Detail < ApplicationRecord
       .group(condition)
   end)
 
+  scope :profit, ->{select("sum((price - price_origin) * details.count) as profit").joins(:product_warehouse)}
+
   def load_structure
     {
       id: id,

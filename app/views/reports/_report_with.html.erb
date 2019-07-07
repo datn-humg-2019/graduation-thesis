@@ -1,0 +1,24 @@
+<table class="table table-bordered">
+  <thead class=" text-danger">
+    <tr>
+      <th>
+        <%= params[:type].to_i == 2 ? "Năm" : "Tháng" %>
+      </th>
+      <th>
+        Số lượng
+      </th>
+      <th>
+        Doanh thu
+      </th>
+      <th>
+        Lợi nhuận
+      </th>
+      <th>
+        Hành động
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render "doanh_thu_list" %>
+  </tbody>
+</table>

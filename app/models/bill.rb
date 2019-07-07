@@ -78,6 +78,18 @@ class Bill < ApplicationRecord
     details.sum("count * price")
   end
 
+  def total_price
+    details.sum("count * price")
+  end
+
+  def profit
+    details.profit.first.profit
+  end
+
+  def code
+    bill_code
+  end
+
   def get_info_sales is_count = true
     {
       id: id,

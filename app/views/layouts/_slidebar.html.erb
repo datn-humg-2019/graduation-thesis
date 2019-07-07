@@ -3,7 +3,7 @@
     <%= link_to image_tag("icon.png", border: 0), current_user.admin? ? admin_path : root_path , class: 'simple-text logo-mini' %>
     <%= link_to "Home", admin_path, class: "simple-text logo-normal" %>
   </div>
-  <div class="sidebar-wrapper">
+  <div class="sidebar-wrapper" style="overflow:hidden;">
     <ul class="nav">
       <% if current_user.admin? %>
         <li class="<%= slide_active "admin" %>">
@@ -61,7 +61,7 @@
             <p>lịch sử Nhập hàng</p>
           <% end %>
         </li>
-        <li class="<%= slide_active "report" %>">
+        <li class="<%= slide_active "reports" %>">
           <%= link_to reports_path do %>
             <i class="nc-icon nc-paper"></i>
             <p>Thống kê</p>

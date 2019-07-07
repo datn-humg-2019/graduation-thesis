@@ -1,0 +1,8 @@
+<h2>
+  <% if action == "index" %>
+    <%= "Thống kê tổng quát" %>
+  <% elsif action == "show" %>
+    <%= link_to "Thống kê tổng quát", reports_path %> >
+    <%= "Chi tiết trong #{params[:date]&.include?("/") ?  "tháng: " : "năm: "} #{params[:date]}" %>
+  <% end %>
+</h2>

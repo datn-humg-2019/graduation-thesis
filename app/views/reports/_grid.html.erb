@@ -1,0 +1,27 @@
+<% list.each_with_index do |element, i| %>
+  <tr>
+    <td>
+      <%= i + 1 %>
+    </td>
+    <td>
+      <%= element.created_at.localtime.strftime("%Y/%m/%d %H:%M:%S") %>
+    </td>
+    <td>
+      <%= element.code %>
+    </td>
+    <td>
+      <%= element.total_count %>
+    </td>
+    <td>
+      <%= to_currency element.total_price %>
+    </td>
+    <td>
+      <%= to_currency element.profit %>
+    </td>
+    <td>
+      <%= link_to (element.class.name == "Bill" ? bill_path(id: element) : sell_path(id: element)), method: :GET, class: "btn btn-info", target: :_blank do %>
+        <i class="fa fa-eye"></i> Chi tiết
+      <% end %>
+    </td>
+  </tr>
+<% end %>

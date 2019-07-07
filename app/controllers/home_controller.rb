@@ -8,6 +8,13 @@ class HomeController < ApplicationController
     @count_output_yesterday = output_day(false).to_i
     @count_input = @warehouse.histories.in_day.sum(:count).to_i
     @count_input_yesterday = @warehouse.histories.yesterday_day.sum(:count).to_i
+
+    if current_user.vip?
+      bills = current_user.sales.in_day.order(created_at: :desc).page(params[:page]).per(5)
+    end
+    sells = current_user.sells.in_day.order(created_at: :desc).page(params[:page]).per(5)
+
+    @list = current_user.vip? ? bills + sells : sells
   end
 
   def chart_io

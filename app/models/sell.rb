@@ -52,12 +52,22 @@ class Sell < ApplicationRecord
 
   scope :yesterday_day, ->{where(created_at: Time.current.yesterday.beginning_of_day..Time.current.yesterday.end_of_day)}
 
+  # scope :xx .select("sum((price - price_origin) * details.count) as profit")
+
   def sum_count
     details.sum :count
   end
 
   def sum_price
     details.sum("count * price")
+  end
+
+  def profit
+    details.profit.first.profit
+  end
+
+  def code
+    sell_code
   end
 
   def auto_update_attribute
