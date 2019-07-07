@@ -31,13 +31,15 @@ class HomeController < ApplicationController
 
   private
   def output_day today = true
+    count = 0
     if today
       count = current_user.sells.in_day.sum(:total_count)
-      count + Detail.by_ref_ids(current_user.sales.in_day.ids, "Bill").sum(:count) if current_user.vip?
+      count += Detail.by_ref_ids(current_user.sales.in_day.ids, "Bill").sum(:count).to_i if current_user.vip?
     else
       count = current_user.sells.yesterday_day.sum(:total_count)
-      count + Detail.by_ref_ids(current_user.sales.yesterday_day.ids, "Bill").sum(:count) if current_user.vip?
+      count += Detail.by_ref_ids(current_user.sales.yesterday_day.ids, "Bill").sum(:count).to_i if current_user.vip?
     end
+    count
   end
 
   def date_to_datas type, is_count=true

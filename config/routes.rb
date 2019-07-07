@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     post "create_product_warehouses", to: "product_warehouses#create", as: "create_product_warehouses"
 
     get "export_template", to: "import_export#export_template", as: "export_template"
+    get "export_reports", to: "import_export#export_reports", as: "export_reports"
+    get "export_reports_inday", to: "import_export#export_reports_inday", as: "export_reports_inday"
     post "import_pw", to: "import_export#import_pw", as: "import_pw"
     get "select_from_user", to: "bills#select_from_user", as: "select_from_user"
     get "update_confirmed", to: "bills#update_confirmed", as: "update_confirmed"
