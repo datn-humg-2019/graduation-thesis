@@ -2,35 +2,40 @@
 
   <h1 class="my-4">Product
     <small>
-      <%= @pw.product.name %>
+      <%= @pws.last.product.name %>
     </small>
   </h1>
 
   <div class="row">
     <div class="col-md-6">
       <div>
-        <%= render "thumb_images", images: @pw.product.images %>
+        <% images = @pws.map(&:images).flatten! %>
+        <% if images.blank? %>
+          Không có dữ liệu hình ảnh
+        <% else %>
+          <%= render "thumb_images", images: images %>
+        <% end %>
       </div>
     </div>
     <div class="col-md-6">
       <h3 class="my-3">thong tin</h3>
       <div class="row">
         <div class="col-md-6">
-          <p><%= stop_providing @pw.stop_providing %></p>
+          <p><%= stop_providing @pws.last.stop_providing %></p>
         </div>
         <div class="col-md-12">
-          <p>Giá bán: <%= to_currency @pw.price_sale %></p>
+          <p>Giá bán: <%= to_currency @pws.last.price_sale %></p>
         </div>
         <div class="col-md-6">
-          <p>Ngày sản xuất: <%= @pw.mfg.localtime.strftime("%Y/%m/%d") if @pw.mfg %></p>
+          <p>Ngày sản xuất: <%= @pws.last.mfg.localtime.strftime("%Y/%m/%d") if @pws.last.mfg %></p>
         </div>
         <div class="col-md-6">
-          <p>Ngày hết hạn: <%= @pw.exp.localtime.strftime("%Y/%m/%d") if @pw.exp %></p>
+          <p>Ngày hết hạn: <%= @pws.last.exp.localtime.strftime("%Y/%m/%d") if @pws.last.exp %></p>
         </div>
       </div>
       <h3 class="my-3">Tags</h3>
       <div class="row">
-        <%= render "products/tag", tags: @pw.product.tag, status: "show" %>
+        <%= render "products/tag", tags: @pws.last.product.tag, status: "show" %>
       </div>
     </div>
     <div class="col-md-12">
@@ -38,7 +43,7 @@
         <h3 class="my-3">Description</h3>
       </strong>
       <div class="box-description">
-        <%= markdown @pw.product.description %>
+        <%= markdown @pws.has_description.blank? ? @pws.product.description : @pws.has_description.first.description %>
       </div>
     </div>
   </div>

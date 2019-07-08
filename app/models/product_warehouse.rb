@@ -1,6 +1,7 @@
 class ProductWarehouse < ApplicationRecord
   belongs_to :warehouse
   belongs_to :product
+  has_many :images, as: :ref_image
   has_many :details, dependent: :destroy
 
   after_create :update_warehouse
@@ -23,6 +24,8 @@ class ProductWarehouse < ApplicationRecord
   scope :inventory_count, ->{where(stop_providing: false).sum(:count)}
 
   scope :inventory_price, ->{where(stop_providing: false).sum("count * price_origin")}
+
+  scope :has_description, ->{where.not(description: nil)}
 
   def endcode_pw
     "PW-#{id}-#{product_id}"

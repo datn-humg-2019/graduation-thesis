@@ -5,7 +5,23 @@ $(document).ready(function() {
 
   $('#product_image').change(function() {
     if(this.files.length == 0){
-      $('.list_images').empty();      
+      $('.list_images').empty();
+    }
+    for(var i=0; i < this.files.length; i++){
+      $('.list_images').empty();
+      var element = this.files[i];
+      let size_in_megabytes = element.size/1024/1024;
+      if (size_in_megabytes > 5) {
+        alert('Maximum file size is 5MB. Please choose a smaller file.');
+      } else {
+        readURLWithImg(element);
+      }
+    }
+  });
+
+  $('#product_warehouse_image').change(function() {
+    if(this.files.length == 0){
+      $('.list_images').empty();
     }
     for(var i=0; i < this.files.length; i++){
       $('.list_images').empty();
