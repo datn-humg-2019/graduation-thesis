@@ -1,3 +1,9 @@
-<h2>
-  <%= link_to t(".warehouses"), warehouses_path %> > <%= t(".new_") %>
-</h2>
+<% if action == "edit" %>
+  <h2>
+    <%= link_to "Hàng hóa", products_path %> > Chỉnh sửa
+  </h2>
+<% else %>
+  <h2>
+    <%= link_to t(".warehouses"), warehouses_path %> > <%= t(".new_") %>
+  </h2>
+<% end %>
