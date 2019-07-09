@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     post "change_password", to: "change_pass#update", as: "change_password"
     post "destroy_image", to: "images#destroy", as: "destroy_image"
     post "create_product_warehouses", to: "product_warehouses#create", as: "create_product_warehouses"
+    post "providing_status", to: "product_warehouses#providing_status", as: "providing_status"
 
     get "export_template", to: "import_export#export_template", as: "export_template"
     get "export_reports", to: "import_export#export_reports", as: "export_reports"
@@ -38,6 +39,7 @@ Rails.application.routes.draw do
 
     get "report", to: "reports#show", as: "report"
 
+    resources :product_warehouses, only: [:update, :edit]
     resources :reports, only: :index
     resources :products
     resources :bills
