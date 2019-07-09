@@ -1,0 +1,57 @@
+<h2>
+  <%= link_to "Trang chủ", root_path %> > <%= "Sửa thông tin cá nhân" %>
+</h2>
+<hr>
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <%= form_for current_user, url: {controller: "users", action: "update"} do |f| %>
+        <%= render "shared/error_messages", object: f.object %>
+        <div>
+          <div class="form-group">
+            <%= f.label :email, "Email" %>
+            <%= f.text_field :email, placeholder: "Email", class: "form-control", required: true, readonly: true %>
+          </div>
+          <div class="form-group">
+            <%= f.label :phone, "Phone" %>
+            <%= f.text_field :phone, placeholder: "Phone", class: "form-control", required: true, readonly: true %>
+          </div>
+          <div class="form-group">
+            <%= f.label :name, "Name" %>
+            <%= f.text_field :name, placeholder: "name", class: "form-control", required: true %>
+          </div>
+          <div class="form-group">
+            <h5>User code: <%= current_user.get_user_code %></h5>
+          </div>
+          <div class="form-group">
+            <%= f.label :gender, "Gender" %>
+            <%= f.collection_select :gender, gender_selected, :last, :first,
+                {include_blank: false}, {class: "form-control"} %>
+          </div>
+          <div class="form-group">
+            <%= f.label :adress, "adress" %>
+            <%= f.text_area :adress, placeholder: "adress", class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :birth, "birth" %>
+            <%= f.text_field :birth, placeholder: "birth", class: "input-datepiker form-control", readonly: true %>
+          </div>
+          <div class="form-group d-flex justify-content-center">
+            <div class="change-image">
+              <img id="img-prev" src="#" class="hidden image">
+              <%= image_tag "avatar.jpg", class: "image img-avatar"%>
+              <div class="middle">
+                <%= f.label :image, "Upload", class: "btn btn-success" %>
+                <%= f.file_field :image, class: "hidden" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box-footer">
+          <%= link_to "Back", admin_users_path, class: "btn btn-default" %>
+          <%= f.button :submit, class: "btn btn-primary float-right" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
