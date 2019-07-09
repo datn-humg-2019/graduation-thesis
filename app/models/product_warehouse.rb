@@ -7,6 +7,8 @@ class ProductWarehouse < ApplicationRecord
   after_create :update_warehouse
   after_update :update_warehouse
 
+  before_update :update_history
+
   scope :from_date, (lambda do |mfg|
     where("date(mfg) >= ?", mfg) unless mfg.blank?
   end)
@@ -27,6 +29,10 @@ class ProductWarehouse < ApplicationRecord
 
   scope :has_description, ->{where.not(description: nil)}
 
+  def of_user user_id
+    warehouse.user.id == user_id
+  end
+
   def endcode_pw
     "PW-#{id}-#{product_id}"
   end
@@ -40,7 +46,8 @@ class ProductWarehouse < ApplicationRecord
       count: p_count.nil? ? count : p_count,
       price: p_price.nil? ? price_origin : p_price,
       product_id: product_id,
-      from: from_user
+      from: from_user,
+      pw_id: id
     )
   end
 
@@ -82,6 +89,20 @@ class ProductWarehouse < ApplicationRecord
   end
 
   private
+  def update_history
+    changes = self.changes
+    return if changes[:count].nil? && changes[:price_origin].nil?
+    h = warehouse.histories.where(pw_id: id).first
+    return if h.nil?
+    counts = changes[:count]
+    if counts
+      count = counts[0] - counts[1]
+      count.positive? ? h.count -= count.abs : h.count += count.abs
+    end
+    h.price = price_origin if changes[:price_origin]
+    h.save
+  end
+
   def update_warehouse
     warehouse.auto_update
   end

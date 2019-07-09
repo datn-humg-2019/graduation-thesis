@@ -17,9 +17,13 @@
       <%= stop_providing pws.last.stop_providing %>
     </td>
     <td>
-      <a href="#" class="btn btn-danger btn-sm">
-        <i class="fa fa-cog"></i>
-      </a>
+        <%= link_to providing_status_path(product_id: p), class: pws.last.stop_providing ? "btn btn-info btn-sm" : "btn btn-danger btn-sm", method: :post do %>
+          <% if pws.last.stop_providing %>
+            <i class="fa fa-circle-o-notch"></i>
+          <% else %>
+            <i class="fa fa-ban"></i>
+          <% end %>
+        <% end %>
     </td>
   </tr>
   <tr>
@@ -32,6 +36,7 @@
               <th>Số lượng</th>
               <th>Giá nhập</th>
               <th>Tổng tiền</th>
+              <th>Chỉnh sửa</th>
             </tr>
           </thead>
             <tbody>
@@ -48,6 +53,11 @@
                   </td>
                   <td>
                     <%= to_currency pw.count * pw.price_origin %>
+                  </td>
+                  <td>
+                    <%= link_to edit_product_warehouse_path(id: pw), class: "btn btn-success btn-sm" do %>
+                      <i class="fa fa-cog"></i>
+                    <% end %>
                   </td>
                 </tr>
               <% end %>

@@ -1,0 +1,26 @@
+<h2>
+  <%= link_to "Danh sách tồn kho", inventories_path %> > <%= "Chỉnh sửa" %>
+</h2>
+<%= form_for @pw, url: {controller: "product_warehouses", action: "update"} do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+  <div class="form-group row">
+    <div class="col">
+      <%= f.text_field :count, placeholder: "Số Lượng", class: "form-control", required: true %>
+    </div>
+    <div class="col">
+      <%= f.text_field :price_origin, placeholder: "Giá nhập", class: "form-control", required: true %>
+    </div>
+    <div class="col">
+      <%= f.text_field :price_sale, placeholder: "Giá xuất", class: "form-control", required: true %>
+    </div>
+    <div class="col">
+      <%= f.text_field :mfg, placeholder: "Ngày sản xuất", class: "form-control input-datepiker",readonly: true %>
+    </div>
+    <div class="col">
+      <%= f.text_field :exp, placeholder: "Ngày hết hạn", class: "form-control input-datepiker",readonly: true %>
+    </div>
+  </div>
+  <div class="box-footer">
+    <%= f.button :submit, class: "btn btn-primary float-right" %>
+  </div>
+<% end %>

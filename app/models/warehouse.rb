@@ -12,7 +12,12 @@ class Warehouse < ApplicationRecord
   end
 
   def stop_providing_product product_id, stage
-    product_warehouses.find_by(product_id: product_id).update_attributes(stop_providing: stage)
+    product_warehouses.where(product_id: product_id).update_all(stop_providing: stage)
+  end
+
+  def auto_providing_product product_id
+    pws = product_warehouses.where(product_id: product_id)
+    pws.update_all(stop_providing: !pws.first.stop_providing)
   end
 
   def get_first_pw p_id
