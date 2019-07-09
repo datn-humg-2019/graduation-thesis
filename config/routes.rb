@@ -39,6 +39,7 @@ Rails.application.routes.draw do
 
     get "report", to: "reports#show", as: "report"
 
+    resources :users, only: [:show, :edit, :update]
     resources :product_warehouses, only: [:update, :edit]
     resources :reports, only: :index
     resources :products
