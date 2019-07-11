@@ -2,6 +2,6 @@ var modal = $('#modal-admin');
 modal.find('.btn-primary').remove();
 modal.find('h4').text('Thông tin của bạn');
 modal.find('.modal-content').addClass('modal-profile-size');
-modal.find('.modal-body').html('<%= j render "users/profile", user: @user %>');
-modal.find('.modal-footer').html('<%= link_to edit_user_path(id: @user), method: :GET, class: "btn btn-warning" do %><i class="fa fa-edit"></i> Edit<% end %>');
+modal.find('.modal-body').html('<%= j render "users/profile", user: current_user %>');
+modal.find('.modal-footer').html('<%= link_to edit_user_path(id: current_user), method: :GET, class: "btn btn-warning" do %><i class="fa fa-edit"></i> Edit<% end %>');
 modal.modal();

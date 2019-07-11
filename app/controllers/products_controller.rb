@@ -117,7 +117,7 @@ class ProductsController < ApplicationController
   def get_product
     @product = Product.find_by id: params[:id]
     @pws = current_user.check_has_product params[:id]
-    @images = @pws.map(&:images).flatten!
+    @images = @pws.load_iamges
 
     return if @product
     flash[:danger] = t "user_not_found"
