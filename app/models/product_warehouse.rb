@@ -17,9 +17,13 @@ class ProductWarehouse < ApplicationRecord
     where("date(exp) <= ?", exp) unless exp.blank?
   end)
 
-  scope :load_iamges, (lambda do
+  scope :load_images, (lambda do
     imgs = map(&:images).flatten!
-    return first.product.images if imgs.blank?
+    if imgs.blank?
+      return first.product.images
+    else
+      return imgs
+    end
   end)
 
   scope :can_sell, (lambda do |p_id|
@@ -32,7 +36,7 @@ class ProductWarehouse < ApplicationRecord
 
   scope :inventory_price, ->{where(stop_providing: false).sum("count * price_origin")}
 
-  scope :has_description, ->{where.not(description: nil)}
+  scope :has_description, ->{where("description <> ''")}
 
   def of_user user_id
     warehouse.user.id == user_id
