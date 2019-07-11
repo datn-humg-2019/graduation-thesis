@@ -7,6 +7,8 @@ end
 Rails.application.routes.draw do
   draw :api
   scope "(:locale)", locale: /en|vi/ do
+    devise_for :users, controllers: { registrations: "users/registrations", sessions: "users/sessions",
+      passwords: "users/passwords"}
     root "home#index"
     get "home/index"
     get "list_tag", to: "products#list_tag", as: "list_tag"
@@ -57,8 +59,5 @@ Rails.application.routes.draw do
       get "/", to: "dashboards#index"
       get "count_user", to: "dashboards#count_user", as: "count_user"
     end
-
-    devise_for :users, controllers: { registrations: "users/registrations", sessions: "users/sessions",
-      passwords: "users/passwords"}
   end
 end

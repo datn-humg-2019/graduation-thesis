@@ -22,7 +22,7 @@
             <div class="profile-info-name"> Email </div>
             <div class="profile-info-value">
               <span>
-                <%= mail_to @user.email, "#{@user.email}" %>
+                <%= mail_to user.email, "#{user.email}" %>
               </span>
             </div>
           </div>
@@ -30,7 +30,7 @@
             <div class="profile-info-name"> Phone </div>
             <div class="profile-info-value">
               <span>
-                <%= @user.phone %>
+                <%= user.phone %>
               </span>
             </div>
           </div>
@@ -38,7 +38,7 @@
             <div class="profile-info-name"> User code </div>
             <div class="profile-info-value">
               <span>
-                <%= @user.get_user_code %>
+                <%= user.get_user_code %>
               </span>
             </div>
           </div>
@@ -46,7 +46,7 @@
             <div class="profile-info-name"> Gender </div>
             <div class="profile-info-value">
               <span>
-                <%= gender_user @user.gender %>
+                <%= gender_user user.gender %>
               </span>
             </div>
           </div>
@@ -55,7 +55,7 @@
             <div class="profile-info-value">
               <i class="fa fa-map-marker light-orange bigger-110"></i>
               <span>
-                <%= @user.adress %>
+                <%= user.adress %>
               </span>
             </div>
           </div>
@@ -63,7 +63,7 @@
             <div class="profile-info-name"> Age </div>
             <div class="profile-info-value">
               <span>
-                <%= "#{@user.age} (#{convert_date @user.birth})" %>
+                <%= "#{user.age} (#{convert_date user.birth})" %>
               </span>
             </div>
           </div>
@@ -71,7 +71,7 @@
             <div class="profile-info-name"> Created </div>
             <div class="profile-info-value">
               <span>
-                <%= convert_date @user.created_at %>
+                <%= convert_date user.created_at %>
               </span>
             </div>
           </div>

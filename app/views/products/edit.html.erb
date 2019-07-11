@@ -20,7 +20,7 @@
 
     <div class="form-group d-flex justify-content-center row">
       <div class="list_images_old">
-        <% @pws.map(&:images).flatten!.each do |img| %>
+        <% @pws.load_iamges.each do |img| %>
           <div class="mblock">
             <span class="btn destroy-image" id="img-<%= img.id %>">
               <i class="fa fa-times"></i>

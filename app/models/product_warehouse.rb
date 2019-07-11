@@ -17,6 +17,11 @@ class ProductWarehouse < ApplicationRecord
     where("date(exp) <= ?", exp) unless exp.blank?
   end)
 
+  scope :load_iamges, (lambda do
+    imgs = map(&:images).flatten!
+    return first.product.images if imgs.blank?
+  end)
+
   scope :can_sell, (lambda do |p_id|
     where(product_id: p_id, stop_providing: false).where.not(count: 0).order(created_at: :asc)
   end)
