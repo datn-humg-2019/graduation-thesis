@@ -27,7 +27,8 @@ class ProductsController < ApplicationController
   def edit; end
 
   def update
-    pw = current_user.check_has_product(params[:id]).has_description.first
+    pws = current_user.check_has_product(params[:id])
+    pw = pws.has_description.blank? ? pws.first : pws.has_description.first
     pw.description = params[:product_warehouse][:description]
 
     if pw.save
@@ -117,7 +118,7 @@ class ProductsController < ApplicationController
   def get_product
     @product = Product.find_by id: params[:id]
     @pws = current_user.check_has_product params[:id]
-    @images = @pws.load_iamges
+    @images = @pws.load_images
 
     return if @product
     flash[:danger] = t "user_not_found"
