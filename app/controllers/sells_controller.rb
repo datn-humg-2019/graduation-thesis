@@ -28,6 +28,7 @@ class SellsController < ApplicationController
 
     if sell.save
       details sell
+      SellBillMailer.sell_bill(sell, params[:email]).deliver_now unless params[:email].blank?
       flash[:success] = "Bán hàng thành công"
       redirect_to sells_path
     else

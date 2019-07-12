@@ -18,6 +18,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   def default_public_id
-    "default"
+    "kotviet"
   end
 end
