@@ -51,9 +51,10 @@ class Product < ApplicationRecord
     result
   end
 
-  def load_images
+  def load_images currnet_user=nil
+    imags = currnet_user.nil? ? images : currnet_user.check_has_product(id).load_images
     arr = []
-    images.each do |img|
+    imags.each do |img|
       url = img.image.url
       url ||= img.image.metadata["url"]
       arr.push url
