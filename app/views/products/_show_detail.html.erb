@@ -20,9 +20,16 @@
       <div class="row">
         <%= render "products/pw", pws: @pws %>
       </div>
-      <%= link_to edit_product_path(id: @product.id), method: :GET, class: "btn btn-warning" do %>
-        <i class="fa fa-edit"></i> Chỉnh sửa
-      <% end %>
+      <div class="col-md-12">
+        <div class="col-md-3">
+          <%= link_to edit_product_path(id: @product.id), method: :GET, class: "btn btn-warning" do %>
+            <i class="fa fa-edit"></i> Chỉnh sửa
+          <% end %>
+        </div>
+        <div class="col-md-9">
+          <div id="qrcode"></div>
+        </div>
+      </div>
       <h3 class="my-3">Tags</h3>
       <div class="row">
         <%= render "products/tag", tags: @product.tag, status: "show" %>

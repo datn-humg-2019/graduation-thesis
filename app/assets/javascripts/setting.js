@@ -223,3 +223,8 @@ function getDaysInThisMonth() {
   }
   return days;
 }
+
+function show_qrcode(str) {
+  $('#qrcode').html('');
+  $('#qrcode').qrcode(str);
+}

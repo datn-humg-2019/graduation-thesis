@@ -49,6 +49,7 @@ class ProductsController < ApplicationController
   end
 
   def show_product
+    @url_public = "#{request.base_url}/product?u_id=#{current_user.id}&p_id=#{@product.id}"
     repond_js
   end
 
