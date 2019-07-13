@@ -55,6 +55,7 @@ class Api::SellsController < Api::BaseController
     counts = counts
     pw_ids.each_with_index do |p_id, i|
       pws = pws_all.can_sell(p_id)
+      next if pws.blank?
       count = counts[i].to_i
       price = pws.last.price_sale
 
