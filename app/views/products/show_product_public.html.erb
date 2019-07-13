@@ -43,7 +43,7 @@
         <h3 class="my-3">Description</h3>
       </strong>
       <div class="box-description">
-        <%= markdown @pws.has_description.blank? ? @pws.product.description : @pws.has_description.first.description %>
+        <%= markdown @pws.has_description.blank? ? @pws.last.product.description : @pws.has_description.first.description %>
       </div>
     </div>
   </div>
