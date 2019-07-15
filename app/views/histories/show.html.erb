@@ -3,9 +3,10 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-header">
-      <button class="btn btn-success">
+      <%= link_to export_history_path(format: :xlsx, date: params[:date]),
+        class: "btn btn-success btn-margin", target: :_blank do %>
         <i class="fa fa-file-excel-o"></i> Xuất toàn bộ dữ liệu
-      </button>
+      <% end %>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -16,19 +17,19 @@
                 STT
               </th>
               <th>
-                Time (hh:mm:ss)
+                Thời gian (hh:mm:ss)
               </th>
               <th>
-                Product
+                Sản phẩm
               </th>
               <th>
-                COUNT
+                Số lượng
               </th>
               <th>
-                PRICE
+                Giá nhập
               </th>
               <th>
-                From user
+                Nơi nhập
               </th>
             </tr>
           </thead>
