@@ -2,7 +2,6 @@ class ImportExportController < ApplicationController
   before_action :authenticate_user!
   before_action :data_reports, only: :export_reports
 
-
   def export_template
     respond_to do |format|
       format.html
@@ -35,6 +34,14 @@ class ImportExportController < ApplicationController
     respond_to do |format|
       format.html
       format.xlsx{response.headers["Content-Disposition"] = "attachment; filename='today_#{Time.current.to_i}.xlsx'"}
+    end
+  end
+
+  def export_history
+    @history_details = current_user.warehouse.detail_history(params["date"])
+    respond_to do |format|
+      format.html
+      format.xlsx{response.headers["Content-Disposition"] = "attachment; filename=histories_#{params[:date]}_#{Time.current.to_i}.xlsx"}
     end
   end
 

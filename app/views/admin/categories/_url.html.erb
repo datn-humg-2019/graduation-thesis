@@ -1,9 +1,9 @@
 <h2>
   <% if action == "index" %>
-    <%= t(".title") %>
+    <%= "Loại hàng hóa" %>
   <% elsif action == "new" %>
-    <%= link_to t(".title"), admin_categories_path %> > <%= t(".new_title") %>
+    <%= link_to "Loại hàng hóa", admin_categories_path %> > <%= "Thêm mới" %>
   <% elsif action == "edit" %>
-    <%= link_to t(".title"), admin_categories_path %> > <%= t(".edit_title") %>
+    <%= link_to "Loại hàng hóa", admin_categories_path %> > <%= "Chỉnh sửa" %>
   <% end %>
 </h2>

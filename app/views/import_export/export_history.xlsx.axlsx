@@ -1,0 +1,40 @@
+wb = xlsx_package.workbook
+wb.styles do |style|
+  date_cell = style.add_style(format_code: "dd-mm-yyyy",
+    border: {style: :thin, color: "000000"}, sz: 12, font_name: "Times New Roman",  alignment: {horizontal: :center})
+
+  text_cell = style.add_style(border: {style: :thin, color: "000000"},
+    sz: 12, font_name: "Times New Roman", alignment: {horizontal: :left})
+
+  style_header = style.add_style(sz: 26,
+    font_name: "Times New Roman", alignment: {horizontal: :center, vertical: :center})
+
+  style_date = style.add_style(sz: 13,
+    font_name: "Times New Roman", alignment: {horizontal: :center})
+
+  style_title = style.add_style(border: {style: :thin, color: "000000"},
+    b: true, sz: 12, font_name: "Times New Roman", bg_color: "004586", alignment: {horizontal: :center})
+  col_widths = [5, 25, 20,30, 15, 25, 25]
+  wb.add_worksheet(name: "Today exports") do |sheet|
+    sheet.add_row ["Chi Tiết hàng nhập trong ngày #{params[:date]}", "", ""],
+      style: style_header
+    sheet.merge_cells("A1:G3")
+    sheet.add_row ["", "", ""]
+    sheet.add_row ["", "", ""]
+
+    sheet.add_row ["Ngày xuất báo cáo: #{Time.current.strftime('%d-%m-%Y')}", "", ""], style: style_date
+    sheet.merge_cells("A4:G4")
+    sheet.add_row ["", "", ""]
+
+    sheet.add_row ["STT", "THỜI GIAN", "Nơi nhập", "Tên hàng hóa", "SỐ LƯỢNG", "GIÁ NHẬP", "THÀNH TIỀN"], style: style_title
+    sheet.column_widths *col_widths
+
+    @history_details.each_with_index do |element, i|
+      sheet.add_row [(i + 1), element.created_at.localtime.strftime("%H:%M:%S"), element.from ? User.find_by(id: element.from).name : "Tự nhập hàng",
+            element.product.name, element.count, to_currency(element.price), to_currency(element.count * element.price)],
+          style: [text_cell, date_cell, text_cell, text_cell, text_cell, text_cell, text_cell]
+    end
+    sheet.add_row ["Tổng cộng", "", "", "",  @history_details.sum(:count), "", to_currency(@history_details.sum("count * price"))], style: [text_cell, date_cell, text_cell, text_cell, text_cell, text_cell, text_cell]
+    sheet.merge_cells("A#{@history_details.length + 7}:D#{@history_details.length + 7}")
+  end
+end

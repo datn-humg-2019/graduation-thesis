@@ -1,11 +1,11 @@
 <h2>
   <% if action == "index" %>
-    <%= t(".title") %>
+    <%= "Kho hàng" %>
   <% elsif action == "new" %>
-    <%= link_to t(".title"), admin_products_path %> > <%= t(".new_title") %>
+    <%= link_to "Kho hàng", admin_products_path %> > <%= "Thêm mới sản phẩm" %>
   <% elsif action == "show" %>
-    <%= link_to t(".title"), admin_products_path %> > <%= "Product display" %>
+    <%= link_to "Kho hàng", admin_products_path %> > <%= "Hiển thị" %>
   <% elsif action == "edit" %>
-    <%= link_to t(".title"), admin_products_path %> > <%= t(".edit_title") %>
+    <%= link_to "Kho hàng", admin_products_path %> > <%= "Chỉnh sửa sản phẩm" %>
   <% end %>
 </h2>
