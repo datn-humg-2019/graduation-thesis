@@ -8,7 +8,7 @@ class BillsController < ApplicationController
     params[:to_date] = convert_date params[:to_date] if params[:to_date].present?
     @q = Bill.ransack(params[:q])
     search = get_bills.from_date(params[:from_date]).to_date(params[:to_date])
-                      .order(confirmed: :asc, created_at: :desc).ransack(params[:q])
+                      .order("confirmed is null, confirmed asc").order(created_at: :desc).ransack(params[:q])
     search.build_grouping({confirmed_null: true}) if params[:q] && params[:q]["confirmed_eq"] == "nil"
     @bills = search.result.page(params[:page]).per(10)
   end

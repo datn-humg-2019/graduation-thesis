@@ -4,7 +4,7 @@ class Warehouse < ApplicationRecord
   has_many :histories, dependent: :destroy
 
   def product_ids
-    product_warehouses.pluck :product_id
+    product_warehouses.where.not(count: 0).pluck :product_id
   end
 
   def product_inventory
