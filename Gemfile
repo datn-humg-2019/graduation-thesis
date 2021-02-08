@@ -11,7 +11,7 @@ gem "axlsx_rails"
 gem "bootsnap", ">= 1.1.0", require: false
 gem "bootstrap", "~> 4.3.1"
 gem "bootstrap-datepicker-rails"
-gem "carrierwave", "~> 1.0"
+gem "carrierwave", "~> 1.3"
 gem "chart-js-rails"
 gem "chosen-rails"
 gem "cloudinary", "~> 1.9.1"
